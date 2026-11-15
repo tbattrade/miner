@@ -1,14 +1,455 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RollerCoin — Tối ưu Rank hiện tại</title><style>*{box-sizing:border-box}body{margin:0;background:#0c1222;color:#e8efff;font:15px system-ui,Segoe UI,sans-serif}header{padding:28px max(20px,calc((100vw - 1300px)/2));background:linear-gradient(115deg,#17264b,#162047);border-bottom:1px solid #30436d}h1{margin:0 0 8px;font-size:29px}p{color:#aebcda;line-height:1.55}main{max-width:1300px;margin:24px auto;padding:0 18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,.9fr);gap:20px}.panel{background:#151f36;border:1px solid #2c3d5c;border-radius:16px;padding:20px;min-width:0}h2{font-size:19px;margin:0 0 14px}.muted{color:#9eafcf}.actions{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}button,a.button{cursor:pointer;background:#467bfa;color:white;border:0;border-radius:9px;padding:11px 15px;font-weight:700;text-decoration:none}button.secondary{background:#293b5d}button.remove{background:#59304a;padding:8px 11px}input,select{width:100%;padding:11px;background:#0e182c;color:white;border:1px solid #3d5073;border-radius:9px;font:inherit}input:focus,select:focus{outline:2px solid #5a8eff}.miner{display:grid;grid-template-columns:35px minmax(80px,1fr) 110px 100px 39px;gap:8px;align-items:center;margin:10px 0}.miner .converted{font-size:12px;color:#a5c4ff;text-align:right}.metric{background:#0d1931;border:1px solid #314a7c;padding:16px;border-radius:12px;margin:14px 0}.big{font-size:30px;font-weight:800;color:#78c6ff}.pill{display:inline-block;background:#29456a;color:#bce1ff;border-radius:20px;padding:4px 10px;font-size:12px}.tablewrap{max-height:660px;overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px 8px;text-align:left;border-bottom:1px solid #2a3955}th{position:sticky;top:0;background:#1b2b48}tr.active{background:#244a65}tr.target{outline:1px solid #65b8ff;outline-offset:-1px}small{color:#9eafcf}.alternative{border-top:1px solid #3d5073;margin-top:14px;padding-top:14px;color:#b9f2db}.alternative p{margin-bottom:0}.notice{border-left:3px solid #ffc06b;padding:10px 12px;background:#2a2831;margin-top:16px;color:#f3dbb8}.rankcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.rankcards>div{background:#0e1a30;padding:13px;border-radius:10px}label{display:block;margin:12px 0 5px;color:#c2d0e8}.progress{height:9px;background:#293b58;border-radius:20px;overflow:hidden}.progress>div{height:100%;background:#66bdff}footer{max-width:1300px;margin:10px auto 35px;padding:0 18px;color:#8799b7}@media(max-width:850px){main{grid-template-columns:1fr}.miner{grid-template-columns:25px minmax(75px,1fr) 90px 70px 35px;gap:5px}.miner .converted{font-size:10px}header{padding:22px}}</style></head><body><header><span class="pill">RollerCoin • Tính tổng Eh/s máy đào</span><h1>Tối ưu Rank hiện tại</h1><p>Nhập từng máy đào, quy đổi về EH/s và xem mức sức mạnh nên nhắm tới. </p></header><main><section class="panel"><h2>1. Danh sách máy đào</h2><p class="muted">Giá trị được quy đổi ngay khi nhập. Có thể nhập số thập phân.</p><div id="miners"></div><div class="actions"><button onclick="addMiner()">+ Thêm máy đào</button><button class="secondary" onclick="exportCsv()">Xuất CSV</button><button class="secondary" onclick="if(confirm('Xóa tất cả máy đào?')){$('miners').innerHTML='';addMiner();run()}">Xóa tất cả</button></div><p>Tổng sức mạnh gốc: <strong id="preview">0 EH/s</strong></p><label for="bonus">Bonus Power chung của tài khoản (%)</label><input id="bonus" type="number" min="0" step="0.01" value="6" oninput="preview();run()"><p class="muted">Sức mạnh sau bonus: <strong id="afterbonus">0 EH/s</strong> · Công thức: sức mạnh gốc × (1 + bonus / 100).</p><label for="buffer">Khoảng đệm dưới ngưỡng Rank tiếp theo (EH/s)</label><input id="buffer" type="number" min="0" step="0.001" value="0.1" oninput="run()"><div class="actions"><button onclick="run()">Tính tổng & đề xuất</button></div><div class="metric"><div class="muted">Tổng sức mạnh sau bonus</div><div class="big" id="total">0 EH/s</div></div><div class="rankcards"><div><small>Rank theo sức mạnh nhập</small><h2 id="rank">—</h2></div><div><small>Còn cách mốc Rank tiếp theo</small><h2 id="remaining">—</h2></div></div><p id="range" class="muted"></p><div class="progress"><div id="bar"></div></div><h2 style="margin-top:24px">2. Đề xuất</h2><div class="metric" id="recommend"></div></section><aside class="panel"><h2>Bảng sức mạnh các Rank</h2><p class="muted">Đơn vị tất cả ngưỡng: EH/s. Dòng xanh là Rank hiện tại; đường viền là Rank mục tiêu.</p><div class="tablewrap"><table><thead><tr><th>Rank</th><th>Từ</th><th>Đến (không gồm)</th></tr></thead><tbody id="ranktable"></tbody></table></div></aside></main><footer>Dữ liệu lưu trong trình duyệt của bạn. Không gửi dữ liệu lên máy chủ. Công cụ không bảo đảm lợi nhuận hay tỷ lệ RLT.</footer><script>const RANKS=[["Bronze I", 0, 0.025], ["Bronze II", 0.025, 0.05], ["Bronze III", 0.05, 0.1], ["Silver I", 0.1, 0.15], ["Silver II", 0.15, 0.25], ["Silver III", 0.25, 0.65], ["Gold I", 0.65, 1.5], ["Gold II", 1.5, 3.5], ["Gold III", 3.5, 16], ["Platinum I", 16, 50], ["Platinum II", 50, 100], ["Platinum III", 100, 200], ["Diamond I", 200, 375], ["Diamond II", 375, 650], ["Diamond III", 650, 1150], ["Titan I", 1150, 2160], ["Titan II", 2160, 4000], ["Titan III", 4000, 13000], ["Emerald I", 13000, 25000], ["Emerald II", 25000, 70000], ["Emerald III", 70000, 1000000], ["Legend", 1000000, null]];const FACTOR={'GH/s':1e-9,'TH/s':1e-6,'PH/s':.001,'EH/s':1,'ZH/s':1000};let count=0;const $=id=>document.getElementById(id);const fmt=(n,d=6)=>Number(n).toLocaleString('vi-VN',{maximumFractionDigits:d});const unit=n=>n===null?'Không giới hạn':fmt(n,6);function addMiner(v='',u='PH/s'){count++;const el=document.createElement('div');el.className='miner';el.innerHTML=`<span class="muted">#${count}</span><input aria-label="Sức mạnh máy đào" type="number" min="0" step="any" placeholder="Giá trị" value="${v}"><select aria-label="Đơn vị">${Object.keys(FACTOR).map(x=>`<option ${x===u?'selected':''}>${x}</option>`).join('')}</select><span class="converted">0 EH/s</span><button class="remove" title="Xóa máy đào" aria-label="Xóa máy đào">×</button>`;el.querySelector('button').onclick=()=>{el.remove();preview();run()};el.querySelector('input').oninput=()=>{preview();run()};el.querySelector('select').onchange=()=>{preview();run()};$('miners').appendChild(el);preview()};function calc(){let sum=0;document.querySelectorAll('.miner').forEach(el=>{const n=Math.max(0,Number(el.querySelector('input').value)||0),u=el.querySelector('select').value,val=n*FACTOR[u];sum+=val;el.querySelector('.converted').textContent=fmt(val,9)+' EH/s'});return sum}function getRank(x){let i=RANKS.findIndex(r=>x>=r[1]&&(r[2]===null||x<r[2]));return Math.max(0,i)}function bonusRate(){return Math.max(0,Number($('bonus').value)||0)}function totalPower(){return calc()*(1+bonusRate()/100)}function preview(){$('preview').textContent=fmt(calc(),2)+' EH/s';$('afterbonus').textContent=fmt(totalPower(),2)+' EH/s'}function safeCap(upper){if(upper===null)return null;const buffer=Math.max(0,Number($('buffer').value)||0);return Math.max(0,upper-buffer)}function buildTable(current,target){$('ranktable').innerHTML=RANKS.map((r,i)=>`<tr class="${i===current?'active':''} ${i===target?'target':''}"><td>${r[0]} ${i===current?'●':''}</td><td>${unit(r[1])}</td><td>${unit(r[2])}</td></tr>`).join('')}function result(){const power=totalPower(),idx=getRank(power),r=RANKS[idx],cap=safeCap(r[2]);$('total').textContent=fmt(power,2)+' EH/s';$('rank').textContent=r[0];$('range').textContent=unit(r[1])+' – '+unit(r[2])+' EH/s';$('remaining').textContent=r[2]===null?'Không có rank tiếp theo':fmt(Math.max(0,r[2]-power),2)+' EH/s';$('bar').style.width=r[2]===null?'100%':Math.min(100,100*(power-r[1])/(r[2]-r[1]))+'%';return {power,idx,r,cap}}function lowerRankSuggestion(power,idx){
- if(idx<=0)return '';
- const previous=RANKS[idx-1];
- const current=RANKS[idx];
- const currentCap=safeCap(current[2]);
- const lowerCap=safeCap(previous[2]);
- if(currentCap===null||lowerCap===null)return '';
- const distanceCurrent=Math.abs(currentCap-power);
- const distanceLower=Math.abs(power-lowerCap);
- if(distanceLower>=distanceCurrent)return '';
- const decrease=power-lowerCap;
- if(decrease<=0)return '';
- return `<div class="alternative"><b>Phương án khác: Hạ xuống ${previous[0]}</b><p>Đưa sức mạnh về <b>${fmt(lowerCap,2)} EH/s</b> (giảm <b>${fmt(decrease,2)} EH/s</b>). Khoảng cách tới mức tối ưu Rank dưới là ${fmt(distanceLower,2)} EH/s, nhỏ hơn khoảng cách ${fmt(distanceCurrent,2)} EH/s tới mức tối ưu ${current[0]}.</p></div>`;
-}function save(){const rows=[...document.querySelectorAll('.miner')].map(e=>[e.querySelector('input').value,e.querySelector('select').value]);localStorage.setItem('rc_miners',JSON.stringify(rows));localStorage.setItem('rc_buffer',$('buffer').value);localStorage.setItem('rc_bonus',$('bonus').value)}function restore(){try{const rows=JSON.parse(localStorage.getItem('rc_miners')||'[]');$('buffer').value=localStorage.getItem('rc_buffer')??'0.1';$('bonus').value=localStorage.getItem('rc_bonus')??'6';if(rows.length)rows.forEach(r=>addMiner(...r));else addMiner()}catch(e){addMiner()}}function exportCsv(){const rows=[['May dao','Gia tri','Don vi','Quy doi EH/s']];document.querySelectorAll('.miner').forEach((e,i)=>{let n=Number(e.querySelector('input').value)||0,u=e.querySelector('select').value;rows.push([i+1,n,u,n*FACTOR[u]])});rows.push(['Tong goc','','',calc()]);rows.push(['Bonus (%)',bonusRate(),'','']);rows.push(['Tong sau bonus','','',totalPower()]);const blob=new Blob(['\ufeff'+rows.map(r=>r.join(';')).join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rollercoin-miners.csv';a.click();URL.revokeObjectURL(a.href)}function run(){const {power,idx,r,cap}=result();buildTable(idx,idx);let html;if(cap===null){html='Bạn đã ở Legend, không có giới hạn Rank kế tiếp.'}else if(power>cap){html=`Bạn đang vượt mức mục tiêu an toàn ${fmt(cap)} EH/s. Để giữ ${r[0]}, không nên bổ sung sức mạnh cố định. Mức đệm có thể điều chỉnh.`}else{html=`Để tối ưu trong <b>${r[0]}</b>, hãy hướng tới <b>${fmt(cap)} EH/s</b>, tức tăng thêm <b>${fmt(cap-power)} EH/s</b> (${power>0?fmt((cap-power)/power*100,2)+'%':'chưa có cơ sở tính %'}). Không vượt mốc ${fmt(r[2])} EH/s.`}$('recommend').innerHTML=html;$('recommend').insertAdjacentHTML('beforeend',lowerRankSuggestion(power,idx));save()}restore();preview();run();</script></body></html>
+<!doctype html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RollerCoin · Tối ưu Miner & Rack v2</title><style>
+:root{color-scheme:dark;font-family:system-ui,Segoe UI,Arial;background:#0c1428;color:#e9f0ff}*{box-sizing:border-box}body{margin:0}header{padding:22px 3vw;background:#121e38;border-bottom:1px solid #324766}h1{margin:0 0 8px;font-size:26px}p{color:#a9bedc;line-height:1.5}.layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:16px;padding:18px 3vw}.panel{background:#15213a;border:1px solid #304364;border-radius:14px;padding:17px;margin-bottom:15px}h2{font-size:19px;margin:0 0 12px}h3{font-size:16px;margin:12px 0}button,input,select{font:inherit}input,select{background:#0c1830;color:#fff;border:1px solid #435a7d;border-radius:8px;padding:9px;min-width:0;width:100%}button{background:#376ef0;color:white;border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:650}button.secondary{background:#293b5c}button.danger{background:#69344b}.actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.entry{display:grid;grid-template-columns:minmax(110px,2fr) minmax(70px,1fr) 95px 80px 75px 75px 40px;gap:7px;margin:8px 0;align-items:center}.entry.rack{grid-template-columns:minmax(130px,2fr) 100px 100px 80px 40px}.entry button{padding:9px 5px}.muted,small{color:#a9bedc}.drop{border:2px dashed #55759e;padding:22px;text-align:center;border-radius:12px;cursor:pointer;background:#0e1a31}.shots{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.shot{width:170px;background:#1c2d49;border-radius:10px;padding:8px}.shot img{width:100%;height:100px;object-fit:contain}.shot select{margin:5px 0}.shot button{width:100%}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:9px 7px;border-bottom:1px solid #304364;text-align:left;white-space:nowrap}td input,td select{min-width:56px}tr.active{background:#153f4e}tr.target{outline:1px solid #23d7cb}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{background:#0e1b33;border-radius:10px;padding:12px}.stat strong{display:block;color:#4fe0d3;font-size:21px;margin-top:6px}.result{padding:12px;background:#0d2337;border-left:3px solid #27d8cc;margin:10px 0;border-radius:6px}.warn{color:#ffd39a}.ok{color:#62e6bc}details{margin:10px 0}pre{white-space:pre-wrap;max-height:220px;overflow:auto}.review input[type=checkbox]{width:auto}.review td{white-space:normal}.review input{min-width:48px}.review th:nth-child(3),.review td:nth-child(3){min-width:250px;width:34%}.review td:nth-child(3) input{min-width:230px;width:100%}.review th:nth-child(1),.review td:nth-child(1){width:42px}.review th:nth-child(2),.review td:nth-child(2){width:90px}.review td:nth-child(4) input,.review td:nth-child(6) input,.review td:nth-child(7) input,.review td:nth-child(8) input{width:82px}.review td:nth-child(5) select{width:90px}.review{min-width:850px}.chip{display:inline-block;border:1px solid #4d7298;padding:3px 8px;border-radius:20px;color:#8fe7e3;font-size:12px}.hidden{display:none}label{display:block;color:#b6c9e6;margin:8px 0 4px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.help{font-size:12px}.progress{height:8px;background:#243752;border-radius:10px;overflow:hidden}.progress>div{height:100%;background:#28cfc1} @media(max-width:1050px){.layout{grid-template-columns:1fr}}@media(max-width:690px){.entry{grid-template-columns:1.5fr 1fr 75px;gap:5px}.entry.rack{grid-template-columns:1fr 1fr 1fr 1fr 35px}.stats{grid-template-columns:1fr 1fr}.panel{padding:12px}h1{font-size:21px}}
+.shot{width:200px}.shot canvas.thumb{width:100%;background:#0b1426;border-radius:6px}.shot select,.shot small{display:block;margin:4px 0}.review{min-width:1050px}.review td:nth-child(9){min-width:180px;font-size:12px}button:disabled{opacity:.55;cursor:wait}.review td:nth-child(2) select{min-width:86px}
+.toast{position:fixed;right:18px;bottom:18px;z-index:9999;background:#123a36;border:1px solid #27d8cc;color:#e9f0ff;padding:12px 16px;border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.4);max-width:min(380px,calc(100vw - 36px));opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .22s ease,transform .22s ease;font-weight:650}
+.toast.show{opacity:1;transform:none}.toast.warn{background:#3a2a16;border-color:#ffd39a;color:#ffd39a}
+</style></head><body>
+<header><h1>RollerCoin · Tối ưu Miner + Rack</h1><p> Tối ưu power dưới giới hạn Rank</p></header><div class="layout"><div>
+<section class="panel"><h2>1. Dán ảnh Miner / Rack</h2><div class="drop" id="drop" tabindex="0">Dán ảnh bằng <b>Ctrl + V</b>, kéo thả hoặc bấm để chọn nhiều ảnh</div><input id="files" type="file" accept="image/*" multiple hidden><div id="shots" class="shots"></div><div class="actions"><button id="ocrStart">Nhận diện</button><button class="secondary" id="clearShots">Xóa toàn bộ</button></div><p id="ocrStatus" class="muted">Khung xanh trên ảnh là vùng thẻ sẽ được đọc; nếu lệch, đổi "Khung thẻ" sang Lưới và chỉnh số cột/hàng.</p><div id="reviewWrap" class="hidden"><h3>Kiểm tra kết quả OCR trước khi nhập</h3><p class="help">Dòng tô cam cần kiểm tra. Sửa tên/bonus ở đây: khi nhập, máy sẽ được lưu vào <b>thư viện đã xác nhận</b> để lần OCR sau tự sửa đúng.</p><div class="scroll"><table class="review"><thead><tr><th>Chọn</th><th>Loại</th><th>Tên</th><th>Power</th><th>Đơn vị</th><th>Bonus %</th><th>Cells</th><th>Số lượng</th><th>Ghi chú</th></tr></thead><tbody id="review"></tbody></table></div><datalist id="nameList"></datalist><div class="actions"><button id="append">Thêm kết quả</button><button class="secondary" id="replace">Thay danh sách</button></div><details><summary>Văn bản OCR gốc</summary><pre id="raw"></pre></details></div></section>
+<section class="panel"><h2>2. Miner sở hữu</h2><p class="help">Mỗi dòng là một loại Miner. Cells = số ô mỗi máy chiếm. Bonus % là bonus Miner (tính một lần cho mỗi loại).</p><div class="scroll"><div style="min-width:690px"><div class="entry muted"><span>Tên máy</span><span>Power</span><span>Đơn vị</span><span>Bonus %</span><span>Cells/máy</span><span>Số lượng</span><span></span></div><div id="miners"></div></div></div><div class="actions"><button id="addMiner">+ Thêm Miner</button><button class="secondary" id="csv">Xuất CSV</button><button class="danger" id="clearMiners">Xóa Miner</button></div></section>
+<section class="panel"><h2>3. Rack sở hữu</h2><p class="help">Cells/Rack là sức chứa của MỖI Rack. Bonus Rack chỉ cộng cho các máy nằm trên chính Rack đó.</p><div class="scroll"><div style="min-width:510px"><div class="entry rack muted"><span>Tên Rack</span><span>Bonus %</span><span>Cells/Rack</span><span>Số lượng</span><span></span></div><div id="racks"></div></div></div><div class="actions"><button id="addRack">+ Thêm Rack</button><button class="danger" id="clearRacks">Xóa Rack</button></div></section>
+<section class="panel"><h2>4. Tính tổng và tối ưu bố trí</h2><div class="stats"><div class="stat">Power gốc (tất cả Miner)<strong id="basePower">—</strong></div><div class="stat">Bonus Miner (tất cả loại)<strong id="allBonus">—</strong></div><div class="stat">Cells cần / Cells có<strong id="cells">—</strong></div><div class="stat">Power tối đa có thể đạt<strong id="maxPower">—</strong><small id="maxRank"></small></div></div>
+<div class="grid2"><div><label>Rank mục tiêu</label><select id="targetRank"></select></div><div><label>Khoảng đệm an toàn (EH/s)</label><input id="buffer" type="number" min="0" step="any" value="0.001"></div></div>
+<div><label>Thời gian tìm kiếm</label><select id="timeout"><option value="1000">Nhanh (1 giây)</option><option value="3000" selected>Cân bằng (3 giây)</option><option value="8000">Kỹ (8 giây)</option><option value="15000">Rất kỹ (15 giây)</option></select></div>
+<div class="actions"><button id="optimize">Tìm bố trí tối ưu cho Rank</button><button id="maximize" class="secondary">Tối đa power (không giới hạn)</button><button class="secondary" id="compare">So sánh các Rank</button></div>
+<p class="help">Mỗi Rank được tối ưu riêng: power cao nhất ngay dưới giới hạn. Không cần lắp hết Rack hay hết Miner.</p>
+<p class="help" id="status"></p><div id="result"></div></section>
+</div><aside><section class="panel"><h2>Bảng sức mạnh các Rank</h2><p class="help">Rank mục tiêu có viền xanh; Rank của power tối đa được tô nền.</p><div class="scroll"><table><thead><tr><th>Rank</th><th>Từ</th><th>Đến</th></tr></thead><tbody id="ranks"></tbody></table></div></section>
+<section class="panel"><h2>Quy tắc tính (theo RollerCoin FAQ)</h2><p class="help"><b>Power</b> = Power gốc các Miner <b>được lắp</b> × (1 + Bonus Miner) + Σ (Bonus Rack × Power gốc các máy nằm trên Rack đó).</p><p class="help">Bonus Miner: mỗi loại máy (cùng tên + cùng bonus) chỉ cộng một lần. Bonus Rack: mỗi Rack tăng riêng cho máy đặt trên nó, Rack trùng tên vẫn được tính riêng.</p><p class="help">Bộ tối ưu chọn subset Miner + Rack (không bắt buộc lắp hết) để power cao nhất dưới trần Rank: tham lam → nhánh-cận (chính xác với ≤ 60 máy nếu kịp thời gian) → simulated annealing nhiều lần khởi động lại → tinh chỉnh thêm/đổi/chuyển. Chạy nền trong Web Worker nên trang không bị treo.</p></section>
+<section class="panel"><h2>Thư viện máy đã xác nhận</h2><p class="help" id="libInfo"></p><div class="actions"><button class="secondary" id="libFromList">Lưu danh sách hiện tại vào thư viện</button><button class="danger" id="libClear">Xóa thư viện</button></div></section></aside></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script id="solver-src">
+'use strict';
+/* ===== Bộ tối ưu (chạy trong Web Worker, trình duyệt và Node) =====
+ * Công thức theo RollerCoin FAQ:
+ *   Power = Power gốc các máy được lắp × (1 + Bonus Miner%)
+ *         + Σ_rack (Bonus Rack% × Power gốc các máy nằm trong rack đó)
+ * Bonus Miner chỉ tính một lần cho mỗi loại máy (cùng tên + cùng bonus).
+ * Không bắt buộc lắp hết rack/máy: mục tiêu là power cao nhất dưới trần Rank.
+ */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function nowMs(){return (typeof performance!=='undefined'&&performance.now)?performance.now():Date.now()}
+
+/* Kiểm tra độc lập một bố trí: tính lại power và kiểm tra sức chứa từng rack. */
+function evaluateLayout(miners,racks,assign,opt){
+  opt=opt||{};
+  const used=new Array(racks.length).fill(0);let base=0,rackPower=0;const keys=new Map();
+  for(let i=0;i<assign.length;i++){const j=assign[i];if(j<0)continue;const m=miners[i];used[j]+=m.slots;base+=m.eh;rackPower+=m.eh*racks[j].bonus/100;if(m.key&&!keys.has(m.key))keys.set(m.key,m.bonus)}
+  let mb=0;for(const v of keys.values())mb+=v;
+  const ok=used.every((u,j)=>u<=racks[j].slots);
+  return {power:base*(1+mb/100)+rackPower,base,mb,rackPower,ok,used};
+}
+
+/* inp: {miners:[{eh,slots,bonus,key}], racks:[{bonus,slots}], ceiling, timeMs, seed} */
+function solve(inp){
+  const M=inp.miners,R=inp.racks,n=M.length,r=R.length;
+  const C=(typeof inp.ceiling==='number'&&isFinite(inp.ceiling))?inp.ceiling:Infinity;
+  const timeMs=Math.max(20,inp.timeMs||2000),rnd=mulberry32(inp.seed||20261114),T_START=nowMs();
+  const eh=new Float64Array(n),sl=new Int32Array(n),mk=new Int32Array(n),kb=[],keyMap=new Map();
+  for(let i=0;i<n;i++){eh[i]=M[i].eh;sl[i]=M[i].slots;const key=M[i].key||('__anon'+i);let k=keyMap.get(key);if(k===undefined){k=kb.length;keyMap.set(key,k);kb.push(M[i].key?M[i].bonus/100:0)}mk[i]=k}
+  const rb=new Float64Array(r),cap=new Int32Array(r);for(let j=0;j<r;j++){rb[j]=R[j].bonus/100;cap[j]=R[j].slots}
+  const asg=new Int32Array(n).fill(-1),free=Int32Array.from(cap),kc=new Int32Array(kb.length);
+  let base=0,rsum=0,B=0;
+  const placed=new Int32Array(n),pos=new Int32Array(n);let np=0;
+  const unp=new Int32Array(n),upos=new Int32Array(n);let nu=n;
+  for(let i=0;i<n;i++){unp[i]=i;upos[i]=i}
+  function place(i,j){asg[i]=j;free[j]-=sl[i];base+=eh[i];rsum+=eh[i]*rb[j];if(kc[mk[i]]++===0)B+=kb[mk[i]];
+    const p=upos[i],last=unp[--nu];unp[p]=last;upos[last]=p;placed[np]=i;pos[i]=np++}
+  function unplace(i){const j=asg[i];asg[i]=-1;free[j]+=sl[i];base-=eh[i];rsum-=eh[i]*rb[j];if(--kc[mk[i]]===0)B-=kb[mk[i]];
+    const p=pos[i],last=placed[--np];placed[p]=last;pos[last]=p;unp[nu]=i;upos[i]=nu++}
+  const power=()=>base*(1+B)+rsum;
+  function clearAll(){while(np)unplace(placed[np-1]);base=0;rsum=0;B=0}
+  function load(a){clearAll();for(let i=0;i<n;i++)if(a[i]>=0)place(i,a[i])}
+  const feasible=p=>p<C;
+  let bestA=new Int32Array(n).fill(-1),bestP=0;if(!feasible(bestP))bestP=-Infinity;
+  function consider(){const p=power();if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg)}}
+  const rackOrder=[...Array(r).keys()].sort((a,b)=>rb[b]-rb[a]||cap[b]-cap[a]);
+
+  // 1) Tham lam: ưu tiên rack bonus cao. Nếu lắp vào rack mạnh bị vượt trần thì thử rack yếu hơn;
+  // máy không vừa trần thì để ngoài. Không bắt buộc dùng hết rack.
+  function greedy(order,use){clearAll();const racks=use||rackOrder;for(const i of order){for(const j of racks){if(free[j]<sl[i])continue;place(i,j);if(feasible(power()))break;unplace(i)}}consider()}
+  const idx=[...Array(n).keys()];
+  const gOrders=[
+    idx.slice().sort((a,b)=>eh[b]-eh[a]),
+    idx.slice().sort((a,b)=>eh[b]/sl[b]-eh[a]/sl[a]),
+    idx.slice().sort((a,b)=>(eh[b]+kb[mk[b]]*1e3)-(eh[a]+kb[mk[a]]*1e3))
+  ];
+  for(const o of gOrders)greedy(o);
+  if(r>1){
+    const ks=new Set();
+    for(let k=1;k<r;k++){
+      if(k<=8||k===r-1||rb[rackOrder[k]]!==rb[rackOrder[k-1]]||(k&(k-1))===0)ks.add(k);
+    }
+    for(const k of ks){const use=rackOrder.slice(0,k);for(const o of gOrders)greedy(o,use)}
+  }
+
+  // 1b) Nhánh-cận (branch & bound) có giới hạn thời gian: tìm chính xác với bộ dữ liệu nhỏ/vừa.
+  let exactDone=false;
+  if(n>0&&r>0&&n<=60){
+    const ord=idx.slice().sort((a,b)=>eh[b]-eh[a]||mk[a]-mk[b]||sl[a]-sl[b]);
+    const sufEh=new Float64Array(n+1),sufKB=new Float64Array(n+1);const seenK=new Set();
+    for(let t=n-1;t>=0;t--){const i=ord[t];sufEh[t]=sufEh[t+1]+eh[i];if(!seenK.has(mk[i])){seenK.add(mk[i]);sufKB[t]=sufKB[t+1]+kb[mk[i]]}else sufKB[t]=sufKB[t+1]}
+    const maxRb=r?Math.max(...rb):0,same=new Uint8Array(n);
+    for(let t=1;t<n;t++){const a=ord[t],b=ord[t-1];same[t]=(eh[a]===eh[b]&&sl[a]===sl[b]&&mk[a]===mk[b])?1:0}
+    const limit=T_START+timeMs*0.3;let nodes=0,aborted=false;const skipped=new Uint8Array(n);
+    const rec=t=>{
+      if(aborted)return;if((++nodes&1023)===0&&nowMs()>limit){aborted=true;return}
+      const p=power();if(!feasible(p))return;if(p>bestP+1e-15){bestP=p;bestA.set(asg)}
+      if(t===n)return;
+      const ub=(base+sufEh[t])*(1+B+sufKB[t])+rsum+sufEh[t]*maxRb;if(ub<=bestP+1e-15)return;
+      const i=ord[t];
+      if(!(same[t]&&skipped[t-1])){
+        const tried=[];
+        for(const j of rackOrder){if(free[j]<sl[i])continue;let dup=false;for(const q of tried)if(rb[q]===rb[j]&&free[q]===free[j]){dup=true;break}if(dup)continue;tried.push(j);
+          place(i,j);skipped[t]=0;rec(t+1);unplace(i);if(aborted)return}
+      }
+      skipped[t]=1;rec(t+1);skipped[t]=0;
+    };
+    clearAll();rec(0);exactDone=!aborted;clearAll();
+  }
+  const scale=isFinite(C)?C:Math.max(bestP,1e-12);
+
+  // 2) Simulated annealing, nhiều lần khởi động lại.
+  const PEN=4;const score=p=>p<C?p:C-PEN*(p-C);
+  let iterations=0;const restarts=Math.max(2,Math.min(8,Math.round(timeMs/400)));
+  const saBudget=timeMs*0.85;
+  for(let rs=0;rs<restarts&&n>0&&r>0&&!exactDone;rs++){
+    const segStart=nowMs(),segLen=(saBudget-(segStart-T_START))/(restarts-rs);if(segLen<=2)break;
+    if(rs%3===0)load(bestA);
+    else if(rs%3===1){const o=idx.slice();for(let k=o.length-1;k>0;k--){const q=Math.floor(rnd()*(k+1));const t=o[k];o[k]=o[q];o[q]=t}const kUse=1+((rnd()*r)|0);greedy(o,rackOrder.slice(0,kUse))}
+    else clearAll();
+    const T0=(rs===0?0.03:0.01)*scale,T1=1e-9*scale;let T=T0,cur=score(power());
+    for(;;){
+      iterations++;
+      if((iterations&255)===0){const f=(nowMs()-segStart)/segLen;if(f>=1)break;T=T0*Math.pow(T1/T0,f)}
+      const m=rnd();let type,a=-1,b=-1,ja=-1,jb=-1,emptied=null;
+      if(nu>0&&(np===0||m<0.25)){ // thêm máy
+        a=unp[(rnd()*nu)|0];jb=(rnd()*r)|0;if(free[jb]<sl[a]){let ok=false;for(let t=0;t<4&&!ok;t++){jb=(rnd()*r)|0;ok=free[jb]>=sl[a]}if(!ok)continue}
+        place(a,jb);type=0;
+      }else if(m<0.4){ // gỡ máy
+        a=placed[(rnd()*np)|0];ja=asg[a];unplace(a);type=1;
+      }else if(m<0.72&&nu>0){ // đổi máy đang lắp với máy trong kho
+        a=placed[(rnd()*np)|0];b=unp[(rnd()*nu)|0];ja=asg[a];if(free[ja]+sl[a]<sl[b])continue;unplace(a);place(b,ja);type=2;
+      }else if(m<0.86&&r>1){ // chuyển máy sang rack khác
+        a=placed[(rnd()*np)|0];ja=asg[a];jb=(rnd()*r)|0;if(jb===ja||free[jb]<sl[a])continue;unplace(a);place(a,jb);type=3;
+      }else if(m<0.93&&np>0&&r>0){ // dọn trống cả một rack (không bắt buộc dùng hết rack)
+        jb=(rnd()*r)|0;emptied=[];for(let t=np-1;t>=0;t--){const i=placed[t];if(asg[i]===jb){emptied.push(i);unplace(i)}}if(!emptied.length)continue;type=5;
+      }else if(np>1){ // hoán đổi hai máy ở hai rack
+        a=placed[(rnd()*np)|0];b=placed[(rnd()*np)|0];ja=asg[a];jb=asg[b];if(ja===jb)continue;if(free[ja]+sl[a]<sl[b]||free[jb]+sl[b]<sl[a])continue;unplace(a);unplace(b);place(a,jb);place(b,ja);type=4;
+      }else continue;
+      const p=power(),s=score(p),d=s-cur;
+      if(d>=0||rnd()<Math.exp(d/T)){cur=s;if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg)}}
+      else{
+        if(type===0)unplace(a);else if(type===1)place(a,ja);else if(type===2){unplace(b);place(a,ja)}else if(type===3){unplace(a);place(a,ja)}else if(type===5){for(let t=emptied.length-1;t>=0;t--)place(emptied[t],jb)}else{unplace(a);unplace(b);place(a,ja);place(b,jb)}
+      }
+    }
+  }
+
+  // 3) Tinh chỉnh tất định: thử mọi phép thêm / đổi / chuyển có lợi cho tới khi hết cải thiện.
+  load(bestA);
+  const typeKey=i=>eh[i]+'|'+sl[i]+'|'+mk[i];
+  for(let pass=0;pass<50&&nowMs()-T_START<timeMs*1.1;pass++){
+    let improved=false;const seen=new Set(),reps=[];for(let k=0;k<nu;k++){const u=unp[k],tk=typeKey(u);if(!seen.has(tk)){seen.add(tk);reps.push(u)}}
+    for(const u of reps){if(asg[u]>=0)continue;for(const j of rackOrder){if(free[j]<sl[u])continue;place(u,j);const p=power();if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg);improved=true;break}unplace(u)}}
+    const pl=Array.from(placed.subarray(0,np));
+    outer:for(const a of pl){const ja=asg[a];if(ja<0)continue;
+      for(const u of reps){if(asg[u]>=0||free[ja]+sl[a]<sl[u])continue;unplace(a);place(u,ja);const p=power();if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg);improved=true;continue outer}unplace(u);place(a,ja)}
+      for(let j=0;j<r;j++){if(j===ja||free[j]<sl[a]||rb[j]<=rb[ja])continue;unplace(a);place(a,j);const p=power();if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg);improved=true;continue outer}unplace(a);place(a,ja)}
+    }
+    if(!improved)break;
+  }
+  return {found:bestP>-Infinity,exact:exactDone,assign:Array.from(bestA),power:bestP,iterations,elapsed:Math.round(nowMs()-T_START),ceiling:C};
+}
+if(typeof module!=='undefined')module.exports={solve,evaluateLayout,mulberry32};
+</script><script>
+'use strict';
+/* ===== Lõi OCR thuần (không phụ thuộc DOM, kiểm thử được bằng Node) ===== */
+const BUILTIN_MINERS=['Bog Rocket','Murkfang','Grime Machine','Bribe Star','Canned','Red/Blue Protocol','Bayou Breakdown','Marsh Blossom','ShaleRig','Game Switcher','RollerPunk','Binance Blazer','Swamp Bloom'];
+const BUILTIN_RACKS=['Regular Rack 6','Hasher Rack 8'];
+const NOISE_LINE=/(power|bonus|cells?|size|quantity|quantit|set\b|sold|details|sell|level|lvl|merge|upgrade)/i;
+const RARITY=/\b(common|uncommon|rare|epic|legendary|unreal|lv\.?\s*\d+|level\s*\d+)\b/gi;
+const nameKey=x=>String(x||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+function cleanName(t){return String(t||'').replace(RARITY,' ').replace(/[|_~`'"“”«»]/g,' ').replace(/[^a-zA-Z0-9 \/&+.\-]/g,' ').replace(/\s+/g,' ').replace(/^[\s.\-+&\/]+|[\s.\-+&\/]+$/g,'').trim()}
+function editDistance(a,b){let row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let next=[i];for(let j=1;j<=b.length;j++)next[j]=Math.min(next[j-1]+1,row[j]+1,row[j-1]+(a[i-1]===b[j-1]?0:1));row=next}return row[b.length]}
+/* Độ giống 0..1; chịu được ký tự rác thêm vào hai đầu (so khớp cửa sổ con). */
+function similarity(text,name){
+  const a=nameKey(text),b=nameKey(name);if(!a||!b)return 0;
+  let best=1-editDistance(a,b)/Math.max(a.length,b.length);
+  if(a.length>b.length+1&&b.length>=4){for(let L=b.length-1;L<=b.length+1;L++)for(let s=0;s+L<=a.length;s++){const sub=a.slice(s,s+L);const v=(1-editDistance(sub,b)/Math.max(L,b.length))*0.97;if(v>best)best=v}}
+  return best;
+}
+/* texts: các đoạn OCR (tiêu đề trước). dict: danh sách tên đã biết. */
+function matchName(texts,dict){
+  const cands=[];
+  for(const t of texts){const lines=String(t||'').split(/\r?\n/).map(cleanName).filter(x=>/[a-z]{2}/i.test(x)&&!NOISE_LINE.test(x));
+    lines.forEach((l,i)=>{cands.push(l);if(lines[i+1])cands.push(l+' '+lines[i+1])})}
+  const raw=cands.find(x=>/[a-z]{3}/i.test(x))||'';
+  if(!dict.length||!cands.length)return {name:raw,certain:false,score:0,raw};
+  const scores=new Map();
+  for(const c of cands)for(const d of dict){const s=similarity(c,d);if(s>(scores.get(d)||0))scores.set(d,s)}
+  const ranked=[...scores.entries()].sort((a,b)=>b[1]-a[1]);
+  const [bn,bs]=ranked[0],ss=ranked[1]?ranked[1][1]:0;
+  const certain=bs>=0.999||(bs>=0.75&&bs-ss>=0.1);
+  if(bs>=0.6)return {name:bn,certain,score:bs,raw,second:ranked[1]&&ranked[1][0]};
+  return {name:raw,certain:false,score:bs,raw};
+}
+/* Đọc chuỗi bonus; dot = thông tin dấu chấm từ ảnh (digitsLeft) để chèn lại dấu thập phân bị OCR bỏ sót. */
+function parseBonusText(raw,dot){
+  let t=String(raw||'').replace(/,/g,'.').replace(/[Oo]/g,'0').replace(/[Ss](?=\d|%|$)/g,'5');
+  // Ghép số bị OCR chèn khoảng trắng quanh dấu chấm: "2 .5" / "2. 5"
+  t=t.replace(/(\d)\s+\.(?=\d)/g,'$1.').replace(/(\d)\.\s+(?=\d)/g,'$1.');
+  // Bỏ mũi tên ↑ / dấu + ở đầu (OCR hay đọc thành 1, l, I, |, t, f, T)
+  t=t.replace(/^[^0-9]*/,'').replace(/^[1lI|!tTfF↑+^](?=\s)/,'').trim();
+  let conf=1,body;
+  const pi=t.indexOf('%');
+  if(pi>=0)body=t.slice(0,pi);
+  else if(/\d\s*96\s*$/.test(t)){body=t.replace(/\s*96\s*$/,'');conf=0.6}           // "%" bị đọc thành "96"
+  else if(/\d\.?\d*9$/.test(t)&&t.replace(/\s/g,'').length>=3){body=t.slice(0,-1);conf=0.4} // "%" bị đọc thành "9"
+  else {body=t;conf=0.5}
+  body=body.replace(/[lI|!]/g,'1').trim();
+  // Lấy cụm số cuối cùng ngay trước "%" (tách theo khoảng trắng nên mũi tên dính "1 " bị bỏ)
+  const toks=body.split(/\s+/).filter(x=>/\d/.test(x));if(!toks.length)return null;
+  const m=toks[toks.length-1].match(/(\d+(?:\.\d+)?)\.?$/);if(!m)return null;
+  let s2=m[1];let fixed=false;
+  if(!s2.includes('.')&&dot&&dot.hasDot&&dot.digitsLeft>0&&dot.digitsLeft<s2.length){s2=s2.slice(0,dot.digitsLeft)+'.'+s2.slice(dot.digitsLeft);fixed=true}
+  if(/^0\d/.test(s2)&&!s2.includes('.')){s2='0.'+s2.slice(1);fixed=true}
+  const v=Number(s2);if(!Number.isFinite(v)||v<0||v>100)return null;
+  return {value:v,conf:v>30?conf*0.3:conf,fixedDecimal:fixed};
+}
+/* Sửa lỗi OCR phổ biến: mũi tên ↑ đọc thành chữ số (0.5 → 40.5 / 10.5) và mất dấu chấm (2.5 → 25). Bonus 1 máy hiếm khi >=10%. */
+function sanitizeBonus(v){
+  let s=String(+v.toFixed(4));
+  if(s.includes('.')){const m=s.match(/^(\d)(\d\.\d+)$/);if(m&&v>=10&&Number(m[2])<10)return Number(m[2]);return v}
+  if(v>=10&&v<=99&&v%5===0)return v/10;
+  if(v>30&&v<=99)return Number(s.slice(1))||v;
+  return v;
+}
+/* Bỏ phiếu giữa nhiều nguồn đọc bonus. */
+function voteBonus(cands){
+  const g=new Map();for(const c of cands){if(!c||c.value==null)continue;const k=String(+c.value.toFixed(4));const e=g.get(k)||{value:+c.value.toFixed(4),w:0,src:new Set()};e.w+=c.w;e.src.add(c.src);g.set(k,e)}
+  // Lỗi OCR có hệ thống: mũi tên ↑ đọc thành "1" (0.5 → 10.5) và mất dấu chấm (2.5 → 25).
+  // Nếu cả bản đúng và bản lỗi cùng xuất hiện thì chuyển phiếu của bản lỗi sang bản đúng.
+  const keys=[...g.keys()];
+  for(const a of keys)for(const b of keys){if(a===b||!g.has(a)||!g.has(b))continue;
+    const arrow=a==='1'+b||a==='1'+b.replace(/^0\./,'0.'),dot=b.includes('.')&&a===b.replace('.','');
+    if(arrow||dot){const ea=g.get(a),eb=g.get(b);eb.w+=ea.w*0.9;ea.src.forEach(s=>eb.src.add(s));g.delete(a)}}
+  const list=[...g.values()].sort((a,b)=>b.w-a.w);if(!list.length)return {value:null,verified:false,alts:[]};
+  const top=list[0];return {value:top.value,verified:top.src.size>=2&&(!list[1]||list[1].w<top.w*0.6),agree:top.src.size,alts:list.slice(1).map(x=>x.value)};
+}
+/* Phân tích thành phần liên thông trên ảnh nhị phân (1 = chữ) để tìm dấu chấm thập phân. */
+function dotInfoFromMask(on,w,h,digitCount){
+  const seen=new Uint8Array(w*h),comps=[];
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const s=y*w+x;if(!on[s]||seen[s])continue;const q=[s];seen[s]=1;let x0=x,x1=x,y0=y,y1=y,area=0;
+    for(let k=0;k<q.length;k++){const p=q[k],px=p%w,py=(p-px)/w;area++;if(px<x0)x0=px;if(px>x1)x1=px;if(py<y0)y0=py;if(py>y1)y1=py;
+      if(px+1<w&&on[p+1]&&!seen[p+1]){seen[p+1]=1;q.push(p+1)}if(px>0&&on[p-1]&&!seen[p-1]){seen[p-1]=1;q.push(p-1)}if(py+1<h&&on[p+w]&&!seen[p+w]){seen[p+w]=1;q.push(p+w)}if(py>0&&on[p-w]&&!seen[p-w]){seen[p-w]=1;q.push(p-w)}}
+    comps.push({x0,x1,y0,y1,area,cx:(x0+x1)/2,cy:(y0+y1)/2,w:x1-x0+1,h:y1-y0+1})}
+  const H=Math.max(0,...comps.map(c=>c.h));if(H<4)return {hasDot:false};
+  const big=comps.filter(c=>c.h>=H*0.55).sort((a,b)=>a.cx-b.cx);if(big.length<2)return {hasDot:false};
+  const baseline=big.reduce((s,c)=>s+c.y1,0)/big.length;
+  const dots=comps.filter(c=>c.h<=H*0.3&&c.w<=H*0.35&&c.area>=2&&Math.abs(c.y1-baseline)<=H*0.2&&c.cx>big[0].cx&&c.cx<big[big.length-1].cx&&Math.abs(c.w-c.h)<=Math.max(2,H*0.15));
+  if(!dots.length)return {hasDot:false};
+  const d=dots[0];let left=big.filter(c=>c.cx<d.cx).length;
+  if(digitCount&&left>=digitCount&&left-1>0)left-=1; // ký hiệu mũi tên/+ ở đầu
+  return {hasDot:true,digitsLeft:left};
+}
+function parsePower(flat){const m=String(flat).replace(/,/g,'.').match(/([0-9]+(?:\.[0-9]{1,3})?)\s*([GTPEZ])\s*[HhtnN][\/\\|vVl1iI]{0,2}['’`]?\s*[s5S]\b/);return m?{power:Number(m[1]),unit:m[2].toUpperCase()+'H/s'}:null}
+function parseCells(flat){const m=String(flat).match(/(?:Size\s*:?\s*)?([0-9]{1,2})\s*[CcG]e[l1Ii|]{2}[s5]?\b/i);return m?Number(m[1]):null}
+function parseQty(flat){const m=String(flat).match(/(?:Quantity|Quantit[yv]|Q[u0]antity|Qty|x)\s*:?\s*([0-9]{1,4})\b/i);return m?Number(m[1]):null}
+function bonusFromBody(flat){const m=String(flat).match(/B[o0]nus\s*:?\s*([^0-9%]{0,4}[0-9OoSl|., ]{1,9}\s*(?:%|96|9\b))/i);return m?parseBonusText(m[1]):null}
+if(typeof module!=='undefined')module.exports={sanitizeBonus,BUILTIN_MINERS,BUILTIN_RACKS,cleanName,similarity,matchName,parseBonusText,voteBonus,dotInfoFromMask,parsePower,parseCells,parseQty,bonusFromBody,editDistance,nameKey};
+</script><script>
+'use strict';
+const RANKS=[['Bronze I',0,.025],['Bronze II',.025,.05],['Bronze III',.05,.1],['Silver I',.1,.15],['Silver II',.15,.25],['Silver III',.25,.65],['Gold I',.65,1.5],['Gold II',1.5,3.5],['Gold III',3.5,16],['Platinum I',16,50],['Platinum II',50,100],['Platinum III',100,200],['Diamond I',200,375],['Diamond II',375,650],['Diamond III',650,1150],['Titan I',1150,2160],['Titan II',2160,4000],['Titan III',4000,13000],['Emerald I',13000,25000],['Emerald II',25000,70000],['Emerald III',70000,1e6],['Legend',1e6,Infinity]];
+const FACTOR={'GH/s':1e-9,'TH/s':1e-6,'PH/s':.001,'EH/s':1,'ZH/s':1000};
+const $=id=>document.getElementById(id);const fmt=(v,d=2)=>Number.isFinite(v)?v.toFixed(d):'—';
+const unitRank=v=>v===Infinity?'Không giới hạn':v<1?Number((v*1000).toPrecision(9))+' PH/s':v>=1000?Number((v/1000).toPrecision(9))+' ZH/s':Number(v.toPrecision(9))+' EH/s';
+const showP=v=>{if(!Number.isFinite(v))return '—';for(const u of ['ZH/s','EH/s','PH/s','TH/s','GH/s'])if(Math.abs(v)>=FACTOR[u]||u==='GH/s')return fmt(v/FACTOR[u],3)+' '+u};
+const norm=s=>String(s||'').toLocaleLowerCase().trim().replace(/\s+/g,' ');
+const rankOf=p=>Math.max(0,RANKS.findIndex(r=>p>=r[1]&&p<r[2]));
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const STORE='rc_optimizer_v2',LIB='rc_library_v2';
+let miners=[],racks=[],shots=[],reviewRows=[],uid=1,library=[];
+let toastTimer=null;
+function toast(msg,kind){const el=$('toast');el.textContent=msg;el.className='toast'+(kind==='warn'?' warn':'')+' show';clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2800)}
+const newMiner=(x={})=>({id:uid++,name:x.name||'',power:Number(x.power)||0,unit:FACTOR[x.unit]?x.unit:'PH/s',bonus:Number(x.bonus)||0,slots:Math.max(1,Math.round(Number(x.slots)||2)),qty:Math.max(1,Math.round(Number(x.qty)||1))});
+const newRack=(x={})=>({id:uid++,name:x.name||'',bonus:Number(x.bonus)||0,slots:Math.max(1,Math.round(Number(x.slots)||8)),qty:Math.max(1,Math.round(Number(x.qty)||1))});
+function save(){try{localStorage.setItem(STORE,JSON.stringify({miners,racks,buffer:$('buffer').value,target:$('targetRank').value,timeout:$('timeout').value}))}catch(e){}}
+
+/* ---------- Thư viện máy đã xác nhận ---------- */
+function loadLib(){try{library=(JSON.parse(localStorage.getItem(LIB)||'[]')||[]).map(l=>({...l,bonus:sanitizeBonus(Number(l.bonus)||0)}))}catch(e){library=[]}}
+function saveLib(){try{localStorage.setItem(LIB,JSON.stringify(library))}catch(e){}renderLibInfo()}
+function libRemember(type,x){if(!x.name||!x.name.trim())return;const e={type,name:x.name.trim(),power:type==='miner'?Number(x.power)||0:0,unit:type==='miner'?x.unit:'',bonus:Number(x.bonus)||0,slots:Number(x.slots)||(type==='rack'?8:2)};
+  const i=library.findIndex(l=>l.type===type&&norm(l.name)===norm(e.name)&&(type==='rack'||Math.abs(l.power*FACTOR[l.unit]-e.power*FACTOR[e.unit])<=1e-12+0.005*e.power*FACTOR[e.unit]));if(i>=0)library[i]=e;else library.push(e)}
+function libLookup(type,name,ocrPower){const c=library.filter(l=>l.type===type&&norm(l.name)===norm(name));if(!c.length)return null;if(type==='rack'||!ocrPower)return c.length===1?c[0]:null;
+  let best=null,bd=Infinity;for(const l of c){const d=Math.abs(l.power*FACTOR[l.unit]-ocrPower)/Math.max(ocrPower,1e-15);if(d<bd){bd=d;best=l}}return bd<=0.03?best:null}
+function dictionary(type){const s=new Set(type==='rack'?BUILTIN_RACKS:BUILTIN_MINERS);for(const l of library)if(l.type===type)s.add(l.name);for(const x of (type==='rack'?racks:miners))if(x.name.trim())s.add(x.name.trim());return [...s]}
+function renderLibInfo(){const m=library.filter(l=>l.type==='miner').length,r=library.filter(l=>l.type==='rack').length;$('libInfo').textContent=`${m} Miner và ${r} Rack đã xác nhận. OCR sẽ ưu tiên tên trong thư viện và lấy bonus đã xác nhận khi khớp tên + power.`}
+
+/* ---------- Danh sách Miner/Rack ---------- */
+function expandMiners(){return miners.filter(m=>m.power>0&&FACTOR[m.unit]).flatMap(m=>Array.from({length:m.qty},(_,i)=>({name:m.name,power:m.power,unit:m.unit,src:m.id,eh:m.power*FACTOR[m.unit],slots:m.slots,bonus:m.bonus,key:norm(m.name)?norm(m.name)+'|'+Number(m.bonus).toFixed(6):''})))}
+function expandRacks(){return racks.filter(r=>r.slots>0).flatMap(r=>Array.from({length:r.qty},(_,i)=>({name:r.name||'Rack',bonus:r.bonus,slots:r.slots,instance:i+1})))}
+function field(type,value,onchange){const e=document.createElement(type==='select'?'select':'input');if(type==='select'){for(const u of Object.keys(FACTOR)){const o=document.createElement('option');o.value=u;o.textContent=u;e.append(o)}e.value=value}else{e.type=type==='number'?'number':'text';e.value=value;if(e.type==='number'){e.step='any';e.min='0'}}e.addEventListener('change',()=>onchange(e.value));e.addEventListener('input',()=>onchange(e.value));return e}
+function render(){for(const [kind,data,wrap] of [['miner',miners,$('miners')],['rack',racks,$('racks')]]){wrap.replaceChildren();for(const x of data){const row=document.createElement('div');row.className='entry '+(kind==='rack'?'rack':'');
+  const add=(typ,v,key)=>row.append(field(typ,v,val=>{x[key]=typ==='number'?Math.max(0,Number(val)||0):val;if(key==='slots'||key==='qty')x[key]=Math.max(1,Math.round(x[key]));save();refreshSoon()}));
+  add('text',x.name,'name');if(kind==='miner'){add('number',x.power,'power');add('select',x.unit,'unit')}add('number',x.bonus,'bonus');add('number',x.slots,'slots');add('number',x.qty,'qty');
+  const del=document.createElement('button');del.className='danger';del.textContent='×';del.title='Xóa';del.onclick=()=>{const arr=kind==='miner'?miners:racks;arr.splice(arr.findIndex(z=>z.id===x.id),1);render();save()};row.append(del);wrap.append(row)}}refreshSoon()}
+let refreshTimer=null;function refreshSoon(){clearTimeout(refreshTimer);refreshTimer=setTimeout(refresh,250)}
+async function refresh(){const ms=expandMiners(),rs=expandRacks();const base=ms.reduce((a,m)=>a+m.eh,0);const keys=new Map();for(const m of ms)if(m.key&&!keys.has(m.key))keys.set(m.key,m.bonus);let mb=0;for(const v of keys.values())mb+=v;
+  $('basePower').textContent=showP(base);$('allBonus').textContent='+'+fmt(mb)+'% ('+keys.size+' loại)';
+  const need=ms.reduce((a,m)=>a+m.slots,0),have=rs.reduce((a,r)=>a+r.slots,0);$('cells').textContent=need+' / '+have;$('cells').style.color=need>have?'#ffd39a':'';
+  markRanks();save();
+  if(!ms.length||!rs.length){$('maxPower').textContent='—';return}
+  const res=await runSolve({miners:ms,racks:rs,ceiling:Infinity,timeMs:Math.min(600,150+ms.length*2)});
+  window.__maxPower=res.power;$('maxPower').textContent=showP(res.power);$('maxRank').textContent='→ '+RANKS[rankOf(res.power)][0];markRanks()}
+function markRanks(){const mi=window.__maxPower!=null?rankOf(window.__maxPower):-1;$('ranks').querySelectorAll('tr').forEach((tr,i)=>{tr.classList.toggle('active',i===mi);tr.classList.toggle('target',i===Number($('targetRank').value))})}
+function initRanks(){RANKS.forEach((r,i)=>{const op=document.createElement('option');op.value=i;op.textContent=r[0];$('targetRank').append(op);const tr=document.createElement('tr');for(const t of [r[0],unitRank(r[1]),unitRank(r[2])]){const td=document.createElement('td');td.textContent=t;tr.append(td)}$('ranks').append(tr)});$('targetRank').onchange=()=>{markRanks();save()}}
+
+/* ---------- Chạy bộ tối ưu trong Web Worker ---------- */
+let worker=null,jobId=0;const pending=new Map();
+function getWorker(){if(worker!==null)return worker;try{const src=$('solver-src').textContent+'\nonmessage=e=>{const {id,inp}=e.data;let res;try{res=solve(inp)}catch(err){res={error:String(err&&err.message||err)}}postMessage({id,res})};';worker=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})));worker.onmessage=e=>{const p=pending.get(e.data.id);if(p){pending.delete(e.data.id);p(e.data.res)}};worker.onerror=()=>{worker=false}}catch(e){worker=false}return worker}
+function runSolve(inp){const w=getWorker();if(!w)return new Promise(ok=>setTimeout(()=>ok(solve(inp)),10));const id=++jobId;return new Promise(ok=>{pending.set(id,ok);w.postMessage({id,inp})})}
+function output(html){$('result').innerHTML=html}
+function showPlan(res,label,ms,rs,ceilRank){
+  if(!res||res.error)return `<div class="result warn">Lỗi tối ưu: ${esc(res&&res.error||'không rõ')}</div>`;
+  if(!res.found)return `<div class="result warn"><b>${esc(label)}:</b> Không có bố trí nào dưới giới hạn (kiểm tra khoảng đệm).</div>`;
+  const v=evaluateLayout(ms,rs,res.assign);
+  const ceil=ceilRank!=null?RANKS[ceilRank][2]:Infinity,floor=ceilRank!=null?RANKS[ceilRank][1]:0;
+  const pct=Number.isFinite(ceil)?Math.min(100,100*v.power/ceil):100;
+  const groups=rs.map((r,j)=>{const list=new Map();let used=0,raw=0;res.assign.forEach((a,i)=>{if(a!==j)return;const m=ms[i];used+=m.slots;raw+=m.eh;const k=m.name+'|'+m.power+' '+m.unit+'|'+m.slots;list.set(k,(list.get(k)||0)+1)});return {r,list,used,raw}}).filter(g=>g.list.size);
+  const ex=new Map();res.assign.forEach((a,i)=>{if(a>=0)return;const m=ms[i];const k=(m.name||'Miner')+' ('+m.power+' '+m.unit+')';ex.set(k,(ex.get(k)||0)+1)});
+  const unusedR=rs.length-groups.length;
+  const item=k=>{const [n,p,s]=k.split('|');return `${esc(n||'Miner')} (${esc(p)}, ${s} Cells)`};
+  const below=v.power<floor?`<p class="warn">Power thấp hơn ngưỡng dưới của ${esc(RANKS[ceilRank][0])} (${unitRank(floor)}): Rank thực tế sẽ là ${esc(RANKS[rankOf(v.power)][0])}.</p>`:'';
+  return `<div class="result"><h3>${esc(label)} · ${showP(v.power)}${Number.isFinite(ceil)?' · '+fmt(pct,3)+'% giới hạn':''}</h3>${Number.isFinite(ceil)?`<div class="progress"><div style="width:${pct}%"></div></div>`:''}
+  <p>Power gốc <b>${showP(v.base)}</b> · Bonus Miner <b>+${fmt(v.mb)}%</b> · Power từ Bonus Rack <b>${showP(v.rackPower)}</b></p>
+  ${Number.isFinite(res.ceiling)?`<p>Giới hạn tìm kiếm: <b>${unitRank(res.ceiling)}</b> · Còn trống: <b>${showP(Math.max(0,res.ceiling-v.power))}</b></p>`:''}${below}
+  <h3>Bố trí đề xuất</h3>${groups.map(g=>`<p><b>${esc(g.r.name+' #'+g.r.instance)}</b> <span class="muted">(+${fmt(g.r.bonus)}%, ${g.used}/${g.r.slots} Cells, +${showP(g.raw*g.r.bonus/100)})</span>: ${[...g.list].map(([k,c])=>(c>1?c+'× ':'')+item(k)).join('; ')}</p>`).join('')||'<p>Chưa lắp máy nào.</p>'}
+  <p><b>Không sử dụng (${res.assign.filter(a=>a<0).length} máy / ${unusedR} Rack):</b> ${[...ex].map(([k,c])=>(c>1?c+'× ':'')+esc(k)).join(', ')||'Không có máy dư'}${unusedR?` · ${unusedR} Rack để trống`:''}</p>
+  <small>${v.ok?'✓ Đã kiểm tra lại sức chứa Rack và công thức':'⚠ Lỗi kiểm tra sức chứa'} · ${res.exact?'Nghiệm chính xác (đã duyệt hết)':'Gần tối ưu'} · ${res.iterations.toLocaleString()} bước SA · ${res.elapsed} ms</small></div>`}
+function prepareRun(){const ms=expandMiners(),rs=expandRacks();if(!ms.length||!rs.length){output('<p class="warn">Cần ít nhất một Miner (power &gt; 0) và một Rack.</p>');return null}return {ms,rs,time:Number($('timeout').value),buffer:Math.max(0,Number($('buffer').value)||0)}}
+const ceilFor=(idx,buffer)=>RANKS[idx][2]===Infinity?Infinity:RANKS[idx][2]-buffer;
+function busy(on,msg){for(const id of ['optimize','maximize','compare'])$(id).disabled=on;$('status').textContent=msg||''}
+async function doOptimize(){const c=prepareRun();if(!c)return;const t=Number($('targetRank').value);busy(true,'Đang tìm bố trí cho '+RANKS[t][0]+'...');
+  try{const primary=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(t,c.buffer),timeMs:c.time});let html='<h3>Đề xuất Rank mục tiêu</h3>'+showPlan(primary,RANKS[t][0],c.ms,c.rs,t);
+    const upper=RANKS[t][2],ratio=primary.found&&Number.isFinite(upper)?primary.power/upper:null;
+    if(t>0&&ratio!==null&&ratio<0.9){busy(true,'Dưới 90%: đang tối ưu riêng cho Rank liền dưới...');const lower=t-1;const lr=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(lower,c.buffer),timeMs:c.time,seed:7});
+      html+='<h3>Đề xuất bổ sung: '+esc(RANKS[lower][0])+'</h3><p class="help">Rank mục tiêu chỉ đạt '+fmt(ratio*100)+'% giới hạn. Đây là bố trí tìm lại riêng cho Rank thấp hơn.</p>'+showPlan(lr,RANKS[lower][0],c.ms,c.rs,lower)}
+    else if(ratio!==null&&primary.assign.some(x=>x>=0))html+='<p class="ok">Đạt '+fmt(ratio*100,3)+'% giới hạn Rank.</p>';else if(ratio!==null)html+='<p class="warn">Mọi Miner đều vượt giới hạn Rank này; hãy chọn Rank cao hơn.</p>';
+    output(html);busy(false,'Đã hoàn thành.')}catch(e){busy(false,'Lỗi tối ưu: '+e.message)}}
+async function doMaximize(){const c=prepareRun();if(!c)return;busy(true,'Đang tìm power tối đa...');try{const r=await runSolve({miners:c.ms,racks:c.rs,ceiling:Infinity,timeMs:c.time});output('<h3>Power tối đa (không giới hạn Rank)</h3>'+showPlan(r,'Rank '+RANKS[rankOf(r.power)][0],c.ms,c.rs,null));busy(false,'Đã hoàn thành.')}catch(e){busy(false,'Lỗi: '+e.message)}}
+async function doCompare(){const c=prepareRun();if(!c)return;busy(true,'Đang tìm power tối đa...');try{const mx=await runSolve({miners:c.ms,racks:c.rs,ceiling:Infinity,timeMs:Math.max(800,c.time/3)});const top=rankOf(mx.power);const rows=[],plans=[];
+  for(let i=top;i>=Math.max(0,top-3);i--){busy(true,'Đang tối ưu '+RANKS[i][0]+'...');const r=i===top&&RANKS[i][2]===Infinity?mx:await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(i,c.buffer),timeMs:Math.max(800,c.time/2),seed:i+3});
+    const pct=r.found&&Number.isFinite(RANKS[i][2])?100*r.power/RANKS[i][2]:null;rows.push(`<tr><td>${esc(RANKS[i][0])}</td><td>${r.found?showP(r.power):'—'}</td><td>${pct===null?'—':fmt(pct,3)+'%'}</td><td>${r.found?r.assign.filter(a=>a>=0).length:0}</td></tr>`);plans.push(`<details><summary>Chi tiết ${esc(RANKS[i][0])}</summary>${showPlan(r,RANKS[i][0],c.ms,c.rs,i)}</details>`)}
+  output(`<h3>So sánh các Rank</h3><p class="help">Power tối đa: <b>${showP(mx.power)}</b> (${esc(RANKS[top][0])}). Mỗi Rank được tối ưu riêng, không cần lắp hết Rack.</p><div class="scroll"><table><thead><tr><th>Rank</th><th>Power tốt nhất</th><th>% giới hạn</th><th>Số máy lắp</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>${plans.join('')}`);busy(false,'Đã hoàn thành.')}catch(e){busy(false,'Lỗi: '+e.message)}}
+
+/* ---------- Xử lý ảnh ---------- */
+async function prepare(file){const bmp=await createImageBitmap(file);const c=document.createElement('canvas');c.width=bmp.width;c.height=bmp.height;c.getContext('2d').drawImage(bmp,0,0);bmp.close&&bmp.close();return c}
+function cropScaled(src,x,y,w,h,scale){x=Math.max(0,x);y=Math.max(0,y);w=Math.min(w,src.width-x);h=Math.min(h,src.height-y);const c=document.createElement('canvas');c.width=Math.max(1,Math.round(w*scale));c.height=Math.max(1,Math.round(h*scale));const ctx=c.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(src,x,y,w,h,0,0,c.width,c.height);return c}
+function otsu(vals){const hist=new Array(256).fill(0);for(const v of vals)hist[v]++;const N=vals.length;let sum=0;for(let i=0;i<256;i++)sum+=i*hist[i];let sB=0,wB=0,best=0,t=127;for(let i=0;i<256;i++){wB+=hist[i];if(!wB)continue;const wF=N-wB;if(!wF)break;sB+=i*hist[i];const mB=sB/wB,mF=(sum-sB)/wF,b=wB*wF*(mB-mF)*(mB-mF);if(b>best){best=b;t=i}}return t}
+/* Nhị phân hóa: chữ đen trên nền trắng (Tesseract đọc tốt nhất). mode 'cyan' chỉ giữ chữ xanh ngọc (bonus). */
+const PAD=12;
+function binarize(src,mode){const w=src.width,h=src.height,ctx=src.getContext('2d'),im=ctx.getImageData(0,0,w,h),d=im.data,N=w*h,v=new Uint8Array(N);
+  for(let i=0;i<N;i++){const r=d[i*4],g=d[i*4+1],b=d[i*4+2];v[i]=mode==='cyan'?Math.max(0,Math.min(255,(Math.min(g,b)-r)*1.6)):Math.round(.299*r+.587*g+.114*b)}
+  if(mode==='gray'){let lo=255,hi=0,above0=0;const mean=v.reduce((s,x)=>s+x,0)/N;for(let i=0;i<N;i++){if(v[i]<lo)lo=v[i];if(v[i]>hi)hi=v[i]}const inv=mean<128;const out=document.createElement('canvas');out.width=w+2*PAD;out.height=h+2*PAD;const o=out.getContext('2d');o.fillStyle='#fff';o.fillRect(0,0,out.width,out.height);const oi=o.createImageData(w,h);for(let i=0;i<N;i++){let x=(v[i]-lo)*255/Math.max(1,hi-lo);if(inv)x=255-x;oi.data[i*4]=oi.data[i*4+1]=oi.data[i*4+2]=x;oi.data[i*4+3]=255}o.putImageData(oi,PAD,PAD);out.mask=null;return out}
+  const t=otsu(v);let above=0;for(let i=0;i<N;i++)if(v[i]>t)above++;const textBright=mode==='cyan'?true:above<N/2;
+  const out=document.createElement('canvas');out.width=w+2*PAD;out.height=h+2*PAD;const o=out.getContext('2d');o.fillStyle='#fff';o.fillRect(0,0,out.width,out.height);const oi=o.getImageData(0,0,out.width,out.height),od=oi.data;const mask=new Uint8Array(N);
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x,on=textBright?v[i]>t:v[i]<=t;if(mode==='cyan'&&v[i]<25)continue;if(on){mask[i]=1;const k=((y+PAD)*out.width+x+PAD)*4;od[k]=od[k+1]=od[k+2]=0}}
+  o.putImageData(oi,0,0);out.mask=mask;out.mw=w;out.mh=h;return out}
+function ocrCrop(src,x,y,w,h,scale,mode){const c=cropScaled(src,x,y,w,h,scale);const b=binarize(c,mode||'auto');b.x0=Math.max(0,x);b.y0=Math.max(0,y);b.scale=scale;return b}
+/* Tự nhận khung thẻ: tìm các dải nền đồng nhất (không có cạnh) giữa các thẻ. */
+function autoBoxes(src){const sc=Math.min(1,700/src.width),w=Math.round(src.width*sc),h=Math.round(src.height*sc);if(w<50||h<50)return null;const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(src,0,0,w,h);const d=ctx.getImageData(0,0,w,h).data;
+  // Màu nền trang = màu phổ biến nhất ở viền ảnh
+  const cnt=new Map();const q=(i)=>((d[i]>>3)<<10)|((d[i+1]>>3)<<5)|(d[i+2]>>3);for(let x=0;x<w;x++){for(const y of [0,1,h-2,h-1]){const k=q((y*w+x)*4);cnt.set(k,(cnt.get(k)||0)+1)}}for(let y=0;y<h;y++){for(const x of [0,1,w-2,w-1]){const k=q((y*w+x)*4);cnt.set(k,(cnt.get(k)||0)+1)}}
+  const bk=[...cnt.entries()].sort((a,b)=>b[1]-a[1])[0][0],br=((bk>>10)&31)*8+4,bg=((bk>>5)&31)*8+4,bb=(bk&31)*8+4;
+  const fg=new Uint8Array(w*h);for(let i=0;i<w*h;i++){const dr=d[i*4]-br,dg=d[i*4+1]-bg,db=d[i*4+2]-bb;fg[i]=(dr*dr+dg*dg+db*db)>12*12?1:0}
+  const runs=(len,active,minLen)=>{const out=[];let s=-1;for(let i=0;i<=len;i++){const a=i<len&&active(i);if(a&&s<0)s=i;if(!a&&s>=0){if(i-s>=minLen)out.push([s,i]);s=-1}}return out};
+  const rowF=new Float32Array(h);for(let y=0;y<h;y++){let n=0;for(let x=0;x<w;x++)n+=fg[y*w+x];rowF[y]=n/w}
+  const bands=runs(h,y=>rowF[y]>0.02,Math.max(20,h*0.05));const boxes=[];
+  for(const [y0,y1] of bands){const colF=new Float32Array(w);for(let x=0;x<w;x++){let n=0;for(let y=y0;y<y1;y++)n+=fg[y*w+x];colF[x]=n/(y1-y0)}
+    for(const [x0,x1] of runs(w,x=>colF[x]>0.03,Math.max(30,w*0.08)))boxes.push({x:x0/sc,y:y0/sc,w:(x1-x0)/sc,h:(y1-y0)/sc})}
+  if(!boxes.length||boxes.length>48)return null;const ws=boxes.map(b=>b.w).sort((a,b)=>a-b),hs=boxes.map(b=>b.h).sort((a,b)=>a-b),mw=ws[ws.length>>1],mh=hs[hs.length>>1];
+  const good=boxes.filter(b=>b.w>=mw*0.75&&b.w<=mw*1.33&&b.h>=mh*0.75&&b.h<=mh*1.33&&b.w/b.h>0.4&&b.w/b.h<4);return good.length===boxes.length?good:null}
+function gridBoxes(src,cols,rows){const w=src.width,h=src.height,cw=w/cols;rows=rows>0?rows:Math.max(1,Math.round(h/(cw*.80)));const rh=h/rows,boxes=[];for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const px=cw*.01,py=rh*.015;boxes.push({x:c*cw+px,y:r*rh+py,w:cw-2*px,h:rh-2*py})}return boxes}
+function cardBoxes(src,shot){if(shot.layout==='auto'){const b=autoBoxes(src);if(b){shot.detected='tự động';return b}shot.detected='lưới (tự động thất bại)'}else shot.detected='lưới';return gridBoxes(src,shot.cols,shot.rows)}
+function addShots(files){for(const f of files){if(!f.type.startsWith('image/'))continue;shots.push({file:f,type:'miner',cols:3,rows:0,layout:'auto'})}renderShots()}
+function renderShots(){$('shots').replaceChildren();shots.forEach((s,i)=>{const box=document.createElement('div');box.className='shot';const cv=document.createElement('canvas');cv.className='thumb';const info=document.createElement('small');
+  (async()=>{if(!s.src)s.src=await prepare(s.file);const b=cardBoxes(s.src,s);s.boxes=b;const k=Math.min(1,320/s.src.width);cv.width=Math.round(s.src.width*k);cv.height=Math.round(s.src.height*k);const x=cv.getContext('2d');x.drawImage(s.src,0,0,cv.width,cv.height);x.strokeStyle='#23d7cb';x.lineWidth=2;for(const q of b)x.strokeRect(q.x*k,q.y*k,q.w*k,q.h*k);info.textContent=b.length+' thẻ · khung '+s.detected})();
+  const sel=(opts,val,on)=>{const e=document.createElement('select');for(const [v,t] of opts){const o=document.createElement('option');o.value=v;o.textContent=t;e.append(o)}e.value=val;e.onchange=()=>on(e.value);return e};
+  const lab=t=>{const e=document.createElement('small');e.textContent=t;return e};
+  const rm=document.createElement('button');rm.className='danger';rm.textContent='Xóa ảnh';rm.onclick=()=>{shots.splice(i,1);renderShots()};
+  box.append(cv,info,sel([['miner','Miner'],['rack','Rack']],s.type,v=>{s.type=v;s.cols=v==='rack'?2:3;renderShots()}),lab('Khung thẻ:'),sel([['auto','Tự động'],['grid','Lưới']],s.layout,v=>{s.layout=v;renderShots()}),lab('Cột / hàng (lưới):'),sel([1,2,3,4,5,6].map(n=>[n,n+' cột']),s.cols,v=>{s.cols=Number(v);renderShots()}),sel([[0,'Tự tính hàng'],...[1,2,3,4,5,6].map(n=>[n,n+' hàng'])],s.rows,v=>{s.rows=Number(v);renderShots()}),rm);$('shots').append(box)})}
+
+/* ---------- OCR ---------- */
+function loadScript(){if(window.Tesseract)return Promise.resolve();return new Promise((ok,bad)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';s.onload=ok;s.onerror=()=>bad(Error('Không tải được Tesseract.js; cần kết nối Internet.'));document.head.append(s)})}
+function wordsOf(data){if(data.words&&data.words.length)return data.words;const out=[];for(const b of data.blocks||[])for(const p of b.paragraphs||[])for(const l of p.lines||[])for(const w of l.words||[])out.push(w);return out}
+async function rec(worker,canvas,psm,whitelist){await worker.setParameters({tessedit_pageseg_mode:String(psm),tessedit_char_whitelist:whitelist||'',preserve_interword_spaces:'1'});return (await worker.recognize(canvas,{},{text:true,blocks:true})).data}
+/* Cắt bỏ mũi tên ↑ phía trước số bonus: cụm cột xanh đầu tiên, hẹp, cách phần số một khoảng trống rõ. */
+function trimArrow(src,x,y,w,h){const sc=Math.max(5,Math.min(10,60/Math.max(1,h)));const c=ocrCrop(src,x,y,w,h,sc,'cyan');const m=c.mask,W=c.mw,H=c.mh;if(!m)return x;
+  let top=H,bot=-1;const col=new Uint16Array(W);for(let yy=0;yy<H;yy++)for(let xx=0;xx<W;xx++)if(m[yy*W+xx]){col[xx]++;if(yy<top)top=yy;if(yy>bot)bot=yy}
+  const th=bot-top+1;if(th<4)return x;const runs=[];let s=-1;for(let i=0;i<=W;i++){const on=i<W&&col[i]>0;if(on&&s<0)s=i;if(!on&&s>=0){runs.push([s,i]);s=-1}}
+  if(runs.length<3)return x;const gap=runs[1][0]-runs[0][1],w0=runs[0][1]-runs[0][0];const inner=[];for(let i=2;i<runs.length;i++)inner.push(runs[i][0]-runs[i-1][1]);const med=inner.sort((p,q)=>p-q)[inner.length>>1]||0;
+  if(gap>=th*0.3&&gap>med*1.6&&w0<=th*0.9)return x+(runs[1][0]-gap*0.4)/sc;return x}
+async function readBonusRegion(worker,src,x,y,w,h,srcTag,weight,cands,images){
+  const nx=trimArrow(src,x,y,w,h);const trimmed=nx>x;w-=nx-x;x=nx;
+  const sc=Math.max(5,Math.min(10,60/Math.max(1,h)));for(const mode of ['cyan','auto','gray']){const c=ocrCrop(src,x,y,w,h,sc,mode);const d=await rec(worker,c,7,'0123456789.,% ');const digits=(d.text.match(/\d/g)||[]).length;const dot=c.mask?dotInfoFromMask(c.mask,c.mw,c.mh,digits):null;const p=parseBonusText(d.text,dot);
+    if(p)cands.push({value:p.value,w:weight*p.conf*(mode==='cyan'?1:mode==='gray'?0.85:0.9)*(trimmed?1.1:1),src:srcTag+'-'+mode,raw:d.text.trim(),fixed:p.fixedDecimal});if(mode==='cyan')images.push(c)}}
+async function recognizeCard(worker,src,box,type){const {x,y,w,h}=box;const rx=x+w*.49,rw=w*.48;
+  const k=Math.max(2.5,Math.min(6,1000/w)); // phóng to theo kích thước thẻ: ảnh nhỏ được phóng nhiều hơn
+  const title=ocrCrop(src,rx,y+h*.03,rw,h*.16,k*1.2,'auto');const td=await rec(worker,title,6);
+  const body=ocrCrop(src,rx,y+h*.03,rw,h*.62,k,'auto');const bd=await rec(worker,body,6);
+  const bodyG=ocrCrop(src,rx,y+h*.03,rw,h*.62,k,'gray');bodyG.x0=body.x0;bodyG.y0=body.y0;bodyG.scale=k;const bg=await rec(worker,bodyG,6);
+  let texts=[td.text,bd.text,bg.text],nm=matchName(texts,dictionary(type)),full=null;
+  if(!nm.certain){const fc=ocrCrop(src,x,y,w,h,2,'auto');full=await rec(worker,fc,11);nm=matchName([td.text,bd.text,bg.text,full.text],dictionary(type))}
+  const flatB=bd.text.replace(/\s+/g,' '),flatG=bg.text.replace(/\s+/g,' '),flatF=full?full.text.replace(/\s+/g,' '):'';
+  const pick=f=>f(flatG)??f(flatB)??(flatF?f(flatF):null);const pw=pick(parsePower),cells=pick(parseCells),qty=pick(parseQty);
+  // Bonus: nhiều nguồn rồi bỏ phiếu
+  const cands=[],images=[];for(const [f,tag] of [[flatB,'body'],[flatG,'body-gray']]){const bb=bonusFromBody(f);if(bb)cands.push({value:bb.value,w:0.7*bb.conf,src:tag})}
+  const isB=q=>/^b[o0]nu/i.test(q.text||'');let bw=wordsOf(bg).find(isB),bref=bodyG;if(!bw){bw=wordsOf(bd).find(isB);bref=body}
+  if(bw){const sx=bref.x0+(bw.bbox.x1-PAD)/bref.scale,sy=bref.y0+(bw.bbox.y0-PAD)/bref.scale,wh=(bw.bbox.y1-bw.bbox.y0)/bref.scale;await readBonusRegion(worker,src,sx+wh*0.2,sy-wh*0.3,rx+rw-sx-wh*0.2,wh*1.6,'word',1,cands,images)}
+  else await readBonusRegion(worker,src,x+w*.805,y+h*.385,w*.172,h*.095,'fixed',0.7,cands,images);
+  const vote=voteBonus(cands);let bonus=vote.value,bonusVerified=vote.verified,bonusFix='';
+  if(bonus!==null){const f=sanitizeBonus(bonus);if(f!==bonus){bonusFix=' · đã sửa '+bonus+' → '+f;bonus=f;bonusVerified=false}}
+  let note=cands.length?'OCR: '+[...new Set(cands.map(c=>c.value))].join(' / ')+'%':'Không đọc được bonus';
+  if(cands.some(c=>c.fixed))note+=' · đã khôi phục dấu thập phân';note+=bonusFix;
+  const lib=nm.certain?libLookup(type,nm.name,pw?pw.power*FACTOR[pw.unit]:0):null;
+  if(lib)lib.bonus=sanitizeBonus(lib.bonus);
+  if(lib){if(bonus===null||Math.abs(lib.bonus-bonus)>1e-9){note='Theo thư viện: '+lib.bonus+'% ('+note+')'}else note='Khớp thư viện';bonus=lib.bonus;bonusVerified=true}
+  const power=pw?pw.power:(lib?lib.power:0),unit=pw?pw.unit:(lib?lib.unit:'PH/s'),slots=cells||(lib&&lib.slots)||(type==='rack'?8:2);
+  const needsReview=!nm.certain||!bonusVerified||bonus===null||(!cells&&!lib)||!qty||(type==='miner'&&!power);
+  return {type,name:nm.name||'',nameScore:nm.score,nameCertain:nm.certain,power,unit,bonus:bonus??0,slots,qty:qty||1,checked:true,needsReview,bonusVerified,bonusNote:note,bonusImage:images[0]?images[0].toDataURL('image/png'):null,raw:'TIÊU ĐỀ: '+td.text.trim()+'\n'+bd.text.trim()+'\nBonus đọc được: '+cands.map(c=>c.src+'='+c.value+(c.raw?' ("'+c.raw+'")':'')).join(', ')}}
+function renderReview(){$('reviewWrap').classList.remove('hidden');$('review').replaceChildren();const dl=$('nameList');dl.replaceChildren();for(const n of new Set([...dictionary('miner'),...dictionary('rack')])){const o=document.createElement('option');o.value=n;dl.append(o)}
+  reviewRows.forEach(r=>{const tr=document.createElement('tr');const add=e=>{const td=document.createElement('td');td.append(e);tr.append(td)};const mark=()=>{tr.style.background=r.needsReview?'rgba(240,170,60,.12)':''};mark();
+    const cb=document.createElement('input');cb.type='checkbox';cb.checked=r.checked;cb.onchange=()=>r.checked=cb.checked;add(cb);
+    const type=document.createElement('select');[['miner','Miner'],['rack','Rack']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;type.append(o)});type.value=r.type;type.onchange=()=>{r.type=type.value;power.disabled=unit.disabled=r.type==='rack'};add(type);
+    const name=field('text',r.name,v=>{r.name=v;r.nameCertain=true;r.needsReview=!r.bonusVerified;mark()});name.setAttribute('list','nameList');if(!r.nameCertain)name.style.borderColor='#ffb547';add(name);
+    const power=field('number',r.power,v=>r.power=Number(v));power.disabled=r.type==='rack';add(power);const unit=field('select',r.unit,v=>r.unit=v);unit.disabled=r.type==='rack';add(unit);
+    const bi=field('number',r.bonus,v=>{r.bonus=Number(v);r.bonusVerified=true;r.needsReview=!r.nameCertain;mark()});if(!r.bonusVerified)bi.style.borderColor='#ffb547';const bx=document.createElement('div');bx.style.cssText='display:flex;flex-direction:column;gap:4px';bx.append(bi);
+    if(r.bonusImage){const im=document.createElement('img');im.src=r.bonusImage;im.title='Vùng bonus đã đọc';im.style.cssText='width:110px;height:36px;object-fit:contain;background:#fff;border-radius:4px';bx.append(im)}add(bx);
+    add(field('number',r.slots,v=>r.slots=Math.max(1,Math.round(Number(v)||1))));add(field('number',r.qty,v=>r.qty=Math.max(1,Math.round(Number(v)||1))));
+    const note=document.createElement('small');note.textContent=(r.nameCertain?'':'Tên chưa chắc ('+Math.round(r.nameScore*100)+'%). ')+r.bonusNote;add(note);$('review').append(tr)})}
+async function ocr(){if(!shots.length){$('ocrStatus').textContent='Chưa có ảnh.';return}const btn=$('ocrStart');btn.disabled=true;reviewRows=[];let w;
+  try{await loadScript();w=await Tesseract.createWorker('eng');const texts=[];let total=0;for(const s of shots){if(!s.src)s.src=await prepare(s.file);s.boxes=cardBoxes(s.src,s);total+=s.boxes.length}let done=0;
+    for(let i=0;i<shots.length;i++){const s=shots[i];for(let j=0;j<s.boxes.length;j++){done++;$('ocrStatus').textContent=`Đang đọc thẻ ${done}/${total} (ảnh ${i+1}/${shots.length})...`;await new Promise(r=>setTimeout(r,0));
+      try{const row=await recognizeCard(w,s.src,s.boxes[j],s.type);texts.push(`Ảnh ${i+1}, thẻ ${j+1} → ${row.name}\n${row.raw}`);if(row.name||row.power)reviewRows.push(row)}catch(err){texts.push(`Ảnh ${i+1}, thẻ ${j+1}: ${err.message}`)}}}
+    $('raw').textContent=texts.join('\n\n');renderReview();const sus=reviewRows.filter(r=>r.needsReview).length;$('ocrStatus').textContent=`Đã nhận diện ${reviewRows.length} thẻ từ ${total} vị trí; ${sus} thẻ cần kiểm tra (tô cam).`}
+  catch(e){$('ocrStatus').textContent='Lỗi OCR: '+e.message}finally{if(w)await w.terminate();btn.disabled=false}}
+function applyOcr(replace){const rows=reviewRows.filter(r=>r.checked&&r.name.trim()&&r.bonus>=0&&r.bonus<=100);if(!rows.length){$('ocrStatus').textContent='Không có dòng hợp lệ để thêm.';toast('Không có miner/rack hợp lệ để thêm.','warn');return}
+  const hasM=rows.some(r=>r.type!=='rack'),hasR=rows.some(r=>r.type==='rack');if(replace&&!confirm('Thay thế danh sách '+[hasM&&'Miner',hasR&&'Rack'].filter(Boolean).join(' và ')+' hiện tại?'))return;if(replace){if(hasM)miners=[];if(hasR)racks=[]}
+  let nM=0,nR=0;
+  for(const r of rows){if(r.type==='rack'){racks.push(newRack(r));libRemember('rack',r);nR++}else if(r.power>0){miners.push(newMiner(r));libRemember('miner',r);nM++}}
+  saveLib();render();
+  reviewRows=[];$('review').replaceChildren();$('reviewWrap').classList.add('hidden');$('raw').textContent='';
+  const msg=`Đã thêm thành công ${nM} Miner và ${nR} Rack.`;
+  $('ocrStatus').textContent=msg;toast(msg)}
+function exportCsv(){const rows=[['Loai','Ten','Power','Don vi','Bonus','Cells','So luong'],...miners.map(m=>['Miner',m.name,m.power,m.unit,m.bonus,m.slots,m.qty]),...racks.map(r=>['Rack',r.name,'','',r.bonus,r.slots,r.qty])];const csv='\ufeff'+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='rollercoin-layout.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+
+/* ---------- Khởi động ---------- */
+initRanks();loadLib();
+try{const s=JSON.parse(localStorage.getItem(STORE)||'null')||JSON.parse(localStorage.getItem('rc_optimizer_current')||'null');if(s){miners=(s.miners||[]).map(newMiner);racks=(s.racks||[]).map(newRack);$('buffer').value=s.buffer??.001;$('targetRank').value=s.target??8;if(s.timeout)$('timeout').value=s.timeout}}catch(e){}
+render();renderLibInfo();
+$('addMiner').onclick=()=>{miners.push(newMiner());render()};$('addRack').onclick=()=>{racks.push(newRack());render()};$('clearMiners').onclick=()=>{if(confirm('Xóa Miner?')){miners=[];render()}};$('clearRacks').onclick=()=>{if(confirm('Xóa Rack?')){racks=[];render()}};
+$('csv').onclick=exportCsv;$('optimize').onclick=doOptimize;$('maximize').onclick=doMaximize;$('compare').onclick=doCompare;for(const id of ['buffer','timeout'])$(id).addEventListener('input',refreshSoon);
+$('libFromList').onclick=()=>{for(const m of miners)libRemember('miner',m);for(const r of racks)libRemember('rack',r);saveLib()};$('libClear').onclick=()=>{if(confirm('Xóa toàn bộ thư viện đã xác nhận?')){library=[];saveLib()}};
+$('drop').onclick=()=>$('files').click();$('files').onchange=e=>addShots(e.target.files);$('clearShots').onclick=()=>{shots=[];reviewRows=[];renderShots();$('reviewWrap').classList.add('hidden')};$('ocrStart').onclick=ocr;$('append').onclick=()=>applyOcr(false);$('replace').onclick=()=>applyOcr(true);
+document.addEventListener('paste',e=>{const fs=[...(e.clipboardData?.items||[])].filter(i=>i.type.startsWith('image/')).map(i=>i.getAsFile()).filter(Boolean);if(fs.length){e.preventDefault();addShots(fs)}});$('drop').ondragover=e=>e.preventDefault();$('drop').ondrop=e=>{e.preventDefault();addShots(e.dataTransfer.files)};
+</script></body></html>
