@@ -3,9 +3,21 @@
 .shot{width:200px}.shot canvas.thumb{width:100%;background:#0b1426;border-radius:6px}.shot select,.shot small{display:block;margin:4px 0}.review{min-width:1050px}.review td:nth-child(9){min-width:180px;font-size:12px}button:disabled{opacity:.55;cursor:wait}.review td:nth-child(2) select{min-width:86px}
 .toast{position:fixed;right:18px;bottom:18px;z-index:9999;background:#123a36;border:1px solid #27d8cc;color:#e9f0ff;padding:12px 16px;border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.4);max-width:min(380px,calc(100vw - 36px));opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .22s ease,transform .22s ease;font-weight:650}
 .toast.show{opacity:1;transform:none}.toast.warn{background:#3a2a16;border-color:#ffd39a;color:#ffd39a}
-</style><style id="rc-text-import-style">.rc-textbox{width:100%;min-height:145px;resize:vertical;background:#0c1830;color:#e9f0ff;border:1px solid #435a7d;border-radius:8px;padding:12px;font:14px/1.5 monospace}.rc-text-review{overflow:auto;max-height:400px}.rc-text-review table{width:100%;min-width:650px}.rc-text-review input{width:100%}.rc-text-review .rc-qty{width:70px}.rc-text-review .rc-num{width:90px}.rc-text-review img{width:62px;height:46px;object-fit:contain}.rc-text-review .rc-name{min-width:160px}.rc-text-note{font-size:12px;color:#a9bedc}</style></head><body>
-<header><h1>Optimizing RollerCoin · Tối ưu Miner + Rack</h1><h2>Liên hệ tác giả qua Telegram: @canhtam286</h2><p> Tối ưu power cho bạn</p></header><div class="layout"><div>
-<section class="panel" id="rc-text-import"><h2>1. Nhập Miner / Rack từ RollerCoin</h2><p class="help">Dán văn bản Miner hoặc Rack từ RollerCoin. Kiểm tra thông số trước khi thêm. Muốn thêm nhiều Miner/Rack cùng lúc thì dùng Enter xuống dòng.</p><textarea class="rc-textbox" id="rc-pasted-miners" placeholder="Ví dụ:
+</style><style id="rc-text-import-style">.rc-textbox{width:100%;min-height:145px;resize:vertical;background:#0c1830;color:#e9f0ff;border:1px solid #435a7d;border-radius:8px;padding:12px;font:14px/1.5 monospace}.rc-text-review{overflow:auto;max-height:400px}.rc-text-review table{width:100%;min-width:650px}.rc-text-review input{width:100%}.rc-text-review .rc-qty{width:70px}.rc-text-review .rc-num{width:90px}.rc-text-review img{width:62px;height:46px;object-fit:contain}.rc-text-review .rc-name{min-width:160px}.rc-text-note{font-size:12px;color:#a9bedc}</style><style id="floating-youtube-style">
+#rc-video-float{position:fixed;right:18px;bottom:18px;width:min(360px,calc(100vw - 28px));z-index:9990;background:#111c33;border:1px solid #456084;border-radius:12px;overflow:hidden;box-shadow:0 12px 35px #0009}
+#rc-video-float .rc-video-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;color:#e9f0ff;font:600 13px system-ui,sans-serif}
+#rc-video-float .rc-video-actions{display:flex;gap:5px}
+#rc-video-float button,#rc-video-reopen{border:0;border-radius:6px;padding:5px 9px;cursor:pointer;background:#314565;color:#fff;font:600 13px system-ui,sans-serif}
+#rc-video-float .rc-video-frame{aspect-ratio:16/9;width:100%;display:block;border:0;background:#000}
+#rc-video-float.rc-minimized .rc-video-frame{display:none}
+#rc-video-float.rc-closed{display:none}
+#rc-video-reopen{position:fixed;right:18px;bottom:18px;z-index:9990;background:#376ef0;box-shadow:0 5px 20px #0008;display:none}
+#rc-video-reopen.rc-visible{display:block}
+@media(max-width:480px){#rc-video-float{right:10px;bottom:10px;width:min(300px,calc(100vw - 20px))}#rc-video-reopen{right:10px;bottom:10px}}
+</style>
+</head><body>
+<header><h1>Optimizing RollerCoin · Tối ưu Miner + Rack</h1><h2>Liên hệ tác giả qua Telegram: @canhtam286</h2><p> Tối ưu power dưới giới hạn Rank</p></header><div class="layout"><div>
+<section class="panel" id="rc-text-import"><h2>1. Nhập Miner / Rack từ RollerCoin</h2><p class="help">Dán thông tin Miner hoặc Rack từ RollerCoin. Kiểm tra thông số trước khi thêm. Nhập nhiều Miner/Rack cùng lúc thì dùng Enter xuống dòng.</p><textarea class="rc-textbox" id="rc-pasted-miners" placeholder="Ví dụ:
 Bog Rocket
 Set
 Size: 2 Cells
@@ -528,4 +540,38 @@ $('rc-import-text').onclick=()=>{
  if(typeof toast==='function')toast(message);
 };
 })();
-</script></body></html>
+</script><div id="rc-video-float" aria-label="Video YouTube nổi">
+  <div class="rc-video-bar"><span>Video hướng dẫn</span><div class="rc-video-actions">
+    <button type="button" id="rc-video-minimize" aria-label="Thu nhỏ video">−</button>
+    <button type="button" id="rc-video-close" aria-label="Đóng video">×</button>
+  </div></div>
+  <iframe id="rc-video-frame" class="rc-video-frame" src="https://www.youtube-nocookie.com/embed/c99Jfbb3U3M?rel=0" title="Video RollerCoin" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+<button type="button" id="rc-video-reopen" aria-label="Mở lại video">▶ Mở video</button>
+
+<script id="floating-youtube-script">
+(function(){
+  'use strict';
+  const box=document.getElementById('rc-video-float');
+  const frame=document.getElementById('rc-video-frame');
+  const reopen=document.getElementById('rc-video-reopen');
+  const source=frame.getAttribute('src');
+  function stop(){frame.setAttribute('src','about:blank');}
+  function resume(){frame.setAttribute('src',source);}
+  document.getElementById('rc-video-minimize').addEventListener('click',function(){
+    const minimized=box.classList.toggle('rc-minimized');
+    this.textContent=minimized?'□':'−';
+    this.setAttribute('aria-label',minimized?'Mở rộng video':'Thu nhỏ video');
+    if(minimized)stop();else resume();
+  });
+  document.getElementById('rc-video-close').addEventListener('click',function(){
+    stop();box.classList.add('rc-closed');reopen.classList.add('rc-visible');
+  });
+  reopen.addEventListener('click',function(){
+    box.classList.remove('rc-closed','rc-minimized');
+    document.getElementById('rc-video-minimize').textContent='−';
+    reopen.classList.remove('rc-visible');resume();
+  });
+})();
+</script>
+</body></html>
