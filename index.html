@@ -36,8 +36,12 @@
 #rc-public-visit-counter{display:inline-flex;align-items:center;gap:9px;margin-top:6px;padding:8px 12px;background:#0c1830;border:1px solid #385174;border-radius:9px;color:#b9d2f4;font:600 13px system-ui,sans-serif}
 #rc-visit-count{font-variant-numeric:tabular-nums;color:#4fe0d3;font-size:17px}
 </style>
+<style id="rc-gallery-css">
+#rc-gallery .rg-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}#rc-gallery .rg-folders{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}#rc-gallery .rg-folder{background:#293b5c}#rc-gallery .rg-folder.active{background:#167d84;outline:2px solid #4fe0d3}#rc-gallery .rg-drop{border:2px dashed #55759e;border-radius:12px;padding:18px;text-align:center;margin:12px 0;outline:none}#rc-gallery .rg-drop:focus,#rc-gallery .rg-drop.over{border-color:#4fe0d3;background:#193950}#rc-gallery .rg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}#rc-gallery .rg-card{background:#0e1b33;border:1px solid #34496a;border-radius:10px;padding:9px;min-width:0}#rc-gallery .rg-card.dragging{opacity:.4}#rc-gallery .rg-card img{width:100%;height:180px;object-fit:contain;background:#0a1224;border-radius:6px;cursor:zoom-in}#rc-gallery .rg-card .rg-title{overflow-wrap:anywhere;margin:6px 0}#rc-gallery .rg-card .rg-buttons{display:flex;gap:5px}#rc-gallery .rg-card button{font-size:12px;padding:6px 8px}#rc-gallery .rg-info{font-size:12px;color:#a9bedc}#rc-gallery .rg-preview{position:fixed;inset:0;background:#000e;z-index:10010;display:none;align-items:center;justify-content:center;padding:30px}#rc-gallery .rg-preview.show{display:flex}#rc-gallery .rg-preview img{max-width:95vw;max-height:88vh;object-fit:contain}#rc-gallery .rg-preview button{position:absolute;right:20px;top:15px}
+</style>
 </head><body>
 <header><h1>Optimizing RollerCoin · Tối ưu Miner + Rack</h1><h2>Liên hệ tác giả qua Telegram: @canhtam286</h2><p> Tối ưu Power cho bạn</p><div id="rc-public-visit-counter" aria-live="polite"><span aria-hidden="true">👁</span><span>Tổng lượt truy cập:</span><strong id="rc-visit-count">Đang tải...</strong></div></header><div class="layout"><div>
+<section class="panel" id="rc-gallery"><h2>Thư viện ảnh Miner / Rack</h2><p class="help">Lưu nguyên ảnh, không OCR hoặc cắt ảnh. Thư viện lưu riêng trên trình duyệt, không đưa vào phép tính. Kéo ảnh để đổi thứ tự.</p><div class="rg-toolbar"><button id="rg-new" type="button">+ Tạo thư mục</button><button id="rg-rename-folder" class="secondary" type="button">Đổi tên thư mục</button><button id="rg-delete-folder" class="danger" type="button">Xóa thư mục</button><button id="rg-export" class="secondary" type="button">Sao lưu JSON</button><button id="rg-import" class="secondary" type="button">Khôi phục JSON</button><input type="file" id="rg-import-file" accept="application/json,.json" hidden></div><div id="rg-folders" class="rg-folders"></div><div id="rg-drop" class="rg-drop" tabindex="0">Bấm vào đây rồi Ctrl+V để dán ảnh, hoặc kéo ảnh vào / chọn tệp.<div class="actions" style="justify-content:center"><button id="rg-pick" type="button">Chọn ảnh</button><input type="file" id="rg-files" accept="image/*" multiple hidden></div></div><p id="rg-status" class="rg-info" aria-live="polite"></p><div id="rg-grid" class="rg-grid"></div><div id="rg-preview" class="rg-preview"><button type="button" id="rg-preview-close">Đóng ×</button><img alt="Ảnh phóng to"></div></section>
 <section class="panel" id="rc-power-converter">
 <h2>1. Chuyển đổi sức mạnh đào</h2>
 <p class="help">Nhập giá trị và chọn đơn vị đầu vào, đầu ra. Kết quả được quy đổi tự động.</p>
@@ -64,8 +68,8 @@ Quantity: 4"></textarea><div class="actions"><button id="rc-parse-text" type="bu
 <section class="panel"><h2>5. Tính tổng và tối ưu bố trí</h2><div class="stats"><div class="stat">Power gốc (tất cả Miner)<strong id="basePower">—</strong></div><div class="stat">Bonus Miner (tất cả loại)<strong id="allBonus">—</strong></div><div class="stat">Cells cần / Cells có<strong id="cells">—</strong></div><div class="stat">Power tối đa có thể đạt<strong id="maxPower">—</strong><small id="maxRank"></small></div></div>
 <div class="grid2"><div><label>Rank mục tiêu</label><select id="targetRank"></select></div><div><label>Khoảng đệm an toàn (EH/s)</label><input id="buffer" type="number" min="0" step="any" value="0.001"></div></div>
 <div><label>Thời gian tìm kiếm</label><select id="timeout"><option value="1000">Nhanh (1 giây)</option><option value="3000" selected>Cân bằng (3 giây)</option><option value="8000">Kỹ (8 giây)</option><option value="15000">Rất kỹ (15 giây)</option></select></div>
-<div class="actions"><button id="optimize">Tìm bố trí tối ưu cho Rank</button><button id="maximize" class="secondary">Tối đa power (không giới hạn)</button><button class="secondary" id="compare">So sánh các Rank</button></div>
-<p class="help">Mỗi Rank được tối ưu riêng: power cao nhất ngay dưới giới hạn. Không cần lắp hết Rack hay hết Miner.</p>
+<div class="actions"><button id="optimize">Tìm 2 phương án: Nhiều / Ít Bonus</button><button id="maximize" class="secondary">Tối đa power (không giới hạn)</button><button class="secondary" id="compare">So sánh các Rank</button></div>
+<p class="help">Phương án 1 ưu tiên Power tối đa dưới trần Rank. Phương án 2 ưu tiên Bonus hiệu dụng thấp nhất nhưng Power phải đạt ≥90% trần Rank. Cả hai tôn trọng Cells và số lượng sở hữu.</p>
 <p class="help" id="status"></p><div id="result"></div></section>
 </div><aside><section class="panel"><h2>Bảng sức mạnh các Rank</h2><p class="help">Rank mục tiêu có viền xanh; Rank của power tối đa được tô nền.</p><div class="scroll"><table><thead><tr><th>Rank</th><th>Từ</th><th>Đến</th></tr></thead><tbody id="ranks"></tbody></table></div></section>
 <section class="panel"><h2>Quy tắc tính (theo RollerCoin FAQ)</h2><p class="help"><b>Power</b> = Power gốc các Miner <b>được lắp</b> × (1 + Bonus Miner) + Σ (Bonus Rack × Power gốc các máy nằm trên Rack đó).</p><p class="help">Bonus Miner: mỗi loại máy (cùng tên + cùng bonus) chỉ cộng một lần. Bonus Rack: mỗi Rack tăng riêng cho máy đặt trên nó, Rack trùng tên vẫn được tính riêng.</p><p class="help">Bộ tối ưu chọn subset Miner + Rack (không bắt buộc lắp hết) để power cao nhất dưới trần Rank: tham lam → nhánh-cận (chính xác với ≤ 60 máy nếu kịp thời gian) → simulated annealing nhiều lần khởi động lại → tinh chỉnh thêm/đổi/chuyển. Chạy nền trong Web Worker nên trang không bị treo.</p></section>
@@ -213,7 +217,69 @@ function solve(inp){
   }
   return {found:bestP>-Infinity,exact:exactDone,assign:Array.from(bestA),power:bestP,iterations,elapsed:Math.round(nowMs()-T_START),ceiling:C};
 }
-if(typeof module!=='undefined')module.exports={solve,evaluateLayout,mulberry32};
+/* Phuong an B: it bonus, nhung dat >= 90% tran Rank.
+ * Muc tieu: toi thieu bonus hieu dung = bonus Miner duy nhat + bonus Rack co trong so.
+ * Chi xet bo tri thoa 90% <= power < tran (tru buffer). Heuristic co gioi han thoi gian.
+ */
+function solveLowBonus(inp){
+ const M=inp.miners,R=inp.racks,n=M.length,r=R.length;
+ const upper=inp.upper, ceiling=inp.ceiling, lower=Math.max(inp.lower||0,upper*0.9);
+ const start=nowMs(),budget=Math.max(100,inp.timeMs||2000),rnd=mulberry32(inp.seed||88123);
+ const none=Array(n).fill(-1);let best=null,bestBonus=Infinity,bestPower=-1,iterations=0;
+ const valid=(v)=>v.ok&&v.power>=lower-1e-10&&v.power<ceiling-1e-12&&v.base>0;
+ function inspect(a){const v=evaluateLayout(M,R,a);iterations++;
+  if(!valid(v))return false;
+  const bonus=v.mb+100*v.rackPower/v.base;
+  if(bonus<bestBonus-1e-8||(Math.abs(bonus-bestBonus)<1e-8&&v.power>bestPower+1e-10)){
+   bestBonus=bonus;bestPower=v.power;best=a.slice();return true;
+  }return false;
+ }
+ function score(a){const v=evaluateLayout(M,R,a);if(!v.ok)return -1e12;
+  if(v.power>=ceiling)return -1e8-(v.power-ceiling)*1e5;
+  if(v.power<lower)return -1e6+(v.power/Math.max(lower,1e-12))*1e5;
+  const bonus=v.base>0?v.mb+100*v.rackPower/v.base:1e6;
+  return 1e6-bonus*1e3+v.power/Math.max(upper,1e-12);
+ }
+ const candidates=[];
+ if(Array.isArray(inp.initial)&&inp.initial.length===n)candidates.push(inp.initial.slice());
+ const orders=[...Array(n).keys()];
+ for(let k=0;k<12;k++){
+  const a=none.slice(),used=Array(r).fill(0);
+  const order=orders.slice().sort((i,j)=>{
+   const ai=M[i].eh/(M[i].slots||1),aj=M[j].eh/(M[j].slots||1);
+   return (aj*(0.8+rnd()*0.4))-(ai*(0.8+rnd()*0.4));
+  });
+  const ro=[...Array(r).keys()].sort((i,j)=>R[i].bonus-R[j].bonus||R[j].slots-R[i].slots);
+  for(const i of order){for(const j of ro){if(used[j]+M[i].slots>R[j].slots)continue;
+   a[i]=j;const v=evaluateLayout(M,R,a);
+   if(v.power<ceiling){used[j]+=M[i].slots;break}a[i]=-1;
+  }}candidates.push(a);
+ }
+ let global=none.slice(),globalScore=-Infinity;
+ for(const c of candidates){const sc=score(c);if(sc>globalScore){globalScore=sc;global=c.slice()}inspect(c)}
+ // Simulated annealing: add/remove/move/swap, bonus reduction is primary objective inside feasible band.
+ let a=global.slice(),current=score(a);const used=Array(r).fill(0);
+ function rebuild(){used.fill(0);for(let i=0;i<n;i++)if(a[i]>=0)used[a[i]]+=M[i].slots}
+ rebuild();let steps=0;
+ while(nowMs()-start<budget && n&&r){
+  steps++;if((steps%15000)===0){a=(best&&rnd()<0.75?best:global).slice();current=score(a);rebuild()}
+  const i=Math.floor(rnd()*n),j=Math.floor(rnd()*r),old=a[i];let b=a.slice();
+  const op=rnd();
+  if(op<0.25)b[i]=-1;
+  else if(op<0.8)b[i]=j;
+  else {const q=Math.floor(rnd()*n);b[i]=a[q];b[q]=old}
+  const v=evaluateLayout(M,R,b);if(!v.ok)continue;
+  const next=score(b),delta=next-current;
+  const frac=(nowMs()-start)/budget,temp=3000*Math.pow(0.001,frac);
+  if(delta>=0||rnd()<Math.exp(Math.max(-700,delta/Math.max(temp,1e-8)))){a=b;current=next;
+   if(next>globalScore){globalScore=next;global=a.slice()}inspect(a)}
+ }
+ // Loai bo cac may khong can thiet, giu du 90% va giam bonus.
+ if(best){let changed=true;while(changed){changed=false;for(let i=0;i<n;i++)if(best[i]>=0){const b=best.slice();b[i]=-1;if(inspect(b)){changed=true;break}}}}
+ return {found:!!best,assign:best||none,power:bestPower,bonusEffective:bestBonus,
+  lower,ceiling,exact:false,iterations:iterations+steps,elapsed:Math.round(nowMs()-start),lowBonus:true};
+}
+if(typeof module!=='undefined')module.exports={solve,solveLowBonus,evaluateLayout,mulberry32};
 </script><script>
 'use strict';
 /* ===== Lõi OCR thuần (không phụ thuộc DOM, kiểm thử được bằng Node) ===== */
@@ -359,8 +425,8 @@ function initRanks(){RANKS.forEach((r,i)=>{const op=document.createElement('opti
 
 /* ---------- Chạy bộ tối ưu trong Web Worker ---------- */
 let worker=null,jobId=0;const pending=new Map();
-function getWorker(){if(worker!==null)return worker;try{const src=$('solver-src').textContent+'\nonmessage=e=>{const {id,inp}=e.data;let res;try{res=solve(inp)}catch(err){res={error:String(err&&err.message||err)}}postMessage({id,res})};';worker=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})));worker.onmessage=e=>{const p=pending.get(e.data.id);if(p){pending.delete(e.data.id);p(e.data.res)}};worker.onerror=()=>{worker=false}}catch(e){worker=false}return worker}
-function runSolve(inp){const w=getWorker();if(!w)return new Promise(ok=>setTimeout(()=>ok(solve(inp)),10));const id=++jobId;return new Promise(ok=>{pending.set(id,ok);w.postMessage({id,inp})})}
+function getWorker(){if(worker!==null)return worker;try{const src=$('solver-src').textContent+'\nonmessage=e=>{const {id,inp}=e.data;let res;try{res=inp.mode==="lowBonus"?solveLowBonus(inp):solve(inp)}catch(err){res={error:String(err&&err.message||err)}}postMessage({id,res})};';worker=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})));worker.onmessage=e=>{const p=pending.get(e.data.id);if(p){pending.delete(e.data.id);p(e.data.res)}};worker.onerror=()=>{worker=false}}catch(e){worker=false}return worker}
+function runSolve(inp){const w=getWorker();if(!w)return new Promise(ok=>setTimeout(()=>ok(inp.mode==='lowBonus'?solveLowBonus(inp):solve(inp)),10));const id=++jobId;return new Promise(ok=>{pending.set(id,ok);w.postMessage({id,inp})})}
 function output(html){$('result').innerHTML=html}
 function showPlan(res,label,ms,rs,ceilRank){
   if(!res||res.error)return `<div class="result warn">Lỗi tối ưu: ${esc(res&&res.error||'không rõ')}</div>`;
@@ -378,17 +444,32 @@ function showPlan(res,label,ms,rs,ceilRank){
   ${Number.isFinite(res.ceiling)?`<p>Giới hạn tìm kiếm: <b>${unitRank(res.ceiling)}</b> · Còn trống: <b>${showP(Math.max(0,res.ceiling-v.power))}</b></p>`:''}${below}
   <h3>Bố trí đề xuất</h3>${groups.map(g=>`<p><b>${esc(g.r.name+' #'+g.r.instance)}</b> <span class="muted">(+${fmt(g.r.bonus)}%, ${g.used}/${g.r.slots} Cells, +${showP(g.raw*g.r.bonus/100)})</span>: ${[...g.list].map(([k,c])=>(c>1?c+'× ':'')+item(k)).join('; ')}</p>`).join('')||'<p>Chưa lắp máy nào.</p>'}
   <p><b>Không sử dụng (${res.assign.filter(a=>a<0).length} máy / ${unusedR} Rack):</b> ${[...ex].map(([k,c])=>(c>1?c+'× ':'')+esc(k)).join(', ')||'Không có máy dư'}${unusedR?` · ${unusedR} Rack để trống`:''}</p>
-  <small>${v.ok?'✓ Đã kiểm tra lại sức chứa Rack và công thức':'⚠ Lỗi kiểm tra sức chứa'} · ${res.exact?'Nghiệm chính xác (đã duyệt hết)':'Gần tối ưu'} · ${res.iterations.toLocaleString()} bước SA · ${res.elapsed} ms</small></div>`}
+  <small>${v.ok?'✓ Đã kiểm tra lại sức chứa Rack và công thức':'⚠ Lỗi kiểm tra sức chứa'} · ${res.exact?'Nghiệm chính xác (đã duyệt hết)':'Gần tối ưu, không bảo đảm tối ưu tuyệt đối'} · ${res.iterations.toLocaleString()} bước SA · ${res.elapsed} ms</small></div>`}
 function prepareRun(){const ms=expandMiners(),rs=expandRacks();if(!ms.length||!rs.length){output('<p class="warn">Cần ít nhất một Miner (power &gt; 0) và một Rack.</p>');return null}return {ms,rs,time:Number($('timeout').value),buffer:Math.max(0,Number($('buffer').value)||0)}}
 const ceilFor=(idx,buffer)=>RANKS[idx][2]===Infinity?Infinity:RANKS[idx][2]-buffer;
 function busy(on,msg){for(const id of ['optimize','maximize','compare'])$(id).disabled=on;$('status').textContent=msg||''}
-async function doOptimize(){const c=prepareRun();if(!c)return;const t=Number($('targetRank').value);busy(true,'Đang tìm bố trí cho '+RANKS[t][0]+'...');
-  try{const primary=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(t,c.buffer),timeMs:c.time});let html='<h3>Đề xuất Rank mục tiêu</h3>'+showPlan(primary,RANKS[t][0],c.ms,c.rs,t);
-    const upper=RANKS[t][2],ratio=primary.found&&Number.isFinite(upper)?primary.power/upper:null;
-    if(t>0&&ratio!==null&&ratio<0.9){busy(true,'Dưới 90%: đang tối ưu riêng cho Rank liền dưới...');const lower=t-1;const lr=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(lower,c.buffer),timeMs:c.time,seed:7});
-      html+='<h3>Đề xuất bổ sung: '+esc(RANKS[lower][0])+'</h3><p class="help">Rank mục tiêu chỉ đạt '+fmt(ratio*100)+'% giới hạn. Đây là bố trí tìm lại riêng cho Rank thấp hơn.</p>'+showPlan(lr,RANKS[lower][0],c.ms,c.rs,lower)}
-    else if(ratio!==null&&primary.assign.some(x=>x>=0))html+='<p class="ok">Đạt '+fmt(ratio*100,3)+'% giới hạn Rank.</p>';else if(ratio!==null)html+='<p class="warn">Mọi Miner đều vượt giới hạn Rank này; hãy chọn Rank cao hơn.</p>';
-    output(html);busy(false,'Đã hoàn thành.')}catch(e){busy(false,'Lỗi tối ưu: '+e.message)}}
+async function doOptimize(){
+ const c=prepareRun();if(!c)return;const t=Number($('targetRank').value),rank=RANKS[t],upper=rank[2];
+ busy(true,'Đang tính phương án nhiều Bonus...');
+ try{
+  const primary=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(t,c.buffer),timeMs:c.time});
+  let html='<h3>Phương án 1 — Nhiều Bonus (ưu tiên Power tối đa)</h3>'+showPlan(primary,rank[0],c.ms,c.rs,t);
+  if(Number.isFinite(upper)){
+   busy(true,'Đang tìm phương án ít Bonus (Power ≥ 90% trần Rank)...');
+   const low=await runSolve({mode:'lowBonus',miners:c.ms,racks:c.rs,upper,lower:rank[1],ceiling:ceilFor(t,c.buffer),timeMs:c.time,initial:primary.assign,seed:20261123});
+   html+='<h3>Phương án 2 — Ít Bonus (đạt ít nhất 90% trần Rank)</h3>';
+   if(low.found){html+=`<p class="ok">Bonus hiệu dụng: <b>+${fmt(low.bonusEffective,3)}%</b>. Ưu tiên Bonus thấp nhất trong các bố trí tìm được đạt ≥90% trần Rank. Không bảo đảm tối ưu tuyệt đối.</p>`+showPlan(low,rank[0]+' · Ít Bonus',c.ms,c.rs,t)}
+   else html+='<p class="warn">Chưa tìm thấy bố trí đạt ≥90% trần Rank với giới hạn hiện tại. Hãy thử thời gian tìm kiếm dài hơn hoặc chọn Rank thấp hơn.</p>';
+  }else html+='<p class="help">Rank không có trần: phương án ít Bonus 90% không áp dụng.</p>';
+  const ratio=primary.found&&Number.isFinite(upper)?primary.power/upper:null;
+  if(t>0&&ratio!==null&&ratio<0.9){
+   busy(true,'Dưới 90%: đang tối ưu Rank liền dưới...');const lower=t-1;
+   const lr=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(lower,c.buffer),timeMs:c.time,seed:7});
+   html+='<h3>Đề xuất bổ sung: Hạ Rank xuống '+esc(RANKS[lower][0])+'</h3>'+showPlan(lr,RANKS[lower][0],c.ms,c.rs,lower);
+  }
+  output(html);busy(false,'Đã hoàn thành cả hai phương án.');
+ }catch(e){busy(false,'Lỗi tối ưu: '+e.message)}
+}
 async function doMaximize(){const c=prepareRun();if(!c)return;busy(true,'Đang tìm power tối đa...');try{const r=await runSolve({miners:c.ms,racks:c.rs,ceiling:Infinity,timeMs:c.time});output('<h3>Power tối đa (không giới hạn Rank)</h3>'+showPlan(r,'Rank '+RANKS[rankOf(r.power)][0],c.ms,c.rs,null));busy(false,'Đã hoàn thành.')}catch(e){busy(false,'Lỗi: '+e.message)}}
 async function doCompare(){const c=prepareRun();if(!c)return;busy(true,'Đang tìm power tối đa...');try{const mx=await runSolve({miners:c.ms,racks:c.rs,ceiling:Infinity,timeMs:Math.max(800,c.time/3)});const top=rankOf(mx.power);const rows=[],plans=[];
   for(let i=top;i>=Math.max(0,top-3);i--){busy(true,'Đang tối ưu '+RANKS[i][0]+'...');const r=i===top&&RANKS[i][2]===Infinity?mx:await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(i,c.buffer),timeMs:Math.max(800,c.time/2),seed:i+3});
@@ -651,6 +732,31 @@ $('rc-import-text').onclick=()=>{
       label.textContent=Math.trunc(count).toLocaleString('vi-VN');
     })
     .catch(function(){label.textContent='Tạm thời không khả dụng';});
+})();
+</script>
+<script id="rc-gallery-js">
+(()=>{'use strict';
+const $=id=>document.getElementById(id), DB='rc_photo_library_v1';let db,folders=[],items=[],current=null,urls=[];
+const status=t=>$('rg-status').textContent=t;
+function req(r){return new Promise((ok,no)=>{r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}
+function openDB(){return new Promise((ok,no)=>{const r=indexedDB.open(DB,1);r.onupgradeneeded=()=>{const d=r.result;d.createObjectStore('folders',{keyPath:'id'});d.createObjectStore('images',{keyPath:'id'})};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}
+function store(name,mode='readonly'){return db.transaction(name,mode).objectStore(name)}
+const id=()=>crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random();
+async function load(){folders=await req(store('folders').getAll());items=await req(store('images').getAll());folders.sort((a,b)=>a.order-b.order);if(!folders.length){const f={id:id(),name:'Ảnh của tôi',order:0};await req(store('folders','readwrite').put(f));folders=[f]}if(!folders.some(f=>f.id===current))current=folders[0].id;render()}
+function revoke(){urls.forEach(URL.revokeObjectURL);urls=[]}
+function render(){revoke();const f=$('rg-folders'),g=$('rg-grid');f.replaceChildren();g.replaceChildren();for(const x of folders){const b=document.createElement('button');b.className='rg-folder'+(x.id===current?' active':'');b.textContent=x.name+' ('+items.filter(i=>i.folder===x.id).length+')';b.onclick=()=>{current=x.id;render()};f.append(b)}const subset=items.filter(x=>x.folder===current).sort((a,b)=>a.order-b.order);for(const x of subset){const card=document.createElement('div');card.className='rg-card';card.draggable=true;card.dataset.id=x.id;const img=document.createElement('img');const url=URL.createObjectURL(x.blob);urls.push(url);img.src=url;img.alt=x.name;img.onclick=()=>{$('rg-preview').classList.add('show');$('rg-preview').querySelector('img').src=url};const name=document.createElement('div');name.className='rg-title';name.textContent=x.name;const btns=document.createElement('div');btns.className='rg-buttons';const rename=document.createElement('button');rename.textContent='Đổi tên';rename.className='secondary';rename.onclick=async()=>{const v=prompt('Tên ảnh mới:',x.name);if(v===null||!v.trim())return;x.name=v.trim();await req(store('images','readwrite').put(x));render()};const del=document.createElement('button');del.textContent='Xóa';del.className='danger';del.onclick=async()=>{if(!confirm('Xóa ảnh này?'))return;await req(store('images','readwrite').delete(x.id));await load()};btns.append(rename,del);card.append(img,name,btns);card.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',x.id);card.classList.add('dragging')});card.addEventListener('dragend',()=>card.classList.remove('dragging'));card.addEventListener('dragover',e=>e.preventDefault());card.addEventListener('drop',async e=>{e.preventDefault();e.stopPropagation();const src=e.dataTransfer.getData('text/plain');if(!src||src===x.id)return;const arr=items.filter(i=>i.folder===current).sort((a,b)=>a.order-b.order);const a=arr.findIndex(i=>i.id===src),b=arr.findIndex(i=>i.id===x.id);if(a<0||b<0)return;arr.splice(b,0,arr.splice(a,1)[0]);for(let n=0;n<arr.length;n++){arr[n].order=n;await req(store('images','readwrite').put(arr[n]))}await load()});g.append(card)}status(subset.length+' ảnh trong thư mục hiện tại. Ảnh được lưu trên thiết bị này.')}
+async function addFiles(files){if(!db){status('Chưa mở được kho lưu trữ.');return}let n=0;for(const f of files){if(!f.type.startsWith('image/'))continue;const record={id:id(),folder:current,name:f.name||'Ảnh '+new Date().toLocaleString('vi-VN'),order:Date.now()+n,blob:f};await req(store('images','readwrite').put(record));n++}await load();status('Đã lưu '+n+' ảnh nguyên bản.')}
+$('rg-new').onclick=async()=>{const name=prompt('Tên thư mục mới:');if(!name||!name.trim())return;const f={id:id(),name:name.trim(),order:folders.length};await req(store('folders','readwrite').put(f));current=f.id;await load()};
+$('rg-rename-folder').onclick=async()=>{const f=folders.find(x=>x.id===current);if(!f)return;const name=prompt('Đổi tên thư mục:',f.name);if(!name||!name.trim())return;f.name=name.trim();await req(store('folders','readwrite').put(f));await load()};
+$('rg-delete-folder').onclick=async()=>{const f=folders.find(x=>x.id===current);if(!f||!confirm('Xóa thư mục "'+f.name+'" cùng toàn bộ ảnh bên trong?'))return;for(const x of items.filter(i=>i.folder===current))await req(store('images','readwrite').delete(x.id));await req(store('folders','readwrite').delete(current));current=null;await load()};
+$('rg-pick').onclick=()=>$('rg-files').click();$('rg-files').onchange=async e=>{await addFiles([...e.target.files]);e.target.value=''};
+const drop=$('rg-drop');drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('over')});drop.addEventListener('dragleave',()=>drop.classList.remove('over'));drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('over');addFiles([...e.dataTransfer.files])});
+document.addEventListener('paste',e=>{const t=e.target;if(t&&(t.closest('input,textarea,[contenteditable="true"]')))return;const fs=[...(e.clipboardData?.items||[])].filter(x=>x.kind==='file'&&x.type.startsWith('image/')).map(x=>x.getAsFile()).filter(Boolean);if(fs.length){e.preventDefault();addFiles(fs)}});
+$('rg-preview-close').onclick=()=>$('rg-preview').classList.remove('show');$('rg-preview').onclick=e=>{if(e.target.id==='rg-preview')e.currentTarget.classList.remove('show')};
+const b64=blob=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>no(r.error);r.readAsDataURL(blob)});
+$('rg-export').onclick=async()=>{try{const images=[];for(const x of items)images.push({...x,blob:await b64(x.blob)});const a=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify({version:1,folders,images})],{type:'application/json'}));a.href=url;a.download='rollercoin-thu-vien-anh.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000)}catch(e){status('Lỗi sao lưu: '+e.message)}};
+$('rg-import').onclick=()=>$('rg-import-file').click();$('rg-import-file').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;const data=JSON.parse(await file.text());if(data.version!==1||!Array.isArray(data.folders)||!Array.isArray(data.images))throw Error('File JSON không đúng định dạng');if(!confirm('Nhập '+data.images.length+' ảnh? Ảnh có ID trùng sẽ được cập nhật.'))return;for(const f of data.folders){if(typeof f.id!=='string'||typeof f.name!=='string')continue;await req(store('folders','readwrite').put({id:f.id,name:f.name,order:Number(f.order)||0}))}for(const x of data.images){if(typeof x.id!=='string'||typeof x.folder!=='string'||typeof x.blob!=='string'||!x.blob.startsWith('data:image/'))continue;const resp=await fetch(x.blob);const blob=await resp.blob();await req(store('images','readwrite').put({id:x.id,folder:x.folder,name:String(x.name||'Ảnh'),order:Number(x.order)||0,blob}))}await load();status('Khôi phục thư viện thành công.')}catch(err){status('Không thể nhập: '+err.message)}finally{e.target.value=''}};
+openDB().then(d=>{db=d;load()}).catch(e=>status('Không thể mở IndexedDB: '+e.message));
 })();
 </script>
 </body></html>
