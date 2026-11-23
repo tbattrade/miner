@@ -4670,29 +4670,41 @@ function editName(element, record, kind){
   const original=record.name;
   const input=document.createElement('input');
   input.type='text';input.value=original;input.className='rg-inline-name';
+  input.setAttribute('aria-label',kind==='folder'?'Tên thư mục':'Tên ảnh');
+  input.addEventListener('click',e=>e.stopPropagation());
+  input.addEventListener('dblclick',e=>e.stopPropagation());
   element.replaceChildren(input);input.focus();input.select();
   let finished=false;
   async function finish(cancel=false){
     if(finished)return;finished=true;
-    const next=input.value.trim();
+    const next=input.value.trim();let saveError=null;
     if(!cancel&&next&&next!==original){
       record.name=next;
       try{await req(store(kind==='folder'?'folders':'images','readwrite').put(record));}
-      catch(err){record.name=original;status('Không lưu được tên: '+err.message)}
+      catch(err){record.name=original;saveError=err}
     }
-    render();
+    render();if(saveError)status('Không lưu được tên: '+saveError.message);
   }
   input.addEventListener('blur',()=>finish());
-  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();input.blur()}else if(e.key==='Escape'){e.preventDefault();finish(true)}});
+  input.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter'){e.preventDefault();input.blur()}else if(e.key==='Escape'){e.preventDefault();finish(true)}});
 }
-function render(){
-  revoke();const f=$('rg-folders'),g=$('rg-grid');f.replaceChildren();g.replaceChildren();
+function render(){renderFolders();renderImages()}
+function renderFolders(){
+  const f=$('rg-folders');f.replaceChildren();
   for(const x of folders){
     const b=document.createElement('button');b.className='rg-folder'+(x.id===current?' active':'');
     b.textContent=x.name+' ('+items.filter(i=>i.folder===x.id).length+')';
-    b.onclick=()=>{if(b.querySelector('input'))return;current=x.id;render()};
-    b.ondblclick=e=>{e.preventDefault();current=x.id;editName(b,x,'folder')};f.append(b);
+    b.type='button';b.dataset.folderId=x.id;
+    b.title='Nhấp đúp để đổi tên';
+    b.onclick=()=>{if(b.querySelector('input'))return;if(current===x.id)return;current=x.id;
+      for(const tab of f.children)tab.classList.toggle('active',tab.dataset.folderId===current);
+      renderImages();
+    };
+    b.ondblclick=e=>{e.preventDefault();editName(b,x,'folder')};f.append(b);
   }
+}
+function renderImages(){
+  revoke();const g=$('rg-grid');g.replaceChildren();
   const subset=items.filter(x=>x.folder===current).sort((a,b)=>a.order-b.order);
   for(const x of subset){
     const card=document.createElement('div');card.className='rg-card';card.draggable=true;card.dataset.id=x.id;
