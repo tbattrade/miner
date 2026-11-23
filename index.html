@@ -521,7 +521,7 @@ function parse(text){
  const lines=text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),rows=[];
  const powerRE=/(?:power\s*:?\s*)?([\d.,]+)\s*(Gh|Th|Ph|Eh|Zh)\s*\/\s*s/i;
  const reserved=/^(?:set|size|power|bonus|quantity|miner details|racks details|rack details|can't be sold|can be sold|inventory|collection|sell|marketplace)$/i;
- const starts=(k)=> k+1<lines.length && (/^set$/i.test(lines[k+1])||/^size\s*:/i.test(lines[k+1])) && !reserved.test(lines[k]) && !powerRE.test(lines[k]);
+ const starts=(k)=> k+1<lines.length && (/^(?:set|.+\s+set)$/i.test(lines[k+1])||/^size\s*:/i.test(lines[k+1])) && !reserved.test(lines[k]) && !powerRE.test(lines[k]) && !/\bset$/i.test(lines[k]);
  for(let i=0;i<lines.length;i++){
   if(!starts(i))continue;
   const name=lines[i],isRack=/\brack\b/i.test(name);
