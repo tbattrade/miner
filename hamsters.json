@@ -1,0 +1,3744 @@
+{
+  "schema_version": 3,
+  "catalog_version": "2026-11-23-all-submitted",
+  "source_policy": "user_screenshots_only",
+  "hamsters": [
+    {
+      "id": "cowham",
+      "name": "Cowham",
+      "generation": 1,
+      "base_stats": {
+        "health": 40,
+        "strength": 30,
+        "luck": 40,
+        "sum": 110
+      },
+      "source_id": "122509",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "cowham_experience",
+          "type": "experience",
+          "value": 10,
+          "unit": "percent",
+          "raw_text": "10% Experience",
+          "level_scaling": null,
+          "source_id": "122509",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "guile",
+      "name": "Guile",
+      "generation": 1,
+      "base_stats": {
+        "health": 50,
+        "strength": 30,
+        "luck": 20,
+        "sum": 100
+      },
+      "source_id": "122528",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "guile_survival",
+          "type": "survival",
+          "value": 5,
+          "unit": "percent",
+          "raw_text": "5% Survival",
+          "level_scaling": null,
+          "source_id": "122528",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "big_daddy",
+      "name": "Big Daddy",
+      "generation": 1,
+      "base_stats": {
+        "health": 50,
+        "strength": 90,
+        "luck": 50,
+        "sum": 190
+      },
+      "source_id": "122551",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "big_daddy_rest_time",
+          "type": "rest_time",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Rest Time",
+          "level_scaling": null,
+          "source_id": "122551",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "the_dracula",
+      "name": "The Dracula",
+      "generation": 1,
+      "base_stats": {
+        "health": 10,
+        "strength": 50,
+        "luck": 90,
+        "sum": 150
+      },
+      "source_id": "122602",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "the_dracula_experience",
+          "type": "experience",
+          "value": 30,
+          "unit": "percent",
+          "raw_text": "30% Experience",
+          "level_scaling": null,
+          "source_id": "122602",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "the_hamster",
+      "name": "The Hamster",
+      "generation": 1,
+      "base_stats": {
+        "health": 20,
+        "strength": 10,
+        "luck": 20,
+        "sum": 50
+      },
+      "source_id": "122613",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": []
+    },
+    {
+      "id": "naughty_claus",
+      "name": "Naughty Claus",
+      "generation": 1,
+      "base_stats": {
+        "health": 85,
+        "strength": 45,
+        "luck": 55,
+        "sum": 185
+      },
+      "source_id": "122621",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "naughty_claus_survival",
+          "type": "survival",
+          "value": 10,
+          "unit": "percent",
+          "raw_text": "10% Survival",
+          "level_scaling": null,
+          "source_id": "122621",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "uncle",
+      "name": "Uncle",
+      "generation": 1,
+      "base_stats": {
+        "health": 85,
+        "strength": 85,
+        "luck": 30,
+        "sum": 200
+      },
+      "source_id": "122633",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "uncle_extra_rewards",
+          "type": "extra_rewards",
+          "value": 50,
+          "unit": "percent",
+          "raw_text": "50% Extra Rewards",
+          "level_scaling": null,
+          "source_id": "122633",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "birthday_bob",
+      "name": "Birthday Bob",
+      "generation": 1,
+      "base_stats": {
+        "health": 30,
+        "strength": 30,
+        "luck": 10,
+        "sum": 70
+      },
+      "source_id": "122643",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "birthday_bob_rest_time",
+          "type": "rest_time",
+          "value": -4,
+          "unit": "percent",
+          "raw_text": "-4% Rest Time",
+          "level_scaling": null,
+          "source_id": "122643",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "valkirita",
+      "name": "Valkirita",
+      "generation": 1,
+      "base_stats": {
+        "health": 90,
+        "strength": 90,
+        "luck": 25,
+        "sum": 205
+      },
+      "source_id": "122708",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "valkirita_expedition_time",
+          "type": "expedition_time",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Expedition Time",
+          "level_scaling": null,
+          "source_id": "122708",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "banjo_walker",
+      "name": "Banjo Walker",
+      "generation": 1,
+      "base_stats": {
+        "health": 65,
+        "strength": 30,
+        "luck": 80,
+        "sum": 175
+      },
+      "source_id": "122727",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "banjo_walker_experience",
+          "type": "experience",
+          "value": 30,
+          "unit": "percent",
+          "raw_text": "30% Experience",
+          "level_scaling": null,
+          "source_id": "122727",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "dusty_mcuncle",
+      "name": "Dusty McUncle",
+      "generation": 1,
+      "base_stats": {
+        "health": 80,
+        "strength": 80,
+        "luck": 40,
+        "sum": 200
+      },
+      "source_id": "122751",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "dusty_mcuncle_extra_rewards",
+          "type": "extra_rewards",
+          "value": 40,
+          "unit": "percent",
+          "raw_text": "40% Extra Rewards",
+          "level_scaling": null,
+          "source_id": "122751",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "dusty_mcuncle_return_to_work",
+          "type": "return_to_work",
+          "value": 25,
+          "unit": "percent",
+          "raw_text": "25% Return to Work",
+          "level_scaling": null,
+          "source_id": "122751",
+          "mechanics_status": "needs_definition"
+        }
+      ]
+    },
+    {
+      "id": "mamita",
+      "name": "Mamita",
+      "generation": 1,
+      "base_stats": {
+        "health": 85,
+        "strength": 30,
+        "luck": 85,
+        "sum": 200
+      },
+      "source_id": "122805",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "mamita_rest_time",
+          "type": "rest_time",
+          "value": -25,
+          "unit": "percent",
+          "raw_text": "-25% Rest Time",
+          "level_scaling": null,
+          "source_id": "122805",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "mamita_experience",
+          "type": "experience",
+          "value": 50,
+          "unit": "percent",
+          "raw_text": "50% Experience",
+          "level_scaling": null,
+          "source_id": "122805",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "mamita_influencer",
+          "type": "influencer",
+          "value": null,
+          "unit": null,
+          "raw_text": "150% / 20% Influencer",
+          "level_scaling": null,
+          "source_id": "122805",
+          "mechanics_status": "needs_definition"
+        }
+      ]
+    },
+    {
+      "id": "mr_jack",
+      "name": "Mr. Jack",
+      "generation": 1,
+      "base_stats": {
+        "health": 25,
+        "strength": 25,
+        "luck": 15,
+        "sum": 65
+      },
+      "source_id": "122829",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": null,
+      "ultimate_status": "not_shown",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": []
+    },
+    {
+      "id": "lucky_red",
+      "name": "Lucky Red",
+      "generation": 2,
+      "base_stats": {
+        "health": 70,
+        "strength": 80,
+        "luck": 50,
+        "sum": 200
+      },
+      "source_id": "123639",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "guaranteed_survival",
+        "raw_text": "Survives no matter what",
+        "charge_points": 30,
+        "source_id": "123639",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "lucky_red_extra_rewards",
+          "type": "extra_rewards",
+          "value": 25,
+          "unit": "percent",
+          "raw_text": "25% Extra Rewards",
+          "level_scaling": null,
+          "source_id": "123639",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "lucky_red_influencer",
+          "type": "influencer",
+          "value": null,
+          "unit": null,
+          "raw_text": "150% / 5% Influencer",
+          "level_scaling": null,
+          "source_id": "123639",
+          "mechanics_status": "needs_definition"
+        }
+      ]
+    },
+    {
+      "id": "sir_catch_a_lot",
+      "name": "Sir Catch-a-Lot",
+      "generation": 2,
+      "base_stats": {
+        "health": 45,
+        "strength": 75,
+        "luck": 95,
+        "sum": 215
+      },
+      "source_id": "123616",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "chests_multiplier",
+        "raw_text": "x3 - 5 chests if it survives",
+        "charge_points": 30,
+        "source_id": "123616",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "multiplier": 3,
+        "chest_count": 5,
+        "condition": "survives"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "sir_catch_a_lot_return_to_work",
+          "type": "return_to_work",
+          "value": 25,
+          "unit": "percent",
+          "raw_text": "25% Return to Work",
+          "level_scaling": null,
+          "source_id": "123616",
+          "mechanics_status": "needs_definition"
+        },
+        {
+          "id": "sir_catch_a_lot_experience",
+          "type": "experience",
+          "value": 30,
+          "unit": "percent",
+          "raw_text": "30% Experience",
+          "level_scaling": null,
+          "source_id": "123616",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "kitsumi",
+      "name": "Kitsumi",
+      "generation": 2,
+      "base_stats": {
+        "health": 90,
+        "strength": 40,
+        "luck": 90,
+        "sum": 220
+      },
+      "source_id": "123712",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "smart_study",
+        "raw_text": "Smart Study: no cooldown and +1 stat point if it survives",
+        "charge_points": 24,
+        "source_id": "123712",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "no_cooldown": true,
+        "extra_stat_points_on_survival": 1
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "remote_effect_present",
+      "abilities": [
+        {
+          "id": "kitsumi_experience",
+          "type": "experience",
+          "value": 25,
+          "unit": "percent",
+          "raw_text": "25% Experience",
+          "level_scaling": null,
+          "source_id": "123712",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "kitsumi_buyback_discount",
+          "type": "buyback_discount",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Buyback Discount",
+          "level_scaling": null,
+          "source_id": "123712",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "kitsumi_remote_bonus",
+          "type": "remote_bonus",
+          "value": 2,
+          "unit": "percent_per_stat_point",
+          "raw_text": "x2% Remote Bonus",
+          "level_scaling": null,
+          "source_id": "123712",
+          "mechanics_status": "label_and_value_transcribed",
+          "mining_effect": {
+            "formula": "(health + strength + luck) * 2",
+            "output_unit": "bonus_percent",
+            "base_stats_bonus_percent": 440,
+            "temporary": true,
+            "counts_toward_league": false,
+            "formula_basis": "previously_verified_game_rule",
+            "activation": "alive_on_expedition"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plague_dancer",
+      "name": "Plague Dancer",
+      "generation": 2,
+      "base_stats": {
+        "health": 25,
+        "strength": 90,
+        "luck": 80,
+        "sum": 195
+      },
+      "source_id": "123546",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "chests_multiplier",
+        "raw_text": "x3 - 5 chests if it survives",
+        "charge_points": 30,
+        "source_id": "123546",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "multiplier": 3,
+        "chest_count": 5,
+        "condition": "survives"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "plague_dancer_survival",
+          "type": "survival",
+          "value": 15,
+          "unit": "percent",
+          "raw_text": "15% Survival",
+          "level_scaling": null,
+          "source_id": "123546",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "plague_dancer_rest_time",
+          "type": "rest_time",
+          "value": -40,
+          "unit": "percent",
+          "raw_text": "-40% Rest Time",
+          "level_scaling": null,
+          "source_id": "123546",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "anomaly",
+      "name": "Anomaly",
+      "generation": 2,
+      "base_stats": {
+        "health": 60,
+        "strength": 60,
+        "luck": 40,
+        "sum": 160
+      },
+      "source_id": "123557",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "boost_mode",
+        "raw_text": "All stats become 100",
+        "charge_points": 12,
+        "source_id": "123557",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "active_stats": {
+          "health": 100,
+          "strength": 100,
+          "luck": 100
+        }
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "anomaly_extra_rewards",
+          "type": "extra_rewards",
+          "value": 20,
+          "unit": "percent",
+          "raw_text": "20% Extra Rewards",
+          "level_scaling": null,
+          "source_id": "123557",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "anomaly_expedition_time",
+          "type": "expedition_time",
+          "value": -20,
+          "unit": "percent",
+          "raw_text": "-20% Expedition Time",
+          "level_scaling": null,
+          "source_id": "123557",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "lord_hexron",
+      "name": "Lord Hexron",
+      "generation": 2,
+      "base_stats": {
+        "health": 85,
+        "strength": 85,
+        "luck": 35,
+        "sum": 205
+      },
+      "source_id": "123605",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "crypto_reward",
+        "raw_text": "Crypto reward if it survives",
+        "charge_points": 24,
+        "source_id": "123605",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "condition": "survives",
+        "reward_amount": null
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "lord_hexron_expedition_time",
+          "type": "expedition_time",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Expedition Time",
+          "level_scaling": null,
+          "source_id": "123605",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "lord_hexron_rest_time",
+          "type": "rest_time",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Rest Time",
+          "level_scaling": null,
+          "source_id": "123605",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "partello",
+      "name": "Partello",
+      "generation": 2,
+      "base_stats": {
+        "health": 20,
+        "strength": 35,
+        "luck": 35,
+        "sum": 90
+      },
+      "source_id": "123702",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "common_parts_reward",
+        "raw_text": "Brings extra common parts if it survives",
+        "charge_points": 24,
+        "source_id": "123702",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "condition": "survives",
+        "reward_amount": null
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "partello_experience",
+          "type": "experience",
+          "value": 30,
+          "unit": "percent",
+          "raw_text": "30% Experience",
+          "level_scaling": null,
+          "source_id": "123702",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "hammy_hooks",
+      "name": "Hammy Hooks",
+      "generation": 2,
+      "base_stats": {
+        "health": 80,
+        "strength": 80,
+        "luck": 45,
+        "sum": 205
+      },
+      "source_id": "123740",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "boost_mode",
+        "raw_text": "Boost Mode: all stats become 100",
+        "charge_points": 12,
+        "source_id": "123740",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "active_stats": {
+          "health": 100,
+          "strength": 100,
+          "luck": 100
+        }
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "remote_effect_present",
+      "abilities": [
+        {
+          "id": "hammy_hooks_survival",
+          "type": "survival",
+          "value": 10,
+          "unit": "percent",
+          "raw_text": "10% Survival",
+          "level_scaling": null,
+          "source_id": "123740",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "hammy_hooks_rest_time",
+          "type": "rest_time",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Rest Time",
+          "level_scaling": null,
+          "source_id": "123740",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "hammy_hooks_remote_power",
+          "type": "remote_power",
+          "value": 5,
+          "unit": "multiplier",
+          "raw_text": "x5 Remote Power",
+          "level_scaling": null,
+          "source_id": "123740",
+          "mechanics_status": "label_and_value_transcribed",
+          "mining_effect": {
+            "formula": "placed_miners_raw_power * 5",
+            "temporary": true,
+            "counts_toward_league": false,
+            "kind": "flat_power",
+            "formula_basis": "previously_verified_game_rule",
+            "activation": "expedition_effect_active"
+          }
+        }
+      ]
+    },
+    {
+      "id": "goodncle",
+      "name": "Goodncle",
+      "generation": 2,
+      "base_stats": {
+        "health": 60,
+        "strength": 40,
+        "luck": 80,
+        "sum": 180
+      },
+      "source_id": "123750",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "chests_multiplier",
+        "raw_text": "x3 - 5 chests if it survives",
+        "charge_points": 30,
+        "source_id": "123750",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "multiplier": 3,
+        "chest_count": 5,
+        "condition": "survives"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "goodncle_extra_rewards",
+          "type": "extra_rewards",
+          "value": 50,
+          "unit": "percent",
+          "raw_text": "50% Extra Rewards",
+          "level_scaling": null,
+          "source_id": "123750",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "goodncle_buyback_discount",
+          "type": "buyback_discount",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Buyback Discount",
+          "level_scaling": null,
+          "source_id": "123750",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "badncle",
+      "name": "Badncle",
+      "generation": 2,
+      "base_stats": {
+        "health": 60,
+        "strength": 80,
+        "luck": 40,
+        "sum": 180
+      },
+      "source_id": "123816",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "chests_multiplier",
+        "raw_text": "x3 - 5 chests if it survives",
+        "charge_points": 30,
+        "source_id": "123816",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "multiplier": 3,
+        "chest_count": 5,
+        "condition": "survives"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "badncle_extra_rewards",
+          "type": "extra_rewards",
+          "value": 50,
+          "unit": "percent",
+          "raw_text": "50% Extra Rewards",
+          "level_scaling": null,
+          "source_id": "123816",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "badncle_buyback_discount",
+          "type": "buyback_discount",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Buyback Discount",
+          "level_scaling": null,
+          "source_id": "123816",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "joga_bonito",
+      "name": "Joga Bonito",
+      "generation": 2,
+      "base_stats": {
+        "health": 70,
+        "strength": 90,
+        "luck": 50,
+        "sum": 210
+      },
+      "source_id": "123839",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "speed_ups_chests",
+        "raw_text": "Speed Ups Chests",
+        "charge_points": 3,
+        "source_id": "123839",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "joga_bonito_extra_loot",
+          "type": "extra_loot",
+          "value": 15,
+          "unit": "percent",
+          "raw_text": "Extra Loot +15%",
+          "level_scaling": null,
+          "source_id": "123839",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "joga_bonito_expedition_time",
+          "type": "expedition_time",
+          "value": -15,
+          "unit": "percent",
+          "raw_text": "Expedition Time -15%",
+          "level_scaling": null,
+          "source_id": "123839",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "joga_bonito_survival",
+          "type": "survival",
+          "value": 5,
+          "unit": "percent",
+          "raw_text": "5% Survival",
+          "level_scaling": null,
+          "source_id": "123839",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "eliza_bit",
+      "name": "Eliza Bit",
+      "generation": 2,
+      "base_stats": {
+        "health": 80,
+        "strength": 20,
+        "luck": 80,
+        "sum": 180
+      },
+      "source_id": "123857",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "high_risk_high_reward",
+        "raw_text": "High Risk High Reward: x2 rewards and XP, x1.5 duration, no rest; failed runs keep boosted salvage and x2 recovery.",
+        "charge_points": 24,
+        "source_id": "123857",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "rewards_multiplier": 2,
+        "xp_multiplier": 2,
+        "expedition_duration_multiplier": 1.5,
+        "no_rest": true,
+        "recovery_multiplier": 2,
+        "failure_salvage_rule": "keep boosted salvage",
+        "failure_salvage_definition": null
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "eliza_bit_experience",
+          "type": "experience",
+          "value": 50,
+          "unit": "percent",
+          "raw_text": "50% Experience",
+          "level_scaling": null,
+          "source_id": "123857",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "eliza_bit_expedition_time",
+          "type": "expedition_time",
+          "value": -25,
+          "unit": "percent",
+          "raw_text": "Expedition Time -25%",
+          "level_scaling": null,
+          "source_id": "123857",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "eliza_bit_influencer",
+          "type": "influencer",
+          "value": 20,
+          "unit": "percent",
+          "raw_text": "20% Influencer",
+          "level_scaling": null,
+          "source_id": "123857",
+          "mechanics_status": "needs_definition"
+        }
+      ]
+    },
+    {
+      "id": "davy_coins",
+      "name": "Davy Coins",
+      "generation": 2,
+      "base_stats": {
+        "health": 80,
+        "strength": 90,
+        "luck": 30,
+        "sum": 200
+      },
+      "source_id": "123928",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "pirate_luck",
+        "raw_text": "Pirate Luck: choose expedition rewards; each has a 50% chance to be tripled or disappear. No rest after use.",
+        "charge_points": 24,
+        "source_id": "123928",
+        "level_scaling": null,
+        "details_status": "transcribed",
+        "triple_chance_percent": 50,
+        "reward_multiplier_on_success": 3,
+        "reward_lost_on_failure": true,
+        "no_rest_after_use": true
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "davy_coins_rlt_chest",
+          "type": "rlt_chest",
+          "value": null,
+          "unit": null,
+          "raw_text": "RLT Chest",
+          "level_scaling": null,
+          "source_id": "123928",
+          "mechanics_status": "needs_definition"
+        },
+        {
+          "id": "davy_coins_buyback_discount",
+          "type": "buyback_discount",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "-50% Buyback Discount",
+          "level_scaling": null,
+          "source_id": "123928",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "davy_coins_survival",
+          "type": "survival",
+          "value": 5,
+          "unit": "percent",
+          "raw_text": "5% Survival",
+          "level_scaling": null,
+          "source_id": "123928",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "uncle_azoth",
+      "name": "Uncle'Azoth",
+      "generation": 3,
+      "base_stats": {
+        "health": 85,
+        "strength": 85,
+        "luck": 60,
+        "sum": 230
+      },
+      "source_id": "125440",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "loot_conversion",
+        "charge_points": 24,
+        "raw_text": "Converts expedition rewards into RLT.",
+        "conversion_rate": null,
+        "source_id": "125440",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "remote_effect_present",
+      "abilities": [],
+      "ability_model": "builder_choices_not_simultaneous_passives",
+      "builder": {
+        "mode": "choose_one_per_slot",
+        "level_lookup": "highest_level_min_not_exceeding_current_level",
+        "basic_level_min": 1,
+        "slots": [
+          {
+            "slot": 1,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "extra_loot",
+                "name": "extra_loot",
+                "effects": [
+                  {
+                    "type": "extra_loot",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 20
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 25
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 35
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 45
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 65
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 75
+                      }
+                    ],
+                    "id": "uncle_azoth_slot1_extra_loot_1",
+                    "source_id": "125440"
+                  }
+                ]
+              },
+              {
+                "id": "buyback_discount",
+                "name": "buyback_discount",
+                "effects": [
+                  {
+                    "type": "buyback_discount",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": -20
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": -25
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": -35
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": -45
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": -65
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": -75
+                      }
+                    ],
+                    "id": "uncle_azoth_slot1_buyback_discount_1",
+                    "source_id": "125440"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 2,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "expedition_time",
+                "name": "expedition_time",
+                "effects": [
+                  {
+                    "type": "expedition_time",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": -10
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": -20
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": -30
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": -40
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": -50
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": -60
+                      }
+                    ],
+                    "id": "uncle_azoth_slot2_expedition_time_1",
+                    "source_id": "125440"
+                  }
+                ]
+              },
+              {
+                "id": "rest_time",
+                "name": "rest_time",
+                "effects": [
+                  {
+                    "type": "rest_time",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": -7.5
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": -15
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": -22.5
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": -30
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": -37.5
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": -45
+                      }
+                    ],
+                    "id": "uncle_azoth_slot2_rest_time_1",
+                    "source_id": "125440"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 3,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "remote_bonus",
+                "name": "remote_bonus",
+                "effects": [
+                  {
+                    "type": "remote_bonus",
+                    "value": null,
+                    "unit": "percent_per_stat_point",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 1
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 1.5
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 1.75
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 2
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 2.25
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 2.5
+                      }
+                    ],
+                    "id": "uncle_azoth_slot3_remote_bonus_1",
+                    "source_id": "125440",
+                    "temporary": true,
+                    "counts_toward_league": false
+                  }
+                ]
+              },
+              {
+                "id": "remote_power",
+                "name": "remote_power",
+                "effects": [
+                  {
+                    "type": "remote_power",
+                    "value": null,
+                    "unit": "raw_miners_power_multiplier",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 3
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 4
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 4.5
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 5
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 5.5
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 6
+                      }
+                    ],
+                    "id": "uncle_azoth_slot3_remote_power_1",
+                    "source_id": "125440",
+                    "temporary": true,
+                    "counts_toward_league": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "captain_jack_pot",
+      "name": "Captain Jack Pot",
+      "generation": 3,
+      "base_stats": {
+        "health": 65,
+        "strength": 60,
+        "luck": 95,
+        "sum": 220
+      },
+      "source_id": "125509",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "smart_study",
+        "charge_points": 24,
+        "raw_text": "Smart Study: no cooldown and +1 stat point if it survives",
+        "no_cooldown": true,
+        "extra_stat_points_on_survival": 1,
+        "source_id": "125509",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "remote_effect_present",
+      "abilities": [],
+      "ability_model": "builder_choices_not_simultaneous_passives",
+      "builder": {
+        "mode": "choose_one_per_slot",
+        "level_lookup": "highest_level_min_not_exceeding_current_level",
+        "basic_level_min": 1,
+        "slots": [
+          {
+            "slot": 1,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "rest_relay",
+                "name": "rest_relay",
+                "effects": [
+                  {
+                    "type": "rest_relay",
+                    "value": null,
+                    "unit": "minutes_per_expedition_hour",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 5
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 6
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 7
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 8
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 9
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 10
+                      }
+                    ],
+                    "id": "captain_jack_pot_slot1_rest_relay_1",
+                    "source_id": "125509"
+                  }
+                ]
+              },
+              {
+                "id": "charge_relay",
+                "name": "charge_relay",
+                "effects": [
+                  {
+                    "type": "charge_relay",
+                    "value": null,
+                    "unit": "minutes_per_expedition_hour",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 5
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 6
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 7
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 8
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 9
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 10
+                      }
+                    ],
+                    "id": "captain_jack_pot_slot1_charge_relay_1",
+                    "source_id": "125509"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 2,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "survival",
+                "name": "survival",
+                "effects": [
+                  {
+                    "type": "survival",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 5
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 6
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 7
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 8
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 9
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 10
+                      }
+                    ],
+                    "id": "captain_jack_pot_slot2_survival_1",
+                    "source_id": "125509"
+                  }
+                ]
+              },
+              {
+                "id": "buyback_discount",
+                "name": "buyback_discount",
+                "effects": [
+                  {
+                    "type": "buyback_discount",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": -20
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": -25
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": -30
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": -35
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": -40
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": -50
+                      }
+                    ],
+                    "id": "captain_jack_pot_slot2_buyback_discount_1",
+                    "source_id": "125509"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 3,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "remote_power",
+                "name": "remote_power",
+                "effects": [
+                  {
+                    "type": "remote_power",
+                    "value": null,
+                    "unit": "raw_miners_power_multiplier",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 3
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 4
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 4.5
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 5
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 5.5
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 6
+                      }
+                    ],
+                    "id": "captain_jack_pot_slot3_remote_power_1",
+                    "source_id": "125509",
+                    "temporary": true,
+                    "counts_toward_league": false
+                  }
+                ]
+              },
+              {
+                "id": "remote_bonus",
+                "name": "remote_bonus",
+                "effects": [
+                  {
+                    "type": "remote_bonus",
+                    "value": null,
+                    "unit": "percent_per_stat_point",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 1
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 1.5
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 1.75
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 2
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 2.25
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 2.5
+                      }
+                    ],
+                    "id": "captain_jack_pot_slot3_remote_bonus_1",
+                    "source_id": "125509",
+                    "temporary": true,
+                    "counts_toward_league": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gordon_hamzy",
+      "name": "Gordon Hamzy",
+      "generation": 2,
+      "base_stats": {
+        "health": 70,
+        "strength": 85,
+        "luck": 55,
+        "sum": 210
+      },
+      "source_id": "124347",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "hamsters_chest",
+        "charge_points": 100,
+        "raw_text": "Hamsters Chest: added to your next successful Expedition. It can give Magic Wool or a Hamster; if you fail, it is lost.",
+        "trigger": "next_successful_expedition",
+        "possible_rewards": [
+          "Magic Wool",
+          "Hamster"
+        ],
+        "lost_if_expedition_fails": true,
+        "reward_probabilities": null,
+        "source_id": "124347",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "gordon_hamzy_survival",
+          "type": "survival",
+          "value": 10,
+          "unit": "percent",
+          "raw_text": "10% Survival",
+          "level_scaling": null,
+          "source_id": "124347",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "gordon_hamzy_return_to_work",
+          "type": "return_to_work",
+          "value": 15,
+          "unit": "percent",
+          "raw_text": "15% Return to Work",
+          "level_scaling": null,
+          "source_id": "124347",
+          "mechanics_status": "needs_definition"
+        },
+        {
+          "id": "gordon_hamzy_expedition_time",
+          "type": "expedition_time",
+          "value": -15,
+          "unit": "percent",
+          "raw_text": "-15% Expedition Time",
+          "level_scaling": null,
+          "source_id": "124347",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "solaire",
+      "name": "SOLaire",
+      "generation": 2,
+      "base_stats": {
+        "health": 35,
+        "strength": 70,
+        "luck": 70,
+        "sum": 175
+      },
+      "source_id": "124401",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "chests_multiplier",
+        "charge_points": null,
+        "raw_text": "Chests Multiplier ×3",
+        "multiplier": 3,
+        "tiers": [
+          {
+            "tier": 1,
+            "charge_points": 18,
+            "reward_count": 3
+          },
+          {
+            "tier": 2,
+            "charge_points": 24,
+            "reward_count": 5
+          },
+          {
+            "tier": 3,
+            "charge_points": 30,
+            "reward_count": 8
+          }
+        ],
+        "source_id": "124401",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "solaire_season_xp_chest",
+          "type": "season_xp_chest",
+          "value": null,
+          "unit": null,
+          "raw_text": "Season XP Chest",
+          "level_scaling": null,
+          "source_id": "124401",
+          "mechanics_status": "needs_definition"
+        },
+        {
+          "id": "solaire_rest_time",
+          "type": "rest_time",
+          "value": -25,
+          "unit": "percent",
+          "raw_text": "Relax Time -25%",
+          "level_scaling": null,
+          "source_id": "124401",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "solaire_survival",
+          "type": "survival",
+          "value": 5,
+          "unit": "percent",
+          "raw_text": "Survive Chance +5%",
+          "level_scaling": null,
+          "source_id": "124401",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "lady_minerra",
+      "name": "Lady Minerra",
+      "generation": 2,
+      "base_stats": {
+        "health": 80,
+        "strength": 70,
+        "luck": 55,
+        "sum": 205
+      },
+      "source_id": "124428",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "loot_conversion",
+        "charge_points": null,
+        "raw_text": "Loot Conversion: Converts part of Expedition loot into RLT.",
+        "output_currency": "RLT",
+        "conversion_rate": null,
+        "tiers": [
+          {
+            "tier": 1,
+            "charge_points": 24,
+            "reward_count_to_convert": 2
+          },
+          {
+            "tier": 2,
+            "charge_points": 30,
+            "reward_count_to_convert": 3
+          },
+          {
+            "tier": 3,
+            "charge_points": 36,
+            "reward_count_to_convert": 5
+          }
+        ],
+        "source_id": "124428",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "lady_minerra_keep_it_going",
+          "type": "keep_it_going",
+          "value": null,
+          "unit": null,
+          "raw_text": "Keep It Going: After a successful Expedition, she skips rest. If it fails, she needs three times the normal rest.",
+          "level_scaling": null,
+          "source_id": "124428",
+          "mechanics_status": "description_transcribed",
+          "rest_multiplier_after_success": 0,
+          "rest_multiplier_after_failure": 3
+        },
+        {
+          "id": "lady_minerra_survival",
+          "type": "survival",
+          "value": -5,
+          "unit": "percent",
+          "raw_text": "Survive Chance -5%",
+          "level_scaling": null,
+          "source_id": "124428",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "lady_minerra_buyback_discount",
+          "type": "buyback_discount",
+          "value": -50,
+          "unit": "percent",
+          "raw_text": "Buyback Discount -50%",
+          "level_scaling": null,
+          "source_id": "124428",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "jack_o_mine",
+      "name": "Jack O’Mine",
+      "generation": 2,
+      "base_stats": {
+        "health": 70,
+        "strength": 60,
+        "luck": 90,
+        "sum": 220
+      },
+      "source_id": "124459",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "extra_loot",
+        "charge_points": null,
+        "raw_text": "Extra Loot",
+        "tiers": [
+          {
+            "tier": 1,
+            "charge_points": 18,
+            "extra_loot_percent": 25
+          },
+          {
+            "tier": 2,
+            "charge_points": 24,
+            "extra_loot_percent": 50
+          },
+          {
+            "tier": 3,
+            "charge_points": 30,
+            "extra_loot_percent": 75
+          }
+        ],
+        "source_id": "124459",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "jack_o_mine_skip_rest_chest",
+          "type": "skip_rest_chest",
+          "value": null,
+          "unit": null,
+          "raw_text": "Skip Rest Chest: After a successful Expedition, adds an Energy Drink chest to the next one to reduce Rest Time.",
+          "level_scaling": null,
+          "source_id": "124459",
+          "mechanics_status": "description_transcribed",
+          "trigger": "after_successful_expedition",
+          "applies_to": "next_expedition",
+          "chest_type": "Energy Drink",
+          "rest_reduction_amount": null
+        },
+        {
+          "id": "jack_o_mine_influencer",
+          "type": "influencer",
+          "value": 20,
+          "unit": "percent",
+          "raw_text": "Influencer +20%",
+          "level_scaling": null,
+          "source_id": "124459",
+          "mechanics_status": "needs_definition"
+        },
+        {
+          "id": "jack_o_mine_return_to_work",
+          "type": "return_to_work",
+          "value": 25,
+          "unit": "percent",
+          "raw_text": "25% Return to Work",
+          "level_scaling": null,
+          "source_id": "124459",
+          "mechanics_status": "needs_definition"
+        }
+      ]
+    },
+    {
+      "id": "chillz",
+      "name": "Chillz",
+      "generation": 2,
+      "base_stats": {
+        "health": 75,
+        "strength": 35,
+        "luck": 65,
+        "sum": 175
+      },
+      "source_id": "124521",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "boost_mode",
+        "charge_points": 24,
+        "raw_text": "Boost Mode: all stats become 100",
+        "active_stats": {
+          "health": 100,
+          "strength": 100,
+          "luck": 100
+        },
+        "source_id": "124521",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [
+        {
+          "id": "chillz_season_xp_chest",
+          "type": "season_xp_chest",
+          "value": null,
+          "unit": null,
+          "raw_text": "Season XP Chest",
+          "level_scaling": null,
+          "source_id": "124521",
+          "mechanics_status": "needs_definition"
+        },
+        {
+          "id": "chillz_rest_time",
+          "type": "rest_time",
+          "value": -40,
+          "unit": "percent",
+          "raw_text": "Relax Time -40%",
+          "level_scaling": null,
+          "source_id": "124521",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "chillz_experience",
+          "type": "experience",
+          "value": 40,
+          "unit": "percent",
+          "raw_text": "Extra XP +40%",
+          "level_scaling": null,
+          "source_id": "124521",
+          "mechanics_status": "label_and_value_transcribed"
+        }
+      ]
+    },
+    {
+      "id": "bb_smoke",
+      "name": "BB Smoke",
+      "generation": 2,
+      "base_stats": {
+        "health": 50,
+        "strength": 70,
+        "luck": 90,
+        "sum": 210
+      },
+      "source_id": "124550",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "remote_power",
+        "charge_points": null,
+        "raw_text": "Remote Power: Adds your miners’ power to your room while he stays alive.",
+        "condition": "alive",
+        "temporary": true,
+        "counts_toward_league": false,
+        "tiers": [
+          {
+            "tier": 1,
+            "charge_points": 20,
+            "miners_raw_power_multiplier": 4
+          },
+          {
+            "tier": 2,
+            "charge_points": 30,
+            "miners_raw_power_multiplier": 5
+          },
+          {
+            "tier": 3,
+            "charge_points": 42,
+            "miners_raw_power_multiplier": 7
+          }
+        ],
+        "source_id": "124550",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "remote_effect_present",
+      "abilities": [
+        {
+          "id": "bb_smoke_speed_up_walk",
+          "type": "speed_up_walk",
+          "value": null,
+          "unit": null,
+          "raw_text": "Speed Up Walk: 1 Speed Up Item per 2 h of Expedition (per 4 h if it fails).",
+          "level_scaling": null,
+          "source_id": "124550",
+          "mechanics_status": "description_transcribed",
+          "item_type": "Speed Up Item",
+          "hours_per_item_success": 2,
+          "hours_per_item_failure": 4,
+          "rounding_rule": null
+        },
+        {
+          "id": "bb_smoke_extra_loot",
+          "type": "extra_loot",
+          "value": 25,
+          "unit": "percent",
+          "raw_text": "Extra Loot +25%",
+          "level_scaling": null,
+          "source_id": "124550",
+          "mechanics_status": "label_and_value_transcribed"
+        },
+        {
+          "id": "bb_smoke_return_to_work",
+          "type": "return_to_work",
+          "value": 20,
+          "unit": "percent",
+          "raw_text": "20% Return to Work",
+          "level_scaling": null,
+          "source_id": "124550",
+          "mechanics_status": "needs_definition"
+        }
+      ]
+    },
+    {
+      "id": "cuscuz",
+      "name": "Cuscuz",
+      "generation": 3,
+      "base_stats": {
+        "health": 90,
+        "strength": 75,
+        "luck": 90,
+        "sum": 255
+      },
+      "source_id": "125533",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "remote_bonus",
+        "charge_points": 24,
+        "raw_text": "x2% Remote Bonus",
+        "percent_per_stat_point": 2,
+        "base_stats_bonus_percent": 510,
+        "temporary": true,
+        "counts_toward_league": false,
+        "formula_basis": "previously_verified_game_rule",
+        "source_id": "125533",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "remote_effect_present",
+      "abilities": [],
+      "ability_model": "builder_choices_not_simultaneous_passives",
+      "builder": {
+        "mode": "choose_one_per_slot",
+        "level_lookup": "highest_level_min_not_exceeding_current_level",
+        "basic_level_min": 1,
+        "slots": [
+          {
+            "slot": 1,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "build_1",
+                "name": "Build 1",
+                "effects": [
+                  {
+                    "type": "extra_loot",
+                    "value": 60,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "cuscuz_slot1_build_1_1",
+                    "source_id": "125533"
+                  },
+                  {
+                    "type": "rest_time",
+                    "value": 20,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "cuscuz_slot1_build_1_2",
+                    "source_id": "125533"
+                  }
+                ]
+              },
+              {
+                "id": "build_2",
+                "name": "Build 2",
+                "effects": [
+                  {
+                    "type": "rest_time",
+                    "value": -45,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "cuscuz_slot1_build_2_1",
+                    "source_id": "125533"
+                  },
+                  {
+                    "type": "extra_loot",
+                    "value": -30,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "cuscuz_slot1_build_2_2",
+                    "source_id": "125533"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 2,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "build_1",
+                "name": "Build 1",
+                "effects": [
+                  {
+                    "type": "expedition_time",
+                    "value": -30,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "cuscuz_slot2_build_1_1",
+                    "source_id": "125533"
+                  },
+                  {
+                    "type": "survival",
+                    "value": -8,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "cuscuz_slot2_build_1_2",
+                    "source_id": "125533"
+                  }
+                ]
+              },
+              {
+                "id": "build_2",
+                "name": "Build 2",
+                "effects": [
+                  {
+                    "type": "survival",
+                    "value": 8,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "cuscuz_slot2_build_2_1",
+                    "source_id": "125533"
+                  },
+                  {
+                    "type": "expedition_time",
+                    "value": 30,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "cuscuz_slot2_build_2_2",
+                    "source_id": "125533"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 3,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "build_1",
+                "name": "Build 1",
+                "effects": [
+                  {
+                    "type": "games_boost",
+                    "value": 220,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "cuscuz_slot3_build_1_1",
+                    "source_id": "125533"
+                  },
+                  {
+                    "type": "buyback_discount",
+                    "value": 20,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "cuscuz_slot3_build_1_2",
+                    "source_id": "125533"
+                  }
+                ]
+              },
+              {
+                "id": "build_2",
+                "name": "Build 2",
+                "effects": [
+                  {
+                    "type": "buyback_discount",
+                    "value": -50,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "cuscuz_slot3_build_2_1",
+                    "source_id": "125533"
+                  },
+                  {
+                    "type": "games_boost",
+                    "value": -60,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "cuscuz_slot3_build_2_2",
+                    "source_id": "125533"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gfeast",
+      "name": "GFeast",
+      "generation": 3,
+      "base_stats": {
+        "health": 70,
+        "strength": 95,
+        "luck": 95,
+        "sum": 260
+      },
+      "source_id": "125521",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "remote_power",
+        "charge_points": 24,
+        "raw_text": "Remote Power: while GFeast is alive on an Expedition, temporarily adds Miner Power × 5 to your room.",
+        "miners_raw_power_multiplier": 5,
+        "temporary": true,
+        "condition": "alive_on_expedition",
+        "counts_toward_league": false,
+        "source_id": "125521",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "remote_effect_present",
+      "abilities": [],
+      "ability_model": "builder_choices_not_simultaneous_passives",
+      "builder": {
+        "mode": "choose_one_per_slot",
+        "level_lookup": "highest_level_min_not_exceeding_current_level",
+        "basic_level_min": 1,
+        "slots": [
+          {
+            "slot": 1,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "build_1",
+                "name": "Build 1",
+                "effects": [
+                  {
+                    "type": "extra_loot",
+                    "value": 50,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "gfeast_slot1_build_1_1",
+                    "source_id": "125521"
+                  },
+                  {
+                    "type": "rest_time",
+                    "value": 25,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "gfeast_slot1_build_1_2",
+                    "source_id": "125521"
+                  }
+                ]
+              },
+              {
+                "id": "build_2",
+                "name": "Build 2",
+                "effects": [
+                  {
+                    "type": "rest_time",
+                    "value": -50,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "gfeast_slot1_build_2_1",
+                    "source_id": "125521"
+                  },
+                  {
+                    "type": "extra_loot",
+                    "value": -25,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "gfeast_slot1_build_2_2",
+                    "source_id": "125521"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 2,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "build_1",
+                "name": "Build 1",
+                "effects": [
+                  {
+                    "type": "expedition_time",
+                    "value": -25,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "gfeast_slot2_build_1_1",
+                    "source_id": "125521"
+                  },
+                  {
+                    "type": "survival",
+                    "value": -10,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "gfeast_slot2_build_1_2",
+                    "source_id": "125521"
+                  }
+                ]
+              },
+              {
+                "id": "build_2",
+                "name": "Build 2",
+                "effects": [
+                  {
+                    "type": "survival",
+                    "value": 10,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "gfeast_slot2_build_2_1",
+                    "source_id": "125521"
+                  },
+                  {
+                    "type": "expedition_time",
+                    "value": 25,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "gfeast_slot2_build_2_2",
+                    "source_id": "125521"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 3,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "build_1",
+                "name": "Build 1",
+                "effects": [
+                  {
+                    "type": "games_boost",
+                    "value": 200,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "gfeast_slot3_build_1_1",
+                    "source_id": "125521"
+                  },
+                  {
+                    "type": "buyback_cost",
+                    "value": 25,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "gfeast_slot3_build_1_2",
+                    "source_id": "125521"
+                  }
+                ]
+              },
+              {
+                "id": "build_2",
+                "name": "Build 2",
+                "effects": [
+                  {
+                    "type": "buyback_discount",
+                    "value": -60,
+                    "unit": "percent",
+                    "role": "buff",
+                    "id": "gfeast_slot3_build_2_1",
+                    "source_id": "125521"
+                  },
+                  {
+                    "type": "games_boost",
+                    "value": -50,
+                    "unit": "percent",
+                    "role": "debuff",
+                    "id": "gfeast_slot3_build_2_2",
+                    "source_id": "125521"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "homie_hamtana",
+      "name": "Homie Hamtana",
+      "generation": 3,
+      "base_stats": {
+        "health": 65,
+        "strength": 85,
+        "luck": 85,
+        "sum": 235
+      },
+      "source_id": "125625",
+      "record_status": "transcribed_from_screenshot",
+      "level": null,
+      "ultimate": {
+        "type": "rest_relay",
+        "charge_points": null,
+        "raw_text": "Rest Relay: Each full Expedition hour cuts the Rest Time of every Hamster in your inventory.",
+        "effect_scope": "every_hamster_in_inventory",
+        "hours_counted": "full_expedition_hours",
+        "tiers": [
+          {
+            "tier": 1,
+            "charge_points": 24,
+            "rest_time_change_minutes_per_hour": -10
+          },
+          {
+            "tier": 2,
+            "charge_points": 30,
+            "rest_time_change_minutes_per_hour": -12
+          },
+          {
+            "tier": 3,
+            "charge_points": 36,
+            "rest_time_change_minutes_per_hour": -16
+          }
+        ],
+        "source_id": "125625",
+        "level_scaling": null,
+        "details_status": "transcribed"
+      },
+      "ultimate_status": "transcribed",
+      "direct_mining_effect_status": "not_shown_in_supplied_abilities",
+      "abilities": [],
+      "ability_model": "builder_choices_not_simultaneous_passives",
+      "builder": {
+        "mode": "choose_one_per_slot",
+        "level_lookup": "highest_level_min_not_exceeding_current_level",
+        "basic_level_min": 1,
+        "slots": [
+          {
+            "slot": 1,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "rlt_walk",
+                "name": "rlt_walk",
+                "effects": [
+                  {
+                    "type": "rlt_walk",
+                    "value": null,
+                    "unit": "RLT_per_hour",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 0.15
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 0.2
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 0.25
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 0.3
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 0.35
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 0.5
+                      }
+                    ],
+                    "id": "homie_hamtana_slot1_rlt_walk_1",
+                    "source_id": "125625"
+                  }
+                ]
+              },
+              {
+                "id": "speed_up_walk",
+                "name": "speed_up_walk",
+                "effects": [
+                  {
+                    "type": "speed_up_walk",
+                    "value": null,
+                    "unit": "speed_up_items_per_hour",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 0.5
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 0.6
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 0.7
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 0.8
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 0.9
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 1
+                      }
+                    ],
+                    "id": "homie_hamtana_slot1_speed_up_walk_1",
+                    "source_id": "125625"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 2,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "survival",
+                "name": "survival",
+                "effects": [
+                  {
+                    "type": "survival",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": 3
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": 4
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": 5
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": 6
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": 7
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": 8
+                      }
+                    ],
+                    "id": "homie_hamtana_slot2_survival_1",
+                    "source_id": "125625"
+                  }
+                ]
+              },
+              {
+                "id": "buyback_discount",
+                "name": "buyback_discount",
+                "effects": [
+                  {
+                    "type": "buyback_discount",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": -25
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": -30
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": -35
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": -40
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": -50
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": -60
+                      }
+                    ],
+                    "id": "homie_hamtana_slot2_buyback_discount_1",
+                    "source_id": "125625"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "slot": 3,
+            "selection": "exactly_one_option",
+            "options": [
+              {
+                "id": "expedition_time",
+                "name": "expedition_time",
+                "effects": [
+                  {
+                    "type": "expedition_time",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": -10
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": -20
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": -30
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": -40
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": -50
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": -60
+                      }
+                    ],
+                    "id": "homie_hamtana_slot3_expedition_time_1",
+                    "source_id": "125625"
+                  }
+                ]
+              },
+              {
+                "id": "rest_time",
+                "name": "rest_time",
+                "effects": [
+                  {
+                    "type": "rest_time",
+                    "value": null,
+                    "unit": "percent",
+                    "role": "ability",
+                    "level_values": [
+                      {
+                        "level_min": 1,
+                        "display_label": "BASIC",
+                        "value": -7.5
+                      },
+                      {
+                        "level_min": 10,
+                        "display_label": "LV.10",
+                        "value": -15
+                      },
+                      {
+                        "level_min": 20,
+                        "display_label": "LV.20",
+                        "value": -22.5
+                      },
+                      {
+                        "level_min": 30,
+                        "display_label": "LV.30",
+                        "value": -30
+                      },
+                      {
+                        "level_min": 40,
+                        "display_label": "LV.40",
+                        "value": -37.5
+                      },
+                      {
+                        "level_min": 50,
+                        "display_label": "LV.50",
+                        "value": -45
+                      }
+                    ],
+                    "id": "homie_hamtana_slot3_rest_time_1",
+                    "source_id": "125625"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "sets": [
+    {
+      "id": "lucky_set",
+      "name": "Lucky Set",
+      "members": [
+        "cowham",
+        "guile",
+        "lucky_red"
+      ],
+      "source_id": "122519",
+      "effect_scope": null,
+      "reward_frequency": null,
+      "milestone_mode": "incremental_additive_as_full_set_row_confirms",
+      "levels": [
+        {
+          "level": 1,
+          "required_distinct_members": 2,
+          "effect": "expedition_time",
+          "increment_percent": -10,
+          "reward_amount": 2,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        },
+        {
+          "level": 2,
+          "required_distinct_members": 3,
+          "effect": "expedition_time",
+          "increment_percent": -15,
+          "reward_amount": 25,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        }
+      ],
+      "full_set_total": {
+        "required_distinct_members": 3,
+        "effect": "expedition_time",
+        "total_percent": -25,
+        "reward_total": 27,
+        "reward_currency": "RLT",
+        "is_summary_not_extra_level": true
+      },
+      "additional_source_ids": [
+        "123648"
+      ]
+    },
+    {
+      "id": "walkers_set",
+      "name": "Walker's Set",
+      "members": [
+        "banjo_walker",
+        "sir_catch_a_lot",
+        "birthday_bob"
+      ],
+      "source_id": "122654",
+      "effect_scope": null,
+      "reward_frequency": null,
+      "milestone_mode": "incremental_additive_as_full_set_row_confirms",
+      "levels": [
+        {
+          "level": 1,
+          "required_distinct_members": 2,
+          "effect": "earned_xp",
+          "increment_percent": 10,
+          "reward_amount": 1,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        },
+        {
+          "level": 2,
+          "required_distinct_members": 3,
+          "effect": "earned_xp",
+          "increment_percent": 15,
+          "reward_amount": 20,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        }
+      ],
+      "full_set_total": {
+        "required_distinct_members": 3,
+        "effect": "earned_xp",
+        "total_percent": 25,
+        "reward_total": 21,
+        "reward_currency": "RLT",
+        "is_summary_not_extra_level": true
+      },
+      "additional_source_ids": [
+        "123627"
+      ]
+    },
+    {
+      "id": "hamsteritas_set",
+      "name": "Hamsterita's Set",
+      "members": [
+        "mamita",
+        "kitsumi",
+        "valkirita"
+      ],
+      "source_id": "122717",
+      "effect_scope": null,
+      "reward_frequency": null,
+      "milestone_mode": "incremental_additive_as_full_set_row_confirms",
+      "levels": [
+        {
+          "level": 1,
+          "required_distinct_members": 2,
+          "effect": "expedition_xp",
+          "increment_percent": 10,
+          "reward_amount": 25,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        },
+        {
+          "level": 2,
+          "required_distinct_members": 3,
+          "effect": "expedition_xp",
+          "increment_percent": 15,
+          "reward_amount": 50,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        }
+      ],
+      "full_set_total": {
+        "required_distinct_members": 3,
+        "effect": "expedition_xp",
+        "total_percent": 25,
+        "reward_total": 75,
+        "reward_currency": "RLT",
+        "is_summary_not_extra_level": true
+      },
+      "additional_source_ids": [
+        "123722"
+      ]
+    },
+    {
+      "id": "ascension_set",
+      "name": "Ascension Set",
+      "members": [
+        "badncle",
+        "goodncle",
+        "uncle_azoth"
+      ],
+      "source_id": "123803",
+      "additional_source_ids": [
+        "123826",
+        "125453"
+      ],
+      "effect_scope": null,
+      "reward_frequency": null,
+      "milestone_mode": "incremental_additive_as_full_set_row_confirms",
+      "levels": [
+        {
+          "level": 1,
+          "required_distinct_members": 2,
+          "effect": "survival",
+          "increment_percent": 5,
+          "reward_amount": 5,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        },
+        {
+          "level": 2,
+          "required_distinct_members": 3,
+          "effect": "survival",
+          "increment_percent": 10,
+          "reward_amount": 20,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        }
+      ],
+      "full_set_total": {
+        "required_distinct_members": 3,
+        "effect": "survival",
+        "total_percent": 15,
+        "reward_total": 25,
+        "reward_currency": "RLT",
+        "is_summary_not_extra_level": true
+      }
+    },
+    {
+      "id": "pirate_set",
+      "name": "Pirate Set",
+      "members": [
+        "eliza_bit",
+        "davy_coins",
+        "captain_jack_pot"
+      ],
+      "source_id": "123915",
+      "additional_source_ids": [
+        "123946",
+        "125546"
+      ],
+      "effect_scope": "all_hamsters_in_set",
+      "trigger": "when_this_hamster_goes_on_expedition",
+      "reward_frequency": null,
+      "milestone_mode": "incremental_additive_as_full_set_row_confirms",
+      "levels": [
+        {
+          "level": 1,
+          "required_distinct_members": 2,
+          "effect": "rest_restore",
+          "increment_value": 5,
+          "unit": "minutes",
+          "raw_effect_text": "Restores 5 min of rest to all Hamsters in the set when this Hamster goes on Expedition.",
+          "reward_amount": 5,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        },
+        {
+          "level": 2,
+          "required_distinct_members": 3,
+          "effect": "rest_restore",
+          "increment_value": 10,
+          "unit": "minutes",
+          "raw_effect_text": "Restores 10 min of rest to all Hamsters in the set when this Hamster goes on Expedition.",
+          "reward_amount": 25,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        }
+      ],
+      "full_set_total": {
+        "required_distinct_members": 3,
+        "effect": "rest_restore",
+        "total_value": 15,
+        "unit": "minutes",
+        "reward_total": 30,
+        "reward_currency": "RLT",
+        "is_summary_not_extra_level": true
+      }
+    },
+    {
+      "id": "night_shift_set",
+      "name": "The Night Shift Set",
+      "members": [
+        "solaire",
+        "lady_minerra",
+        "jack_o_mine"
+      ],
+      "source_id": "124410",
+      "additional_source_ids": [
+        "124440",
+        "124510"
+      ],
+      "effect_scope": null,
+      "reward_frequency": null,
+      "milestone_mode": "incremental_additive_as_full_set_row_confirms",
+      "levels": [
+        {
+          "level": 1,
+          "required_distinct_members": 2,
+          "effect": "extra_loot",
+          "increment_percent": 10,
+          "reward_amount": 5,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        },
+        {
+          "level": 2,
+          "required_distinct_members": 3,
+          "effect": "extra_loot",
+          "increment_percent": 15,
+          "reward_amount": 25,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        }
+      ],
+      "full_set_total": {
+        "required_distinct_members": 3,
+        "effect": "extra_loot",
+        "total_percent": 25,
+        "reward_total": 30,
+        "reward_currency": "RLT",
+        "is_summary_not_extra_level": true
+      }
+    },
+    {
+      "id": "community_set",
+      "name": "The Community Set",
+      "members": [
+        "bb_smoke",
+        "cuscuz",
+        "chillz"
+      ],
+      "source_id": "124533",
+      "additional_source_ids": [
+        "124559",
+        "125554"
+      ],
+      "effect_scope": null,
+      "reward_frequency": null,
+      "milestone_mode": "incremental_additive_as_full_set_row_confirms",
+      "levels": [
+        {
+          "level": 1,
+          "required_distinct_members": 2,
+          "effect": "rest_time",
+          "increment_percent": -10,
+          "reward_amount": 25,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        },
+        {
+          "level": 2,
+          "required_distinct_members": 3,
+          "effect": "rest_time",
+          "increment_percent": -15,
+          "reward_amount": 50,
+          "reward_currency": "RLT",
+          "currency_evidence": "icon_interpretation"
+        }
+      ],
+      "full_set_total": {
+        "required_distinct_members": 3,
+        "effect": "rest_time",
+        "total_percent": -25,
+        "reward_total": 75,
+        "reward_currency": "RLT",
+        "is_summary_not_extra_level": true
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "122509",
+      "file_name": "image(20261123-122509).png",
+      "sha256": "4f9e59aafb6825b03e56f3ffa20ced08dda3b484dbb0994fc8c8b8e6780cd20e",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122519",
+      "file_name": "image(20261123-122519).png",
+      "sha256": "f4cc7fbd64f49a7cee1469e98a32a96977e4b735b2602e3f76461dc84f18681f",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122528",
+      "file_name": "image(20261123-122528).png",
+      "sha256": "69d1514b9461aaafef7c5dbca917715a8dd2d8a9c0e989ae1c15d57027f71287",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122541",
+      "file_name": "image(20261123-122541).png",
+      "sha256": "95f23425f6d91ed9acbbea8ea0f6cfe0d4fd2350d538f6933b645cfcc97172ce",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122551",
+      "file_name": "image(20261123-122551).png",
+      "sha256": "a1e29a72add907d5356bdfce156827424189d4792274af3ef4535c43d5ddfd46",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122602",
+      "file_name": "image(20261123-122602).png",
+      "sha256": "8b6907652615568e16f9b505aa921c7d40b2ab4f715170bc5858b97320c5835b",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122613",
+      "file_name": "image(20261123-122613).png",
+      "sha256": "2525e492c1fc429dc7c78688caebca93976333f4b982bc2154cac692723e8932",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122621",
+      "file_name": "image(20261123-122621).png",
+      "sha256": "72499af2afde6d627377afe72a509bf51ee36e9866d3c2e502342375861a2790",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122633",
+      "file_name": "image(20261123-122633).png",
+      "sha256": "a129dbcd36490125237273ee29cb82356bbd6fa4f48a9efbd999d9d994c1a629",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122643",
+      "file_name": "image(20261123-122643).png",
+      "sha256": "d3fc003e410f5b591bab4cbbe698d1d1ebb10dda32e749a7af4af48278576b7f",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122654",
+      "file_name": "image(20261123-122654).png",
+      "sha256": "c625d561dca129a825bb5ae9e1e3fbac185d2bc8dbae3e11e17a46da8e796b91",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122708",
+      "file_name": "image(20261123-122708).png",
+      "sha256": "a0e95452f7882f9e992e975190f5219bdfc71df17de539c751f7eac3196190cb",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122717",
+      "file_name": "image(20261123-122717).png",
+      "sha256": "fb0517f155e845b9c29a4145f2432143a35cc1dd4797db0bb75e931e4724d811",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122727",
+      "file_name": "image(20261123-122727).png",
+      "sha256": "2d06607dfc993c356536002c17de8fc198c1fa24536e583c9089149933341852",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122739",
+      "file_name": "image(20261123-122739).png",
+      "sha256": "c29ab431a6b0101bfb3b27aebe649d852e01aed432d6c8be02fac58d9d06ba1c",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122751",
+      "file_name": "image(20261123-122751).png",
+      "sha256": "fe2f1748e534e38d8c99fe0fcb20bbe18448cd71521301c3418c265c147da1e6",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122805",
+      "file_name": "image(20261123-122805).png",
+      "sha256": "34a8e38e67d4849f8d0ce20eab3ffe6bfb131974d59dee8d420140dad14f5c52",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122816",
+      "file_name": "image(20261123-122816).png",
+      "sha256": "32d50c7a9d1007e5f3959f60e3bfec813a84bd9e9c44c2dacdcdb2b195e817c2",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "122829",
+      "file_name": "image(20261123-122829).png",
+      "sha256": "e1ceec8c0db7e1e4962f753b4b3473039fbe065c7d79f99d1ac5485801e81076",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123546",
+      "file_name": "image(20261123-123546).png",
+      "sha256": "cac400dad7d63a5a6ec355b53f093e727325bf26700ab79e223f689b860bc4f0",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123557",
+      "file_name": "image(20261123-123557).png",
+      "sha256": "c9ee2d25b98d342e0fc9afc5d7cab4417cfcec005d602d098acc71ada85f5612",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123605",
+      "file_name": "image(20261123-123605).png",
+      "sha256": "96e2faca6755539ad2a975c8dbb00451042817c3ab9038280056a9795304e54b",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123616",
+      "file_name": "image(20261123-123616).png",
+      "sha256": "11e007a1e43179d4fdbb5d5d0f85e3aeb65d44c63a152f62efca494cff044550",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123627",
+      "file_name": "image(20261123-123627).png",
+      "sha256": "7cb37301b95b3e6885a5ea481a28a0f86c5ebf28b2c788d17cb469cc80adf2ce",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123639",
+      "file_name": "image(20261123-123639).png",
+      "sha256": "38ae9070edd80441b7b6934275bb52bd32c1c96b743c579b387a693a73cd68d8",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123648",
+      "file_name": "image(20261123-123648).png",
+      "sha256": "3c99c126adfbb764ff3782e7b663e91283c2ec79fa5a62257d0dda13b48e49a7",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123702",
+      "file_name": "image(20261123-123702).png",
+      "sha256": "351a5011239cc08d103acc860f07cdd397a30b0b271a1bbed9ef42756c74fd75",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123712",
+      "file_name": "image(20261123-123712).png",
+      "sha256": "16fbd5091401877cc45654ad380b2129a13d9ea5fd98a70821f3e935bd627fd4",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123722",
+      "file_name": "image(20261123-123722).png",
+      "sha256": "9ba4195a9f001552da96165f31bf7ccae67de6a2f162569f88f384fe9a878a74",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123740",
+      "file_name": "image(20261123-123740).png",
+      "sha256": "5e7822d1b2d13b342b2a6fbd41d2b10c9370f24e5f52625a67bb6ccc1082d13e",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123750",
+      "file_name": "image(20261123-123750).png",
+      "sha256": "e0288a69139c8c58fb86312c822461aa219fa33df6ee131d02dd59252f72371b",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123803",
+      "file_name": "image(20261123-123803).png",
+      "sha256": "2e62f8874a255e98a2d29c3b76a79faeacc8bcfbeed5634738169a3d9aa349ad",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123816",
+      "file_name": "image(20261123-123816).png",
+      "sha256": "c0dd6df36d02d86867d631909eebb89f622ab776151bf41e6a362e14f3fca499",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123826",
+      "file_name": "image(20261123-123826).png",
+      "sha256": "ea58db6cf8cbe002e716dc152d17215d34838e71a35652246bf75dca61e7bf5f",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123839",
+      "file_name": "image(20261123-123839).png",
+      "sha256": "eb9caeb3b58fd5f5a5676cab3918ed7683ecbadacda2959d7719ab40ae86a39d",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123857",
+      "file_name": "image(20261123-123857).png",
+      "sha256": "1d31c92b5a3ebcbd361a323fa3ca3fdfd98c1272a1c7f40c04a0ee9f20197fb6",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123915",
+      "file_name": "image(20261123-123915).png",
+      "sha256": "4dfe78d302280b3c1db62848542a18798eed0620cf465f94ffb6d97f3ca12395",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123928",
+      "file_name": "image(20261123-123928).png",
+      "sha256": "4f5cad44eaf2a5028fa4de0ae329f35ba49465eeec51c3ceb58aa26984ed5a9e",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "123946",
+      "file_name": "image(20261123-123946).png",
+      "sha256": "9d741ee93b357a29b9f6ce4330031590e490b5b1367ddf20057758179d540d87",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124347",
+      "file_name": "image(20261123-124347).png",
+      "sha256": "c56027af19fb00bbc4da7ba89fda82f56fcaf1d3105b5cbb9fa26491c2c1ea55",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124401",
+      "file_name": "image(20261123-124401).png",
+      "sha256": "1d740b8ea72055070a926047f77aa4b5c0ce9435465944056e1b6b59e8c937c2",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124410",
+      "file_name": "image(20261123-124410).png",
+      "sha256": "f6a8761f164814d1e01ecd40d79dcd58733e7be4ac72be4a455a48a237b5f602",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124428",
+      "file_name": "image(20261123-124428).png",
+      "sha256": "5bc6c7727bae11dc15a1abf22e03b44d1aaef8a1146bd02493e89e6ec1102a36",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124440",
+      "file_name": "image(20261123-124440).png",
+      "sha256": "5f4d3b8a63e35f8a098f95aa83bdfd830645bcf36968e6d1e7c08b203762c552",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124459",
+      "file_name": "image(20261123-124459).png",
+      "sha256": "5a8c4cd473ed266c7903b0346062d7a8a7af2a636531593fbd5549bcae24fdc4",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124510",
+      "file_name": "image(20261123-124510).png",
+      "sha256": "0ce82d8298f99977cf3ab40a6d5e9842da6a2fbba7ba88ff7534cd58601175bb",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124521",
+      "file_name": "image(20261123-124521).png",
+      "sha256": "11bab4138a2f34f86927da8308479917504be8faf8a7eb24caf7c64b2055fffc",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124533",
+      "file_name": "image(20261123-124533).png",
+      "sha256": "352d4dbb1225d3db5f6f59eb71c10ec913489028e6a108c96839ddd46fca3f35",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124550",
+      "file_name": "image(20261123-124550).png",
+      "sha256": "5eb651bc5f26c93595540ed8d4a4db62be897ce3242844d7b7af416ee5fb9742",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "124559",
+      "file_name": "image(20261123-124559).png",
+      "sha256": "4965edffbc9a2c8c3b94c214bb7154b8601758d05bb2517a207c980ea18a9f68",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "125440",
+      "file_name": "image(20261123-125440).png",
+      "sha256": "74b93e2be8df73581f5350c0fb85859cf550c9e5acec6dc29362aba5f5066464",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "125453",
+      "file_name": "image(20261123-125453).png",
+      "sha256": "2bab65a4e4bb6b7761d1c85c8faa68afd9fb3231aaea6b798577b63a450d6137",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "125509",
+      "file_name": "image(20261123-125509).png",
+      "sha256": "738ffc7e76e06a3d6661acf0f6b51e1c37c6c4e674ac78b90b039cb278e12e3a",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "125521",
+      "file_name": "image(20261123-125521).png",
+      "sha256": "af57d7487079b5d522807279b2a8b39ddd5052fe636dee536e7bbbc785f5b4a9",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "125533",
+      "file_name": "image(20261123-125533).png",
+      "sha256": "8d1bfcc29cdf603c493e168e63e4baa73c0bcc81f594eb4c9cc545124efbf845",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "125546",
+      "file_name": "image(20261123-125546).png",
+      "sha256": "20b86b25e493ae813600a44cba2c8fa7df19e10574587670213b54582a5323b3",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "125554",
+      "file_name": "image(20261123-125554).png",
+      "sha256": "315c8e25353a37f15be72618e0ecbd07383814301a066f7d771e34c1f4e541a4",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    },
+    {
+      "id": "125625",
+      "file_name": "image(20261123-125625).png",
+      "sha256": "97c5852ac5477125a2fdf5346ee4766052551047d6129417b6beb190d433e52f",
+      "kind": "user_screenshot",
+      "received_date": "2026-11-23"
+    }
+  ],
+  "notes": [
+    {
+      "id": "gen_vs_level",
+      "status": "recording_rule",
+      "text": "1ST GEN được lưu là thế hệ 1, không phải level 1. Bộ đếm 1/6…6/6 không được dùng để suy ra level."
+    },
+    {
+      "id": "missing_members",
+      "status": "resolved_by_gen3_batch1",
+      "text": "Uncle'Azoth, Captain Jack Pot và Cuscuz đã được bổ sung ảnh chi tiết. Tất cả thành viên của 7 set đang có đều đã có thông tin."
+    },
+    {
+      "id": "mamita_influencer",
+      "status": "needs_definition",
+      "text": "Giữ nguyên 150% / 20% Influencer; chưa gán hai số này vào công thức khi chưa có mô tả chi tiết."
+    },
+    {
+      "id": "return_to_work",
+      "status": "needs_definition",
+      "text": "Dusty McUncle: 25% Return to Work được lưu nguyên văn; ảnh không giải thích điều kiện và cách kích hoạt."
+    },
+    {
+      "id": "level_scaling",
+      "status": "unknown",
+      "text": "Các ảnh ghi BASE STATS. Không ngoại suy chỉ số hoặc kỹ năng theo level; cần ảnh/mô tả mốc cấp nếu có."
+    },
+    {
+      "id": "sets_scope",
+      "status": "unknown",
+      "text": "Ảnh thể hiện thành viên và các mốc set nhưng không nêu phạm vi áp dụng hiệu ứng hoặc tần suất nhận thưởng; chưa tự gán toàn tài khoản."
+    },
+    {
+      "id": "empty_abilities",
+      "status": "observed",
+      "text": "The Hamster và Mr. Jack không có kỹ năng hiển thị trong ảnh. Không suy ra rằng không bao giờ có kỹ năng ở cấp khác."
+    },
+    {
+      "id": "server",
+      "status": "github_pages_static_json",
+      "text": "Đích triển khai là GitHub Pages miễn phí: web dùng hamsters.json. SQLite chỉ là bản quản lý dữ liệu; chưa cập nhật repository hoặc triển khai web."
+    },
+    {
+      "id": "gen2_incomplete",
+      "status": "resolved_by_gen2_batch2",
+      "text": "Đã nhận thêm 11 ảnh cuối: Gordon Hamzy, SOLaire, Lady Minerra, Jack O’Mine, Chillz và BB Smoke. Người dùng xác nhận đã gửi hết thế hệ 2; tổng đã lưu 19 hamster thế hệ 2."
+    },
+    {
+      "id": "lucky_red_influencer",
+      "status": "needs_definition",
+      "text": "Lucky Red: giữ nguyên 150% / 5% Influencer, chưa suy đoán ý nghĩa hai số."
+    },
+    {
+      "id": "eliza_influencer",
+      "status": "needs_definition",
+      "text": "Eliza Bit: 20% Influencer; cần mô tả phạm vi/điều kiện trước khi áp dụng."
+    },
+    {
+      "id": "pirate_minutes",
+      "status": "recording_rule",
+      "text": "Pirate Set khôi phục thời gian nghỉ: 5 phút ở mốc 2/3, thêm 10 phút ở mốc 3/3, tổng 15 phút. Không lưu thành phần trăm hoặc phút mỗi giờ."
+    },
+    {
+      "id": "kitsumi_experience",
+      "status": "recording_rule",
+      "text": "Kitsumi có 25% Experience trong ảnh. Lưu theo ảnh người dùng, không bỏ qua chỉ số này chỉ vì bài giới thiệu cũ không đề cập."
+    },
+    {
+      "id": "tier_charge_model",
+      "status": "recording_rule",
+      "text": "SOLaire, Lady Minerra, Jack O’Mine và BB Smoke có Ultimate 3 Tier. charge_points ở cấp Ultimate để null; điểm sạc và hiệu ứng được lưu riêng trong tiers, không lấy một Tier áp dụng cho cả ba."
+    },
+    {
+      "id": "lady_minerra_conditional_rest",
+      "status": "recording_rule",
+      "text": "Keep It Going: thành công không nghỉ; thất bại nghỉ gấp 3. Không biến thành một hệ số giảm thời gian nghỉ cố định."
+    },
+    {
+      "id": "gordon_chest",
+      "status": "recording_rule",
+      "text": "Gordon Hamzy cần 100 điểm sạc cho Hamsters Chest; ảnh nêu rương có thể cho Magic Wool hoặc hamster, không đảm bảo luôn nhận hamster."
+    },
+    {
+      "id": "builder_exclusivity",
+      "status": "recording_rule",
+      "text": "Mỗi Slot Builder chỉ chọn một option. GFeast/Cuscuz: mỗi Build gồm cả buff và debuff; không được chỉ lấy buff hoặc bật cả hai Build trong một Slot."
+    },
+    {
+      "id": "builder_basic_label",
+      "status": "recording_rule",
+      "text": "Giữ nhãn BASIC và các mốc LV.10/20/30/40/50. level_min=1 là quy ước để tra BASIC cho cấp trước 10, không phải cấp hiện tại suy ra từ hình skin."
+    },
+    {
+      "id": "homie_relay",
+      "status": "recording_rule",
+      "text": "Homie Hamtana Ultimate Rest Relay: Tier 1/2/3 giảm 10/12/16 phút nghỉ cho mỗi giờ Expedition trọn vẹn, cần 24/30/36 điểm sạc. Ảnh không nêu cách cộng với các hiệu ứng hồi nghỉ khác."
+    },
+    {
+      "id": "cuscuz_buyback_debuff",
+      "status": "label_preserved",
+      "text": "Cuscuz Slot 3 Build 1 ghi Buyback Discount +20% dưới DEBUFF. Lưu đúng nhãn, số và vai trò; không suy ra đó là giảm chi phí 20%."
+    },
+    {
+      "id": "gen3_batch_status",
+      "status": "resolved_user_confirmed_complete",
+      "text": "Người dùng xác nhận đã gửi toàn bộ hamster; đã ghi 13 Gen1, 19 Gen2, 5 Gen3."
+    }
+  ],
+  "generation_completeness": {
+    "1": "batch_received_not_independently_exhaustive",
+    "2": "complete_as_submitted_by_user_19_hamsters",
+    "3": "complete_as_submitted_by_user_5_hamsters"
+  }
+}
