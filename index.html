@@ -18,6 +18,8 @@
 #rc-video-float .rc-video-actions{display:flex;gap:5px}
 #rc-video-float button,#rc-video-reopen{border:0;border-radius:6px;padding:5px 9px;cursor:pointer;background:#314565;color:#fff;font:600 13px system-ui,sans-serif}
 #rc-video-float .rc-video-frame{aspect-ratio:16/9;width:100%;display:block;border:0;background:#000}
+#rc-video-float.rc-minimized{width:max-content;max-width:calc(100vw - 28px)}
+#rc-video-float.rc-minimized .rc-video-bar{gap:8px;padding:6px 8px}
 #rc-video-float.rc-minimized .rc-video-frame{display:none}
 #rc-video-float.rc-closed{display:none}
 #rc-video-reopen{position:fixed;right:18px;bottom:18px;z-index:9990;background:#376ef0;box-shadow:0 5px 20px #0008;display:none}
@@ -44,7 +46,6 @@
 <section class="panel" id="rc-gallery"><h2>Thư viện ảnh Miner / Rack</h2><p class="help">Kéo ảnh để đổi thứ tự. Nhấp đúp vào tên thư mục hoặc tên ảnh để đổi tên; bấm ra ngoài để lưu.</p><div class="rg-toolbar"><button id="rg-new" type="button">+ Tạo thư mục</button><button id="rg-delete-folder" class="danger" type="button">Xóa thư mục</button><button id="rg-export" class="secondary" type="button">Sao lưu JSON</button><button id="rg-import" class="secondary" type="button">Khôi phục JSON</button><input type="file" id="rg-import-file" accept="application/json,.json" hidden></div><div id="rg-folders" class="rg-folders"></div><div id="rg-drop" class="rg-drop" tabindex="0">Bấm vào đây rồi Ctrl+V để dán ảnh, hoặc kéo ảnh vào / chọn tệp.<div class="actions" style="justify-content:center"><button id="rg-pick" type="button">Chọn ảnh</button><input type="file" id="rg-files" accept="image/*" multiple hidden></div></div><p id="rg-status" class="rg-info" aria-live="polite"></p><div id="rg-grid" class="rg-grid"></div><div id="rg-preview" class="rg-preview"><button type="button" id="rg-preview-close">Đóng ×</button><img alt="Ảnh phóng to"></div></section>
 <section class="panel" id="rc-power-converter">
 <h2>1. Chuyển đổi sức mạnh đào</h2>
-
 <div class="rc-convert-grid">
 <div><label for="rc-convert-input">Sức mạnh đầu vào</label><input id="rc-convert-input" type="number" min="0" step="any" value="1" inputmode="decimal"></div>
 <div><label for="rc-convert-from">Đơn vị đầu vào</label><select id="rc-convert-from"><option>GH/s</option><option>TH/s</option><option>PH/s</option><option selected>EH/s</option><option>ZH/s</option></select></div>
@@ -62,8 +63,8 @@ Power 185.000 Ph/s
 Bonus 0.5 %
 Quantity: 4"></textarea><div class="actions"><button id="rc-parse-text" type="button">Phân tích</button><button id="rc-import-text" type="button" class="secondary">Thêm Miner / Rack vào danh sách</button></div><p class="rc-text-note" id="rc-text-status">Dữ liệu nhận diện cần kiểm tra trước khi nhập.</p><div class="rc-text-review"><table><thead><tr><th>Chọn</th><th>Loại</th><th>Tên Miner / Rack</th><th>Power</th><th>Đơn vị</th><th>Bonus %</th><th>Cells</th><th>Số lượng</th></tr></thead><tbody id="rc-text-rows"></tbody></table></div></section>
 <section class="panel" id="rc-old-image-import" hidden><h2>1. Dán ảnh Miner / Rack</h2><div class="drop" id="drop" tabindex="0">Dán ảnh bằng <b>Ctrl + V</b>, kéo thả hoặc bấm để chọn nhiều ảnh</div><input id="files" type="file" accept="image/*" multiple hidden><div id="shots" class="shots"></div><div class="actions"><button id="ocrStart">Nhận diện</button><button class="secondary" id="clearShots">Xóa toàn bộ</button></div><p id="ocrStatus" class="muted">Khung xanh trên ảnh là vùng thẻ sẽ được đọc; nếu lệch, đổi "Khung thẻ" sang Lưới và chỉnh số cột/hàng.</p><div id="reviewWrap" class="hidden"><h3>Kiểm tra kết quả OCR trước khi nhập</h3><p class="help">Dòng tô cam cần kiểm tra. Sửa tên/bonus ở đây: kiểm tra lại thông số trước khi nhập.</p><div class="scroll"><table class="review"><thead><tr><th>Chọn</th><th>Loại</th><th>Tên</th><th>Power</th><th>Đơn vị</th><th>Bonus %</th><th>Cells</th><th>Số lượng</th><th>Ghi chú</th></tr></thead><tbody id="review"></tbody></table></div><datalist id="nameList"></datalist><div class="actions"><button id="append">Thêm kết quả</button><button class="secondary" id="replace">Thay danh sách</button></div><details><summary>Văn bản OCR gốc</summary><pre id="raw"></pre></details></div></section>
-<section class="panel"><h2>3. Miner sở hữu</h2><div class="scroll"><div style="min-width:690px"><div class="entry muted"><span>Tên máy</span><span>Power</span><span>Đơn vị</span><span>Bonus %</span><span>Cells/máy</span><span>Số lượng</span><span></span></div><div id="miners"></div></div></div><div class="actions"><button id="addMiner">+ Thêm Miner</button><button class="danger" id="clearMiners">Xóa Miner</button></div></section>
-<section class="panel"><h2>4. Rack sở hữu</h2><div class="scroll"><div style="min-width:510px"><div class="entry rack muted"><span>Tên Rack</span><span>Bonus %</span><span>Cells/Rack</span><span>Số lượng</span><span></span></div><div id="racks"></div></div></div><div class="actions"><button id="addRack">+ Thêm Rack</button><button class="danger" id="clearRacks">Xóa Rack</button></div></section>
+<section class="panel"><h2>3. Miner sở hữu</h2><p class="help">Mỗi dòng là một loại Miner. Cells = số ô mỗi máy chiếm. Bonus % là bonus Miner (tính một lần cho mỗi loại).</p><div class="scroll"><div style="min-width:690px"><div class="entry muted"><span>Tên máy</span><span>Power</span><span>Đơn vị</span><span>Bonus %</span><span>Cells/máy</span><span>Số lượng</span><span></span></div><div id="miners"></div></div></div><div class="actions"><button id="addMiner">+ Thêm Miner</button><button class="danger" id="clearMiners">Xóa Miner</button></div></section>
+<section class="panel"><h2>4. Rack sở hữu</h2><p class="help">Cells/Rack là sức chứa của MỖI Rack. Bonus Rack chỉ cộng cho các máy nằm trên chính Rack đó.</p><div class="scroll"><div style="min-width:510px"><div class="entry rack muted"><span>Tên Rack</span><span>Bonus %</span><span>Cells/Rack</span><span>Số lượng</span><span></span></div><div id="racks"></div></div></div><div class="actions"><button id="addRack">+ Thêm Rack</button><button class="danger" id="clearRacks">Xóa Rack</button></div></section>
 
 <section class="panel" id="hamster-panel"><h2>5. Hamster và set sở hữu</h2>
 <p class="help" id="hamster-data-status" aria-live="polite"></p>
@@ -79,8 +80,8 @@ Quantity: 4"></textarea><div class="actions"><button id="rc-parse-text" type="bu
 <section class="panel"><h2>6. Tính tổng và tối ưu bố trí</h2><div class="stats"><div class="stat">Power gốc (tất cả Miner)<strong id="basePower">—</strong></div><div class="stat">Bonus Miner (tất cả loại)<strong id="allBonus">—</strong></div><div class="stat">Cells cần / Cells có<strong id="cells">—</strong></div><div class="stat">Tổng power đào tối đa<strong id="maxPower">—</strong><small id="maxRank"></small></div></div>
 <div class="grid2"><div><label>Rank mục tiêu</label><select id="targetRank"></select></div><div><label>Khoảng đệm an toàn (EH/s)</label><input id="buffer" type="number" min="0" step="any" value="0.001"></div></div>
 <div><label>Thời gian tìm kiếm</label><select id="timeout"><option value="1000">Nhanh (1 giây)</option><option value="3000" selected>Cân bằng (3 giây)</option><option value="8000">Kỹ (8 giây)</option><option value="15000">Rất kỹ (15 giây)</option></select></div>
-<div class="actions"><button id="optimize">Tìm 2 phương án: Tổng đào / Ít Bonus</button><button id="maximize" class="secondary">Tối đa power (không giới hạn)</button><button class="secondary" id="compare">So sánh các Rank</button></div>
-<p class="help">Phương án 1 ưu tiên tổng power đào (có hamster), giữ power thường dưới trần Rank. Phương án 2 ưu tiên bonus miner/rack thấp nhất, power thường đạt ≥90% trần Rank; nếu bằng bonus thì ưu tiên tổng power đào cao hơn. Cả hai tôn trọng Cells và số lượng sở hữu.</p>
+<div class="actions"><button id="optimize">Tìm phương án tối ưu</button><button id="maximize" class="secondary">Tối đa power (không giới hạn)</button><button class="secondary" id="compare">So sánh các Rank</button></div>
+<p class="help">Tìm bố trí có tổng power đào cao nhất theo hiệu ứng hamster đang bật, giữ power thường dưới trần Rank. Không chọn hoặc tắt hết hiệu ứng hamster thì tối ưu miner/rack như thường. Tôn trọng Cells và số lượng sở hữu.</p>
 <p class="help" id="status"></p><div id="result"></div></section>
 </div><aside><section class="panel"><h2>Bảng sức mạnh các Rank</h2><p class="help">Rank mục tiêu có viền xanh; Mức Rank tương ứng power thường của phương án tối đa được tô nền. Giảm power không làm tài khoản đã lên Rank tự hạ Rank.</p><div class="scroll"><table><thead><tr><th>Rank</th><th>Từ</th><th>Đến</th></tr></thead><tbody id="ranks"></tbody></table></div></section>
 <section class="panel"><h2>Quy tắc tính (theo RollerCoin FAQ)</h2><p class="help"><b>Power</b> = Power gốc các Miner <b>được lắp</b> × (1 + Bonus Miner) + Σ (Bonus Rack × Power gốc các máy nằm trên Rack đó).</p><p class="help">Bonus Miner: mỗi loại máy (cùng tên + cùng bonus) chỉ cộng một lần. Bonus Rack: mỗi Rack tăng riêng cho máy đặt trên nó, Rack trùng tên vẫn được tính riêng.</p><p class="help">Bộ tối ưu chọn subset Miner + Rack (không bắt buộc lắp hết) để power cao nhất dưới trần Rank: tham lam → nhánh-cận (chính xác với ≤ 60 máy nếu kịp thời gian) → simulated annealing nhiều lần khởi động lại → tinh chỉnh thêm/đổi/chuyển. Chạy nền trong Web Worker nên trang không bị treo.</p></section>
@@ -3978,69 +3979,7 @@ function solve(inp){
   const verified=evaluateLayout(M,R,bestA,inp);
   return {found:bestP>-Infinity,exact:exactDone,assign:Array.from(bestA),power:verified.power,rankPower:verified.rankPower,hamster:inp.hamster||{},iterations,elapsed:Math.round(nowMs()-T_START),ceiling:C};
 }
-/* Phuong an B: it bonus, nhung dat >= 90% tran Rank.
- * Muc tieu: toi thieu bonus hieu dung = bonus Miner duy nhat + bonus Rack co trong so.
- * Chi xet bo tri thoa 90% <= power < tran (tru buffer). Heuristic co gioi han thoi gian.
- */
-function solveLowBonus(inp){
- const M=inp.miners,R=inp.racks,n=M.length,r=R.length;
- const upper=inp.upper, ceiling=inp.ceiling, lower=Math.max(inp.lower||0,upper*0.9);
- const start=nowMs(),budget=Math.max(100,inp.timeMs||2000),rnd=mulberry32(inp.seed||88123);
- const none=Array(n).fill(-1);let best=null,bestBonus=Infinity,bestPower=-1,iterations=0;
- const valid=(v)=>v.ok&&v.rankPower>=lower-1e-10&&v.rankPower<ceiling-1e-12&&v.base>0;
- function inspect(a){const v=evaluateLayout(M,R,a,inp);iterations++;
-  if(!valid(v))return false;
-  const bonus=v.mb+100*v.rackPower/v.base;
-  if(bonus<bestBonus-1e-8||(Math.abs(bonus-bestBonus)<1e-8&&v.power>bestPower+1e-10)){
-   bestBonus=bonus;bestPower=v.power;best=a.slice();return true;
-  }return false;
- }
- function score(a){const v=evaluateLayout(M,R,a,inp);if(!v.ok)return -1e12;
-  if(v.rankPower>=ceiling)return -1e8-(v.rankPower-ceiling)*1e5;
-  if(v.rankPower<lower)return -1e6+(v.rankPower/Math.max(lower,1e-12))*1e5;
-  const bonus=v.base>0?v.mb+100*v.rackPower/v.base:1e6;
-  return 1e6-bonus*1e3+v.power/Math.max(upper,1e-12);
- }
- const candidates=[];
- if(Array.isArray(inp.initial)&&inp.initial.length===n)candidates.push(inp.initial.slice());
- const orders=[...Array(n).keys()];
- for(let k=0;k<12;k++){
-  const a=none.slice(),used=Array(r).fill(0);
-  const order=orders.slice().sort((i,j)=>{
-   const ai=M[i].eh/(M[i].slots||1),aj=M[j].eh/(M[j].slots||1);
-   return (aj*(0.8+rnd()*0.4))-(ai*(0.8+rnd()*0.4));
-  });
-  const ro=[...Array(r).keys()].sort((i,j)=>R[i].bonus-R[j].bonus||R[j].slots-R[i].slots);
-  for(const i of order){for(const j of ro){if(used[j]+M[i].slots>R[j].slots)continue;
-   a[i]=j;const v=evaluateLayout(M,R,a,inp);
-   if(v.rankPower<ceiling){used[j]+=M[i].slots;break}a[i]=-1;
-  }}candidates.push(a);
- }
- let global=none.slice(),globalScore=-Infinity;
- for(const c of candidates){const sc=score(c);if(sc>globalScore){globalScore=sc;global=c.slice()}inspect(c)}
- // Simulated annealing: add/remove/move/swap, bonus reduction is primary objective inside feasible band.
- let a=global.slice(),current=score(a);const used=Array(r).fill(0);
- function rebuild(){used.fill(0);for(let i=0;i<n;i++)if(a[i]>=0)used[a[i]]+=M[i].slots}
- rebuild();let steps=0;
- while(nowMs()-start<budget && n&&r){
-  steps++;if((steps%15000)===0){a=(best&&rnd()<0.75?best:global).slice();current=score(a);rebuild()}
-  const i=Math.floor(rnd()*n),j=Math.floor(rnd()*r),old=a[i];let b=a.slice();
-  const op=rnd();
-  if(op<0.25)b[i]=-1;
-  else if(op<0.8)b[i]=j;
-  else {const q=Math.floor(rnd()*n);b[i]=a[q];b[q]=old}
-  const v=evaluateLayout(M,R,b,inp);if(!v.ok)continue;
-  const next=score(b),delta=next-current;
-  const frac=(nowMs()-start)/budget,temp=3000*Math.pow(0.001,frac);
-  if(delta>=0||rnd()<Math.exp(Math.max(-700,delta/Math.max(temp,1e-8)))){a=b;current=next;
-   if(next>globalScore){globalScore=next;global=a.slice()}inspect(a)}
- }
- // Loai bo cac may khong can thiet, giu du 90% va giam bonus.
- if(best){let changed=true;while(changed){changed=false;for(let i=0;i<n;i++)if(best[i]>=0){const b=best.slice();b[i]=-1;if(inspect(b)){changed=true;break}}}}
- return {found:!!best,assign:best||none,power:bestPower,bonusEffective:bestBonus,
-  rankPower:best?evaluateLayout(M,R,best,inp).rankPower:0,hamster:inp.hamster||{},lower,ceiling,exact:false,iterations:iterations+steps,elapsed:Math.round(nowMs()-start),lowBonus:true};
-}
-if(typeof module!=='undefined')module.exports={solve,solveLowBonus,evaluateLayout,mulberry32};
+if(typeof module!=='undefined')module.exports={solve,evaluateLayout,mulberry32};
 </script><script>
 'use strict';
 /* ===== Lõi OCR thuần (không phụ thuộc DOM, kiểm thử được bằng Node) ===== */
@@ -4338,8 +4277,8 @@ function initRanks(){RANKS.forEach((r,i)=>{const op=document.createElement('opti
 
 /* ---------- Chạy bộ tối ưu trong Web Worker ---------- */
 let worker=null,jobId=0;const pending=new Map();
-function getWorker(){if(worker!==null)return worker;try{const src=$('solver-src').textContent+'\nonmessage=e=>{const {id,inp}=e.data;let res;try{res=inp.mode==="lowBonus"?solveLowBonus(inp):solve(inp)}catch(err){res={error:String(err&&err.message||err)}}postMessage({id,res})};';worker=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})));worker.onmessage=e=>{const p=pending.get(e.data.id);if(p){pending.delete(e.data.id);p(e.data.res)}};worker.onerror=()=>{worker=false}}catch(e){worker=false}return worker}
-function runSolve(inp){inp={...inp,hamster:inp.hamster||hamsterConfig()};const w=getWorker();if(!w)return new Promise(ok=>setTimeout(()=>ok(inp.mode==='lowBonus'?solveLowBonus(inp):solve(inp)),10));const id=++jobId;return new Promise(ok=>{pending.set(id,ok);w.postMessage({id,inp})})}
+function getWorker(){if(worker!==null)return worker;try{const src=$('solver-src').textContent+'\nonmessage=e=>{const {id,inp}=e.data;let res;try{res=solve(inp)}catch(err){res={error:String(err&&err.message||err)}}postMessage({id,res})};';worker=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})));worker.onmessage=e=>{const p=pending.get(e.data.id);if(p){pending.delete(e.data.id);p(e.data.res)}};worker.onerror=()=>{worker=false}}catch(e){worker=false}return worker}
+function runSolve(inp){inp={...inp,hamster:inp.hamster||hamsterConfig()};const w=getWorker();if(!w)return new Promise(ok=>setTimeout(()=>ok(solve(inp)),10));const id=++jobId;return new Promise(ok=>{pending.set(id,ok);w.postMessage({id,inp})})}
 function output(html){$('result').innerHTML=html}
 function showPlan(res,label,ms,rs,ceilRank){
   if(!res||res.error)return `<div class="result warn">Lỗi tối ưu: ${esc(res&&res.error||'không rõ')}</div>`;
@@ -4370,14 +4309,7 @@ async function doOptimize(){
   const h=hamsterConfig();
   const plain=h.flat+h.bonus>0?await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(t,c.buffer),timeMs:c.time,hamster:{flat:0,bonus:0}}):null;
   const primary=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(t,c.buffer),timeMs:c.time,hamster:h,initial:plain?.assign});
-  let html='<h3>Phương án 1 — Tổng power đào cao nhất (có hamster)</h3>'+showPlan(primary,rank[0],c.ms,c.rs,t);
-  if(Number.isFinite(upper)){
-   busy(true,'Đang tìm phương án ít Bonus (Power thường ≥ 90% trần Rank)...');
-   const low=await runSolve({mode:'lowBonus',miners:c.ms,racks:c.rs,upper,lower:rank[1],ceiling:ceilFor(t,c.buffer),timeMs:c.time,initial:primary.assign,seed:20261123});
-   html+='<h3>Phương án 2 — Ít Bonus (power thường đạt ít nhất 90% trần Rank)</h3>';
-   if(low.found){html+=`<p class="ok">Bonus hiệu dụng: <b>+${fmt(low.bonusEffective,3)}%</b>. Ưu tiên Bonus thấp nhất trong các bố trí tìm được đạt ≥90% trần Rank (power thường). Không bảo đảm tối ưu tuyệt đối.</p>`+showPlan(low,rank[0]+' · Ít Bonus',c.ms,c.rs,t)}
-   else html+='<p class="warn">Chưa tìm thấy bố trí đạt ≥90% trần Rank (power thường) với giới hạn hiện tại. Hãy thử thời gian tìm kiếm dài hơn hoặc kiểm tra lại dữ liệu.</p>';
-  }else html+='<p class="help">Rank không có trần: phương án ít Bonus 90% không áp dụng.</p>';
+  let html='<h3>Phương án tối ưu — Tổng power đào cao nhất ('+(h.flat+h.bonus>0?'có hiệu ứng hamster':'không có hiệu ứng hamster')+')</h3>'+showPlan(primary,rank[0],c.ms,c.rs,t);
   const ratio=primary.found&&Number.isFinite(upper)?primary.rankPower/upper:null;
   if(t>0&&ratio!==null&&ratio<0.9){
    busy(true,'Dưới 90%: đang tối ưu Rank liền dưới...');const lower=t-1;
@@ -4577,7 +4509,7 @@ $('rc-import-text').onclick=()=>{
 };
 })();
 </script><div id="rc-video-float" aria-label="Video YouTube nổi">
-  <div class="rc-video-bar"><span>Video hướng dẫn</span><div class="rc-video-actions">
+  <div class="rc-video-bar"><span id="rc-video-title">Video hướng dẫn</span><div class="rc-video-actions">
     <button type="button" id="rc-video-minimize" aria-label="Thu nhỏ video">−</button>
     <button type="button" id="rc-video-close" aria-label="Đóng video">×</button>
   </div></div>
@@ -4590,6 +4522,7 @@ $('rc-import-text').onclick=()=>{
   'use strict';
   const box=document.getElementById('rc-video-float');
   const frame=document.getElementById('rc-video-frame');
+  const title=document.getElementById('rc-video-title');
   const reopen=document.getElementById('rc-video-reopen');
   const source=frame.getAttribute('src');
   function stop(){frame.setAttribute('src','about:blank');}
@@ -4597,6 +4530,7 @@ $('rc-import-text').onclick=()=>{
   document.getElementById('rc-video-minimize').addEventListener('click',function(){
     const minimized=box.classList.toggle('rc-minimized');
     this.textContent=minimized?'□':'−';
+    title.textContent=minimized?'Video':'Video hướng dẫn';
     this.setAttribute('aria-label',minimized?'Mở rộng video':'Thu nhỏ video');
     if(minimized)stop();else resume();
   });
@@ -4606,6 +4540,8 @@ $('rc-import-text').onclick=()=>{
   reopen.addEventListener('click',function(){
     box.classList.remove('rc-closed','rc-minimized');
     document.getElementById('rc-video-minimize').textContent='−';
+    document.getElementById('rc-video-minimize').setAttribute('aria-label','Thu nhỏ video');
+    title.textContent='Video hướng dẫn';
     reopen.classList.remove('rc-visible');resume();
   });
 })();
