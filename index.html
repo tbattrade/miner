@@ -37,11 +37,11 @@
 #rc-visit-count{font-variant-numeric:tabular-nums;color:#4fe0d3;font-size:17px}
 </style>
 <style id="rc-gallery-css">
-#rc-gallery .rg-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}#rc-gallery .rg-folders{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}#rc-gallery .rg-folder{background:#293b5c}#rc-gallery .rg-folder.active{background:#167d84;outline:2px solid #4fe0d3}#rc-gallery .rg-drop{border:2px dashed #55759e;border-radius:12px;padding:18px;text-align:center;margin:12px 0;outline:none}#rc-gallery .rg-drop:focus,#rc-gallery .rg-drop.over{border-color:#4fe0d3;background:#193950}#rc-gallery .rg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}#rc-gallery .rg-card{background:#0e1b33;border:1px solid #34496a;border-radius:10px;padding:9px;min-width:0}#rc-gallery .rg-card.dragging{opacity:.4}#rc-gallery .rg-card img{width:100%;height:180px;object-fit:contain;background:#0a1224;border-radius:6px;cursor:zoom-in}#rc-gallery .rg-card .rg-title{overflow-wrap:anywhere;margin:6px 0}#rc-gallery .rg-card .rg-buttons{display:flex;gap:5px}#rc-gallery .rg-card button{font-size:12px;padding:6px 8px}#rc-gallery .rg-info{font-size:12px;color:#a9bedc}#rc-gallery .rg-preview{position:fixed;inset:0;background:#000e;z-index:10010;display:none;align-items:center;justify-content:center;padding:30px}#rc-gallery .rg-preview.show{display:flex}#rc-gallery .rg-preview img{max-width:95vw;max-height:88vh;object-fit:contain}#rc-gallery .rg-preview button{position:absolute;right:20px;top:15px}
+#rc-gallery .rg-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}#rc-gallery .rg-folders{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}#rc-gallery .rg-folder{background:#293b5c}#rc-gallery .rg-folder.active{background:#167d84;outline:2px solid #4fe0d3}#rc-gallery .rg-drop{border:2px dashed #55759e;border-radius:12px;padding:18px;text-align:center;margin:12px 0;outline:none}#rc-gallery .rg-drop:focus,#rc-gallery .rg-drop.over{border-color:#4fe0d3;background:#193950}#rc-gallery .rg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}#rc-gallery .rg-card{background:#0e1b33;border:1px solid #34496a;border-radius:10px;padding:9px;min-width:0}#rc-gallery .rg-card.dragging{opacity:.4}#rc-gallery .rg-card img{width:100%;height:180px;object-fit:contain;background:#0a1224;border-radius:6px;cursor:zoom-in}#rc-gallery .rg-card .rg-title{overflow-wrap:anywhere;margin:6px 0;min-height:26px}.rg-editable{cursor:text}.rg-inline-name{width:100%;min-width:0;padding:5px 7px;font:inherit}#rc-gallery .rg-card .rg-buttons{display:flex;gap:5px}#rc-gallery .rg-card button{font-size:12px;padding:6px 8px}#rc-gallery .rg-info{font-size:12px;color:#a9bedc}#rc-gallery .rg-preview{position:fixed;inset:0;background:#000e;z-index:10010;display:none;align-items:center;justify-content:center;padding:30px}#rc-gallery .rg-preview.show{display:flex}#rc-gallery .rg-preview img{max-width:95vw;max-height:88vh;object-fit:contain}#rc-gallery .rg-preview button{position:absolute;right:20px;top:15px}
 </style>
 </head><body>
 <header><h1>Optimizing RollerCoin · Tối ưu Miner + Rack</h1><h2>Liên hệ tác giả qua Telegram: @canhtam286</h2><p> Tối ưu Power cho bạn</p><div id="rc-public-visit-counter" aria-live="polite"><span aria-hidden="true">👁</span><span>Tổng lượt truy cập:</span><strong id="rc-visit-count">Đang tải...</strong></div></header><div class="layout"><div>
-<section class="panel" id="rc-gallery"><h2>Thư viện ảnh Miner / Rack</h2><p class="help">Lưu nguyên ảnh, không OCR hoặc cắt ảnh. Thư viện lưu riêng trên trình duyệt, không đưa vào phép tính. Kéo ảnh để đổi thứ tự.</p><div class="rg-toolbar"><button id="rg-new" type="button">+ Tạo thư mục</button><button id="rg-rename-folder" class="secondary" type="button">Đổi tên thư mục</button><button id="rg-delete-folder" class="danger" type="button">Xóa thư mục</button><button id="rg-export" class="secondary" type="button">Sao lưu JSON</button><button id="rg-import" class="secondary" type="button">Khôi phục JSON</button><input type="file" id="rg-import-file" accept="application/json,.json" hidden></div><div id="rg-folders" class="rg-folders"></div><div id="rg-drop" class="rg-drop" tabindex="0">Bấm vào đây rồi Ctrl+V để dán ảnh, hoặc kéo ảnh vào / chọn tệp.<div class="actions" style="justify-content:center"><button id="rg-pick" type="button">Chọn ảnh</button><input type="file" id="rg-files" accept="image/*" multiple hidden></div></div><p id="rg-status" class="rg-info" aria-live="polite"></p><div id="rg-grid" class="rg-grid"></div><div id="rg-preview" class="rg-preview"><button type="button" id="rg-preview-close">Đóng ×</button><img alt="Ảnh phóng to"></div></section>
+<section class="panel" id="rc-gallery"><h2>Thư viện ảnh Miner / Rack</h2><p class="help">Lưu nguyên ảnh, không OCR hoặc cắt ảnh. Thư viện lưu riêng trên trình duyệt, không đưa vào phép tính. Kéo ảnh để đổi thứ tự. Nhấp đúp vào tên thư mục hoặc tên ảnh để đổi tên; bấm ra ngoài để lưu.</p><div class="rg-toolbar"><button id="rg-new" type="button">+ Tạo thư mục</button><button id="rg-delete-folder" class="danger" type="button">Xóa thư mục</button><button id="rg-export" class="secondary" type="button">Sao lưu JSON</button><button id="rg-import" class="secondary" type="button">Khôi phục JSON</button><input type="file" id="rg-import-file" accept="application/json,.json" hidden></div><div id="rg-folders" class="rg-folders"></div><div id="rg-drop" class="rg-drop" tabindex="0">Bấm vào đây rồi Ctrl+V để dán ảnh, hoặc kéo ảnh vào / chọn tệp.<div class="actions" style="justify-content:center"><button id="rg-pick" type="button">Chọn ảnh</button><input type="file" id="rg-files" accept="image/*" multiple hidden></div></div><p id="rg-status" class="rg-info" aria-live="polite"></p><div id="rg-grid" class="rg-grid"></div><div id="rg-preview" class="rg-preview"><button type="button" id="rg-preview-close">Đóng ×</button><img alt="Ảnh phóng to"></div></section>
 <section class="panel" id="rc-power-converter">
 <h2>1. Chuyển đổi sức mạnh đào</h2>
 <p class="help">Nhập giá trị và chọn đơn vị đầu vào, đầu ra. Kết quả được quy đổi tự động.</p>
@@ -744,10 +744,55 @@ function store(name,mode='readonly'){return db.transaction(name,mode).objectStor
 const id=()=>crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random();
 async function load(){folders=await req(store('folders').getAll());items=await req(store('images').getAll());folders.sort((a,b)=>a.order-b.order);if(!folders.length){const f={id:id(),name:'Ảnh của tôi',order:0};await req(store('folders','readwrite').put(f));folders=[f]}if(!folders.some(f=>f.id===current))current=folders[0].id;render()}
 function revoke(){urls.forEach(URL.revokeObjectURL);urls=[]}
-function render(){revoke();const f=$('rg-folders'),g=$('rg-grid');f.replaceChildren();g.replaceChildren();for(const x of folders){const b=document.createElement('button');b.className='rg-folder'+(x.id===current?' active':'');b.textContent=x.name+' ('+items.filter(i=>i.folder===x.id).length+')';b.onclick=()=>{current=x.id;render()};f.append(b)}const subset=items.filter(x=>x.folder===current).sort((a,b)=>a.order-b.order);for(const x of subset){const card=document.createElement('div');card.className='rg-card';card.draggable=true;card.dataset.id=x.id;const img=document.createElement('img');const url=URL.createObjectURL(x.blob);urls.push(url);img.src=url;img.alt=x.name;img.onclick=()=>{$('rg-preview').classList.add('show');$('rg-preview').querySelector('img').src=url};const name=document.createElement('div');name.className='rg-title';name.textContent=x.name;const btns=document.createElement('div');btns.className='rg-buttons';const rename=document.createElement('button');rename.textContent='Đổi tên';rename.className='secondary';rename.onclick=async()=>{const v=prompt('Tên ảnh mới:',x.name);if(v===null||!v.trim())return;x.name=v.trim();await req(store('images','readwrite').put(x));render()};const del=document.createElement('button');del.textContent='Xóa';del.className='danger';del.onclick=async()=>{if(!confirm('Xóa ảnh này?'))return;await req(store('images','readwrite').delete(x.id));await load()};btns.append(rename,del);card.append(img,name,btns);card.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',x.id);card.classList.add('dragging')});card.addEventListener('dragend',()=>card.classList.remove('dragging'));card.addEventListener('dragover',e=>e.preventDefault());card.addEventListener('drop',async e=>{e.preventDefault();e.stopPropagation();const src=e.dataTransfer.getData('text/plain');if(!src||src===x.id)return;const arr=items.filter(i=>i.folder===current).sort((a,b)=>a.order-b.order);const a=arr.findIndex(i=>i.id===src),b=arr.findIndex(i=>i.id===x.id);if(a<0||b<0)return;arr.splice(b,0,arr.splice(a,1)[0]);for(let n=0;n<arr.length;n++){arr[n].order=n;await req(store('images','readwrite').put(arr[n]))}await load()});g.append(card)}status(subset.length+' ảnh trong thư mục hiện tại. Ảnh được lưu trên thiết bị này.')}
+function editName(element, record, kind){
+  if(element.querySelector('input'))return;
+  const original=record.name;
+  const input=document.createElement('input');
+  input.type='text';input.value=original;input.className='rg-inline-name';
+  element.replaceChildren(input);input.focus();input.select();
+  let finished=false;
+  async function finish(cancel=false){
+    if(finished)return;finished=true;
+    const next=input.value.trim();
+    if(!cancel&&next&&next!==original){
+      record.name=next;
+      try{await req(store(kind==='folder'?'folders':'images','readwrite').put(record));}
+      catch(err){record.name=original;status('Không lưu được tên: '+err.message)}
+    }
+    render();
+  }
+  input.addEventListener('blur',()=>finish());
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();input.blur()}else if(e.key==='Escape'){e.preventDefault();finish(true)}});
+}
+function render(){
+  revoke();const f=$('rg-folders'),g=$('rg-grid');f.replaceChildren();g.replaceChildren();
+  for(const x of folders){
+    const b=document.createElement('button');b.className='rg-folder'+(x.id===current?' active':'');
+    b.textContent=x.name+' ('+items.filter(i=>i.folder===x.id).length+')';
+    b.onclick=()=>{if(b.querySelector('input'))return;current=x.id;render()};
+    b.ondblclick=e=>{e.preventDefault();current=x.id;editName(b,x,'folder')};f.append(b);
+  }
+  const subset=items.filter(x=>x.folder===current).sort((a,b)=>a.order-b.order);
+  for(const x of subset){
+    const card=document.createElement('div');card.className='rg-card';card.draggable=true;card.dataset.id=x.id;
+    const img=document.createElement('img');const url=URL.createObjectURL(x.blob);urls.push(url);
+    img.src=url;img.alt=x.name;img.onclick=()=>{$('rg-preview').classList.add('show');$('rg-preview').querySelector('img').src=url};
+    const name=document.createElement('div');name.className='rg-title rg-editable';name.textContent=x.name;
+    name.title='Nhấp đúp để đổi tên';name.ondblclick=()=>editName(name,x,'image');
+    const btns=document.createElement('div');btns.className='rg-buttons';
+    const del=document.createElement('button');del.textContent='Xóa';del.className='danger';
+    del.onclick=async()=>{if(!confirm('Xóa ảnh này?'))return;await req(store('images','readwrite').delete(x.id));await load()};
+    btns.append(del);card.append(img,name,btns);
+    card.addEventListener('dragstart',e=>{if(name.querySelector('input')){e.preventDefault();return}e.dataTransfer.setData('text/plain',x.id);card.classList.add('dragging')});
+    card.addEventListener('dragend',()=>card.classList.remove('dragging'));
+    card.addEventListener('dragover',e=>e.preventDefault());
+    card.addEventListener('drop',async e=>{e.preventDefault();e.stopPropagation();const src=e.dataTransfer.getData('text/plain');if(!src||src===x.id)return;const arr=items.filter(i=>i.folder===current).sort((a,b)=>a.order-b.order);const a=arr.findIndex(i=>i.id===src),b=arr.findIndex(i=>i.id===x.id);if(a<0||b<0)return;arr.splice(b,0,arr.splice(a,1)[0]);for(let n=0;n<arr.length;n++){arr[n].order=n;await req(store('images','readwrite').put(arr[n]))}await load()});
+    g.append(card);
+  }
+  status(subset.length+' ảnh trong thư mục hiện tại. Ảnh được lưu trên thiết bị này.');
+}
 async function addFiles(files){if(!db){status('Chưa mở được kho lưu trữ.');return}let n=0;for(const f of files){if(!f.type.startsWith('image/'))continue;const record={id:id(),folder:current,name:f.name||'Ảnh '+new Date().toLocaleString('vi-VN'),order:Date.now()+n,blob:f};await req(store('images','readwrite').put(record));n++}await load();status('Đã lưu '+n+' ảnh nguyên bản.')}
 $('rg-new').onclick=async()=>{const name=prompt('Tên thư mục mới:');if(!name||!name.trim())return;const f={id:id(),name:name.trim(),order:folders.length};await req(store('folders','readwrite').put(f));current=f.id;await load()};
-$('rg-rename-folder').onclick=async()=>{const f=folders.find(x=>x.id===current);if(!f)return;const name=prompt('Đổi tên thư mục:',f.name);if(!name||!name.trim())return;f.name=name.trim();await req(store('folders','readwrite').put(f));await load()};
 $('rg-delete-folder').onclick=async()=>{const f=folders.find(x=>x.id===current);if(!f||!confirm('Xóa thư mục "'+f.name+'" cùng toàn bộ ảnh bên trong?'))return;for(const x of items.filter(i=>i.folder===current))await req(store('images','readwrite').delete(x.id));await req(store('folders','readwrite').delete(current));current=null;await load()};
 $('rg-pick').onclick=()=>$('rg-files').click();$('rg-files').onchange=async e=>{await addFiles([...e.target.files]);e.target.value=''};
 const drop=$('rg-drop');drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('over')});drop.addEventListener('dragleave',()=>drop.classList.remove('over'));drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('over');addFiles([...e.dataTransfer.files])});
