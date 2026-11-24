@@ -4107,7 +4107,34 @@ function render(){for(const [kind,data,wrap] of [['miner',miners,$('miners')],['
   add('text',x.name,'name');if(kind==='miner'){add('number',x.power,'power');add('select',x.unit,'unit')}add('number',x.bonus,'bonus');add('number',x.slots,'slots');add('number',x.qty,'qty');
   const del=document.createElement('button');del.className='danger';del.textContent='×';del.title='Xóa';del.onclick=()=>{const arr=kind==='miner'?miners:racks;arr.splice(arr.findIndex(z=>z.id===x.id),1);render();save()};row.append(del);wrap.append(row)}}refreshSoon()}
 /* Catalog-driven hamster selection. Pure functions are shared by UI and tests. */
-const HAMSTER_LABELS={extra_loot:'Loot',extra_rewards:'Thưởng thêm',rest_time:'Thời gian nghỉ',expedition_time:'Thời gian Expedition',buyback_discount:'Buyback Discount',buyback_cost:'Chi phí Buyback',survival:'Sống sót',games_boost:'Games Boost',remote_bonus:'Remote Bonus',remote_power:'Remote Power',rest_relay:'Rest Relay',charge_relay:'Charge Relay',rlt_walk:'RLT Walk',speed_up_walk:'Speed Up Walk'};
+const HAMSTER_LABELS={rest_restore:'Hồi thời gian nghỉ',extra_loot:'Phần thưởng bổ sung',extra_rewards:'Phần thưởng thêm',rest_time:'Thời gian nghỉ',expedition_time:'Thời gian thám hiểm',buyback_discount:'Chi phí chuộc thưởng',buyback_cost:'Chi phí chuộc thưởng',survival:'Tỷ lệ sống sót',games_boost:'Tăng sức mạnh từ trò chơi',remote_bonus:'Thưởng từ xa',remote_power:'Sức mạnh từ xa',rest_relay:'Hồi thời gian nghỉ',charge_relay:'Hồi thời gian sạc',rlt_walk:'Nhận RLT theo giờ',speed_up_walk:'Nhận vật phẩm tăng tốc',experience:'Kinh nghiệm (XP)',earned_xp:'Kinh nghiệm nhận được',expedition_xp:'Kinh nghiệm thám hiểm',return_to_work:'Trở lại làm việc',influencer:'Sức ảnh hưởng',rlt_chest:'Rương RLT',season_xp_chest:'Rương kinh nghiệm mùa',keep_it_going:'Tiếp tục hành trình',skip_rest_chest:'Rương giảm thời gian nghỉ',chests_multiplier:'Nhân phần thưởng rương',loot_conversion:'Đổi phần thưởng sang RLT',boost_mode:'Chế độ tăng cường',smart_study:'Học tập thông minh',crypto_reward:'Thưởng tiền mã hóa',common_parts_reward:'Thưởng linh kiện thường',guaranteed_survival:'Đảm bảo sống sót',speed_ups_chests:'Rương vật phẩm tăng tốc',high_risk_high_reward:'Mạo hiểm cao, phần thưởng lớn',pirate_luck:'Vận may hải tặc',hamsters_chest:'Rương hamster'};
+function hamsterOptionName(option){return option.name.startsWith('Build')?'Lựa chọn '+option.name.replace('Build','').trim():(HAMSTER_LABELS[option.id]||option.name)}
+function hamsterAbilityDescription(e){
+ const n=e.value,amount=n===null||n===undefined?null:Math.abs(n);
+ if(e.type==='experience')return 'Tăng '+amount+'% kinh nghiệm nhận được.';
+ if(e.type==='survival')return (n<0?'Giảm ':'Tăng ')+amount+'% tỷ lệ sống sót.';
+ if(e.type==='rest_time')return (n<0?'Giảm ':'Tăng ')+amount+'% thời gian nghỉ.';
+ if(e.type==='expedition_time')return (n<0?'Giảm ':'Tăng ')+amount+'% thời gian thám hiểm.';
+ if(e.type==='extra_rewards'||e.type==='extra_loot')return 'Phần thưởng thêm: '+amount+'%.';
+ if(e.type==='buyback_discount'||e.type==='buyback_cost')return (n<0?'Giảm ':'Tăng ')+amount+'% chi phí chuộc lại phần thưởng.';
+ if(e.type==='return_to_work')return 'Trở lại làm việc: '+amount+'%.';
+ if(e.type==='influencer'){const values=String(e.raw_text||'').match(/\d+(?:\.\d+)?%/g);return 'Sức ảnh hưởng: '+(values?.join(' / ')||((amount??'—')+'%'))+'.'}
+ if(e.type==='rlt_chest')return 'Có rương chứa RLT.';
+ if(e.type==='season_xp_chest')return 'Có rương chứa kinh nghiệm mùa.';
+ if(e.type==='remote_bonus')return 'Thưởng từ xa = tổng Máu + Sức mạnh + May mắn hiện tại × '+n+'%.';
+ if(e.type==='remote_power')return 'Khi có hiệu lực, cộng thêm power gốc của miner × '+n+'.';
+ if(e.type==='keep_it_going')return 'Sau chuyến thám hiểm thành công, bỏ qua thời gian nghỉ. Nếu thất bại, phải nghỉ gấp 3 lần bình thường.';
+ if(e.type==='skip_rest_chest')return 'Sau chuyến thám hiểm thành công, thêm rương nước tăng lực vào chuyến tiếp theo để giảm thời gian nghỉ.';
+ if(e.type==='speed_up_walk')return 'Nhận 1 vật phẩm tăng tốc cho mỗi 2 giờ thám hiểm; nếu thất bại, nhận 1 vật phẩm cho mỗi 4 giờ.';
+ return HAMSTER_LABELS[e.type]||e.raw_text||e.type;
+}
+function hamsterUltimateDescription(u){
+ if(!u)return '';
+ const text={chests_multiplier:u.chest_count?'Nếu sống sót, nhân phần thưởng của '+u.chest_count+' rương lên '+(u.multiplier||3)+' lần.':'Nhân '+(u.multiplier||3)+' phần thưởng rương; số phần thưởng được áp dụng tùy bậc.',boost_mode:'Khi kích hoạt, cả ba chỉ số Máu, Sức mạnh và May mắn đều trở thành 100.',smart_study:'Không cần chờ hồi; được thêm 1 điểm chỉ số nếu sống sót sau chuyến thám hiểm.',crypto_reward:'Nhận thưởng tiền mã hóa nếu sống sót.',common_parts_reward:'Mang về thêm linh kiện thường nếu sống sót.',guaranteed_survival:'Đảm bảo sống sót trong chuyến thám hiểm.',speed_ups_chests:'Nhận rương vật phẩm tăng tốc.',high_risk_high_reward:'Phần thưởng và kinh nghiệm ×2; thời gian thám hiểm ×1,5; không nghỉ sau chuyến đi. Khi thất bại, vẫn giữ mức thu hồi phần thưởng đã tăng và hồi phục ×2.',pirate_luck:'Chọn các phần thưởng thám hiểm: mỗi phần thưởng có 50% cơ hội được nhân 3, nếu không sẽ biến mất. Không nghỉ sau khi sử dụng.',loot_conversion:'Chuyển một phần phần thưởng thám hiểm thành RLT.',hamsters_chest:'Thêm rương vào chuyến thám hiểm thành công kế tiếp. Rương có thể cho len phép thuật hoặc hamster; nếu chuyến đi thất bại, rương sẽ mất.',extra_loot:'Tăng phần thưởng bổ sung theo bậc đã chọn.',rest_relay:'Mỗi giờ thám hiểm trọn vẹn giúp giảm thời gian nghỉ của tất cả hamster trong kho; mức giảm tùy bậc.'};
+ if(u.type==='remote_power')return u.miners_raw_power_multiplier!==undefined?'Khi hamster còn sống trong chuyến thám hiểm, tạm thời cộng thêm power gốc miner × '+u.miners_raw_power_multiplier+' vào phòng.':'Khi hamster còn sống, cộng thêm power gốc miner theo hệ số của bậc đã chọn.';
+ if(u.type==='remote_bonus')return 'Khi kỹ năng có hiệu lực, nhận thêm thưởng tạm thời bằng tổng Máu + Sức mạnh + May mắn hiện tại × '+u.percent_per_stat_point+'%.';
+ return text[u.type]||u.raw_text||u.type;
+}
 let hamsterCatalog=JSON.parse($('hamster-catalog-fallback').textContent);
 let hamsterRows=[],hamsterNextId=1;
 const hamsterViews=new Map();
@@ -4154,21 +4181,21 @@ function hamsterConfig(){
 }
 function effectText(e){
  const name=HAMSTER_LABELS[e.type]||e.raw_text||e.type;
- if(e.value===null||e.value===undefined)return e.raw_text||name;
+ if(e.value===null||e.value===undefined)return hamsterAbilityDescription(e);
  if(e.type==='remote_power')return name+' ×'+e.value;
  if(e.type==='remote_bonus')return name+' '+e.value+'% × tổng chỉ số';
  const signed=e.value>=0?'+':'';
  const unit=e.unit==='percent'?'%':e.unit==='minutes_per_expedition_hour'?' phút/giờ':e.unit==='RLT_per_hour'?' RLT/giờ':e.unit==='speed_up_items_per_hour'?' vật phẩm/giờ':' '+(e.unit||'');
- return name+' '+signed+e.value+unit+(e.role==='debuff'?' (debuff)':'');
+ return name+' '+signed+e.value+unit+(e.role==='debuff'?' (bất lợi)':'');
 }
 function ultimateTierText(t,u){
  const charge=t.charge_points+' điểm';
- if(t.miners_raw_power_multiplier!==undefined)return 'Tier '+t.tier+' — ×'+t.miners_raw_power_multiplier+' · '+charge;
- if(t.reward_count!==undefined)return 'Tier '+t.tier+' — '+t.reward_count+' thưởng ×'+u.multiplier+' · '+charge;
- if(t.reward_count_to_convert!==undefined)return 'Tier '+t.tier+' — đổi '+t.reward_count_to_convert+' thưởng · '+charge;
- if(t.extra_loot_percent!==undefined)return 'Tier '+t.tier+' — Loot +'+t.extra_loot_percent+'% · '+charge;
- if(t.rest_time_change_minutes_per_hour!==undefined)return 'Tier '+t.tier+' — '+t.rest_time_change_minutes_per_hour+' phút nghỉ/giờ · '+charge;
- return 'Tier '+t.tier+' · '+charge;
+ if(t.miners_raw_power_multiplier!==undefined)return 'Bậc '+t.tier+' — ×'+t.miners_raw_power_multiplier+' · '+charge;
+ if(t.reward_count!==undefined)return 'Bậc '+t.tier+' — '+t.reward_count+' thưởng ×'+u.multiplier+' · '+charge;
+ if(t.reward_count_to_convert!==undefined)return 'Bậc '+t.tier+' — đổi '+t.reward_count_to_convert+' thưởng · '+charge;
+ if(t.extra_loot_percent!==undefined)return 'Bậc '+t.tier+' — Loot +'+t.extra_loot_percent+'% · '+charge;
+ if(t.rest_time_change_minutes_per_hour!==undefined)return 'Bậc '+t.tier+' — '+t.rest_time_change_minutes_per_hour+' phút nghỉ/giờ · '+charge;
+ return 'Bậc '+t.tier+' · '+charge;
 }
 function renderHamsterSets(){
  const wrap=$('hamster-sets');wrap.replaceChildren();
@@ -4179,8 +4206,8 @@ function renderHamsterSets(){
   const benefit=document.createElement('p');benefit.className='help';
   if(!active)benefit.textContent='Cần ít nhất '+Math.min(...s.levels.map(l=>l.required_distinct_members))+' loại khác nhau trong bộ.';
   else {const e=levels[0].effect;
-   if(e==='rest_restore'){const minutes=levels.reduce((n,l)=>n+(l.increment_value||0),0);benefit.textContent='Khôi phục '+minutes+' phút nghỉ cho các hamster trong set khi một thành viên đi Expedition.';}
-   else {const percent=levels.reduce((n,l)=>n+(l.increment_percent||0),0);benefit.textContent=(HAMSTER_LABELS[e]||({earned_xp:'XP',expedition_xp:'Expedition XP'}[e])||e)+' '+(percent>=0?'+':'')+percent+'%.';}
+   if(e==='rest_restore'){const minutes=levels.reduce((n,l)=>n+(l.increment_value||0),0);benefit.textContent='Khôi phục '+minutes+' phút nghỉ cho các hamster trong set khi một thành viên đi thám hiểm.';}
+   else {const percent=levels.reduce((n,l)=>n+(l.increment_percent||0),0);benefit.textContent=(HAMSTER_LABELS[e]||({earned_xp:'XP',expedition_xp:'thám hiểm XP'}[e])||e)+' '+(percent>=0?'+':'')+percent+'%.';}
    benefit.textContent+=' Thưởng các mốc: '+levels.reduce((n,l)=>n+(l.reward_amount||0),0)+' RLT (thông tin danh mục).';
   }card.append(benefit);wrap.append(card);
  }
@@ -4188,17 +4215,17 @@ function renderHamsterSets(){
 function updateHamsterView(h){
  const view=hamsterViews.get(h.id),p=hamsterRecord(h.type);if(!view||!p)return;
  const effects=selectedHamsterEffects(h),power=hamsterEffect(h);
- view.effect.textContent=!h.active?'Chưa có hiệu lực — cộng 0 power.':power.flat||power.bonus?'Cộng: M × '+power.flat+' + M × '+fmt(power.bonus)+'%':'Các kỹ năng đã chọn hỗ trợ Expedition; hiện không cộng trực tiếp power đào.';
- view.skills.textContent=effects.map(effectText).join(' · ')||'Ảnh không hiển thị kỹ năng bị động.';
- for(const {slot,select} of view.selects){for(const opt of select.options){const config=slot.options.find(o=>o.id===opt.value);if(config)opt.textContent=(config.name.startsWith('Build')?config.name+': ':'')+config.effects.map(e=>effectText({...e,value:levelValue(e,h.level)})).join(' / ')}}
+ view.effect.textContent=!h.active?'Chưa có hiệu lực — cộng 0 power.':power.flat||power.bonus?'Cộng: M × '+power.flat+' + M × '+fmt(power.bonus)+'%':'Các kỹ năng đã chọn hỗ trợ thám hiểm; hiện không cộng trực tiếp power đào.';
+ view.skills.textContent=effects.map(effectText).join(' · ');view.skills.hidden=!effects.length;
+ for(const {slot,select} of view.selects){for(const opt of select.options){const config=slot.options.find(o=>o.id===opt.value);if(config)opt.textContent=(config.name.startsWith('Build')?hamsterOptionName(config)+': ':'')+config.effects.map(e=>effectText({...e,value:levelValue(e,h.level)})).join(' / ')}}
  view.statsBox.hidden=!effects.some(e=>e.type==='remote_bonus')&&p.ultimate?.type!=='remote_bonus';
  if(view.ultimateNote){const u=p.ultimate,t=u?.tiers?.find(t=>t.tier===Number(h.tier));
-  view.ultimateNote.textContent=u?(u.raw_text||u.type)+(t?' · '+ultimateTierText(t,u):u.charge_points!==null?' · '+u.charge_points+' điểm sạc':'')+(h.ultimate?' · Đang chọn bật Ultimate.':' · Ultimate đang tắt.'):'';
+  view.ultimateNote.hidden=!u;view.ultimateNote.textContent=u?hamsterUltimateDescription(u)+(t?' · '+ultimateTierText(t,u):u.charge_points!==null?' · '+u.charge_points+' điểm sạc':'')+(h.ultimate?' · Kỹ năng tối thượng đang bật.':' · Kỹ năng tối thượng đang tắt.'):'';
  }
 }
 function hamsterChanged(){
  const h=hamsterConfig();
- $('hamster-summary').textContent=hamsterRows.length?`Sở hữu ${hamsterRows.length} hamster · ${hamsterRows.filter(h=>h.active).length} có hiệu lực · Remote Power: M × ${h.flat} · Remote Bonus: +${fmt(h.bonus)}% · Tổng cộng thêm: M × ${fmt(h.flat+h.bonus/100,3)}.`:'Chưa chọn hamster — tính như phiên bản không hamster.';
+ $('hamster-summary').textContent=hamsterRows.length?`Sở hữu ${hamsterRows.length} hamster · ${hamsterRows.filter(h=>h.active).length} có hiệu lực · Sức mạnh từ xa: M × ${h.flat} · Thưởng từ xa: +${fmt(h.bonus)}% · Tổng cộng thêm: M × ${fmt(h.flat+h.bonus/100,3)}.`:'Chưa chọn hamster — tính như phiên bản không hamster.';
  for(const row of hamsterRows)updateHamsterView(row);renderHamsterSets();
  $('result').replaceChildren();$('status').textContent='Cấu hình đã thay đổi. Bấm tìm phương án để tính lại.';
  window.__maxPower=null;refreshSoon();
@@ -4211,7 +4238,7 @@ function renderHamsters(){
   const head=document.createElement('div');head.className='hamster-heading';const title=document.createElement('strong');title.textContent=p.name+' · Gen '+p.generation;head.append(title);
   function checkbox(text,checked,change){const label=document.createElement('label'),e=document.createElement('input');e.type='checkbox';e.checked=checked;e.setAttribute('aria-label',p.name+' '+text);e.onchange=()=>{change(e.checked);hamsterChanged()};label.append(e,document.createTextNode(' '+text));head.append(label)}
   checkbox('Có hiệu lực',h.active,value=>h.active=value);
-  if(p.ultimate)checkbox('Bật Ultimate',h.ultimate,value=>h.ultimate=value);
+  if(p.ultimate)checkbox('Bật kỹ năng tối thượng',h.ultimate,value=>h.ultimate=value);
   const del=document.createElement('button');del.type='button';del.className='danger';del.textContent='Xóa';del.setAttribute('aria-label','Xóa '+p.name);del.onclick=()=>{hamsterRows=hamsterRows.filter(x=>x.id!==h.id);renderHamsters();hamsterChanged()};head.append(del);row.append(head);
   const fields=document.createElement('div');fields.className='hamster-fields';row.append(fields);
   function fieldBox(label){const box=document.createElement('div'),lab=document.createElement('label');lab.textContent=label;box.append(lab);fields.append(box);return box}
@@ -4220,13 +4247,13 @@ function renderHamsters(){
   if(p.builder?.slots.some(s=>s.options.some(o=>o.effects.some(e=>e.level_values))))number('Cấp hiện tại','level',1,50);
   const statsBox=number('Tổng chỉ số hiện tại (H + S + L)','stats',0,1e6,'any');
   const selects=[];
-  for(const s of p.builder?.slots||[]){const box=fieldBox('Slot '+s.slot),select=document.createElement('select');select.setAttribute('aria-label',p.name+' Slot '+s.slot);
+  for(const s of p.builder?.slots||[]){const box=fieldBox('Ô kỹ năng '+s.slot),select=document.createElement('select');select.setAttribute('aria-label',p.name+' Ô kỹ năng '+s.slot);
    for(const o of s.options){const option=document.createElement('option');option.value=o.id;option.textContent=o.name;select.append(option)}select.value=h.choices[s.slot];select.onchange=()=>{h.choices[s.slot]=select.value;hamsterChanged()};box.append(select);selects.push({slot:s,select});
   }
-  if(p.ultimate?.tiers){const box=fieldBox('Tier Ultimate'),select=document.createElement('select');select.setAttribute('aria-label',p.name+' Tier Ultimate');for(const t of p.ultimate.tiers){const op=document.createElement('option');op.value=t.tier;op.textContent=ultimateTierText(t,p.ultimate);select.append(op)}select.value=h.tier;select.onchange=()=>{h.tier=Number(select.value);hamsterChanged()};box.append(select)}
+  if(p.ultimate?.tiers){const box=fieldBox('Bậc kỹ năng tối thượng'),select=document.createElement('select');select.setAttribute('aria-label',p.name+' Bậc kỹ năng tối thượng');for(const t of p.ultimate.tiers){const op=document.createElement('option');op.value=t.tier;op.textContent=ultimateTierText(t,p.ultimate);select.append(op)}select.value=h.tier;select.onchange=()=>{h.tier=Number(select.value);hamsterChanged()};box.append(select)}
   const effect=document.createElement('p');effect.className='hamster-power';effect.setAttribute('aria-live','polite');row.append(effect);
   const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Chỉ số và kỹ năng';details.append(summary);
-  const base=document.createElement('p');base.className='help';const b=p.base_stats;base.textContent=b?`Chỉ số gốc trong ảnh: Health ${b.health} · Strength ${b.strength} · Luck ${b.luck}.`:'Chưa có chỉ số.';details.append(base);
+  const base=document.createElement('p');base.className='help';const b=p.base_stats;base.textContent=b?`Chỉ số gốc trong ảnh: Máu ${b.health} · Sức mạnh ${b.strength} · May mắn ${b.luck}.`:'Chưa có chỉ số.';details.append(base);
   const skills=document.createElement('p');skills.className='help';details.append(skills);
   const ultimateNote=document.createElement('p');ultimateNote.className='help';details.append(ultimateNote);row.append(details);wrap.append(row);
   hamsterViews.set(h.id,{effect,skills,statsBox,selects,ultimateNote});updateHamsterView(h);
@@ -4247,7 +4274,7 @@ function validateHamsterCatalog(c){
  return c;
 }
 /* Read-only hamster encyclopedia; shares the same catalog as the optimizer. */
-const LOOKUP_LABELS={...HAMSTER_LABELS,experience:'Kinh nghiệm (XP)',earned_xp:'XP nhận được',expedition_xp:'XP Expedition',return_to_work:'Return to Work',influencer:'Influencer',rlt_chest:'Rương RLT',season_xp_chest:'Rương Season XP',keep_it_going:'Keep It Going',skip_rest_chest:'Rương giảm thời gian nghỉ',chests_multiplier:'Nhân thưởng rương',loot_conversion:'Đổi phần thưởng sang RLT',boost_mode:'Boost Mode',smart_study:'Smart Study',crypto_reward:'Thưởng crypto',common_parts_reward:'Thưởng linh kiện Common',guaranteed_survival:'Đảm bảo sống sót',speed_ups_chests:'Rương Speed Up',high_risk_high_reward:'High Risk High Reward',pirate_luck:'Pirate Luck',hamsters_chest:'Rương hamster'};
+const LOOKUP_LABELS={...HAMSTER_LABELS};
 function lookupKey(text){return String(text||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
 function lookupNumber(value){return Number.isFinite(Number(value))?String(Number(value)):'—'}
 function lookupValue(value,unit){
@@ -4256,28 +4283,28 @@ function lookupValue(value,unit){
  if(unit==='percent')return sign+n+'%';
  if(unit==='percent_per_stat_point')return n+'% × tổng chỉ số';
  if(unit==='raw_miners_power_multiplier'||unit==='multiplier')return '×'+n;
- if(unit==='minutes_per_expedition_hour')return n+' phút/giờ Expedition';
+ if(unit==='minutes_per_expedition_hour')return n+' phút/giờ thám hiểm';
  if(unit==='RLT_per_hour')return n+' RLT/giờ';
  if(unit==='speed_up_items_per_hour')return n+' vật phẩm Speed Up/giờ';
  return n+(unit?' '+unit:'');
 }
 function lookupAbilityNote(e){
- const notes={remote_bonus:'Bonus tạm thời phụ thuộc tổng Health + Strength + Luck hiện tại; không phải bonus miner cố định.',remote_power:'Cộng power tạm thời theo power gốc miner, khi kỹ năng có hiệu lực.',influencer:'Ảnh đã lưu chưa giải thích đầy đủ cơ chế Influencer.',return_to_work:'Danh mục giữ đúng tỷ lệ trong ảnh; ảnh chưa mô tả chi tiết điều kiện kích hoạt.',rlt_chest:'Ảnh chưa nêu số RLT nhận được.',season_xp_chest:'Ảnh chưa nêu lượng Season XP nhận được.'};
+ const notes={remote_bonus:'Thưởng tạm thời phụ thuộc tổng Máu + Sức mạnh + May mắn hiện tại; không phải bonus miner cố định.',remote_power:'Cộng power tạm thời theo power gốc miner, khi kỹ năng có hiệu lực.',influencer:'Ảnh đã lưu chưa giải thích đầy đủ cơ chế sức ảnh hưởng.',return_to_work:'Danh mục giữ đúng tỷ lệ trong ảnh; ảnh chưa mô tả chi tiết điều kiện kích hoạt.',rlt_chest:'Ảnh chưa nêu số RLT nhận được.',season_xp_chest:'Ảnh chưa nêu lượng kinh nghiệm mùa nhận được.'};
  return notes[e.type]||'';
 }
 function lookupMemberLink(id){const h=hamsterRecord(id);return h?'<button type="button" class="secondary hl-member" data-lookup-hamster="'+esc(id)+'">'+esc(h.name)+'</button>':esc(id)}
 function hamsterLookupHtml(p,catalog=hamsterCatalog){
  const b=p.base_stats||{},u=p.ultimate;
  let html='<div class="hl-heading"><h3>'+esc(p.name)+'</h3><span class="chip">Thế hệ '+esc(p.generation||'—')+'</span></div>';
- html+='<div class="hl-stats">'+[['Health',b.health],['Strength',b.strength],['Luck',b.luck],['Tổng',b.sum]].map(([label,value])=>'<div class="stat">'+label+'<strong>'+esc(value??'—')+'</strong></div>').join('')+'</div><p class="help">Đây là chỉ số gốc trong ảnh. Chỉ số thực tế có thể khác sau khi nâng cấp hoặc phân bổ điểm.</p>';
- html+='<h3>Kỹ năng / chức năng</h3>';
+ html+='<div class="hl-stats">'+[['Máu',b.health],['Sức mạnh',b.strength],['May mắn',b.luck],['Tổng',b.sum]].map(([label,value])=>'<div class="stat">'+label+'<strong>'+esc(value??'—')+'</strong></div>').join('')+'</div><p class="help">Đây là chỉ số gốc trong ảnh. Chỉ số thực tế có thể khác sau khi nâng cấp hoặc phân bổ điểm.</p>';
+ if(p.builder||(p.abilities||[]).length)html+='<h3>Kỹ năng / chức năng</h3>';
  if(p.builder){
-  html+='<p class="help">Chọn một lựa chọn trong mỗi Slot. Với Build có buff/debuff, cả hai hiệu ứng đi cùng nhau.</p>';
+  html+='<p class="help">Mỗi ô kỹ năng chọn một phương án. Hiệu ứng có lợi và bất lợi của cùng phương án luôn đi kèm nhau.</p>';
   for(const slot of p.builder.slots){
    const scaled=slot.options.some(o=>o.effects.some(e=>Array.isArray(e.level_values)));
-   html+='<h4>Slot '+esc(slot.slot)+'</h4><div class="scroll"><table><thead><tr><th>Lựa chọn</th><th>Hiệu ứng</th>'+(scaled?['BASIC','LV.10','LV.20','LV.30','LV.40','LV.50'].map(t=>'<th>'+t+'</th>').join(''):'<th>Thông số</th>')+'</tr></thead><tbody>';
+   html+='<h4>Ô kỹ năng '+esc(slot.slot)+'</h4><div class="scroll"><table><thead><tr><th>Lựa chọn</th><th>Hiệu ứng</th>'+(scaled?['Cơ bản','Cấp 10','Cấp 20','Cấp 30','Cấp 40','Cấp 50'].map(t=>'<th>'+t+'</th>').join(''):'<th>Thông số</th>')+'</tr></thead><tbody>';
    for(const o of slot.options)for(const e of o.effects){
-    html+='<tr><td>'+esc(o.name.startsWith('Build')?o.name:(LOOKUP_LABELS[o.id]||o.name))+'</td><td>'+esc(LOOKUP_LABELS[e.type]||e.type)+(e.role==='buff'?' <span class="ok">(buff)</span>':e.role==='debuff'?' <span class="warn">(debuff)</span>':'')+'</td>';
+    html+='<tr><td>'+esc(hamsterOptionName(o))+'</td><td>'+esc(LOOKUP_LABELS[e.type]||e.type)+(e.role==='buff'?' <span class="ok">(có lợi)</span>':e.role==='debuff'?' <span class="warn">(bất lợi)</span>':'')+'</td>';
     const values=scaled?[1,10,20,30,40,50].map(level=>levelValue(e,level)):[e.value];
     html+=values.map(v=>'<td>'+esc(lookupValue(v,e.unit))+'</td>').join('')+'</tr>';
    }
@@ -4286,24 +4313,23 @@ function hamsterLookupHtml(p,catalog=hamsterCatalog){
  }else if((p.abilities||[]).length){
   html+='<div class="hl-abilities">';
   for(const e of p.abilities){
-   html+='<div class="hl-ability"><b>'+esc(LOOKUP_LABELS[e.type]||e.type)+'</b>'+(e.value!==null&&e.value!==undefined?' · '+esc(lookupValue(e.value,e.unit)):'')+'<p>'+esc(e.raw_text||'')+'</p>';
+   html+='<div class="hl-ability"><b>'+esc(LOOKUP_LABELS[e.type]||e.type)+'</b>'+(e.value!==null&&e.value!==undefined?' · '+esc(lookupValue(e.value,e.unit)):'')+'<p>'+esc(hamsterAbilityDescription(e))+'</p>';
    const note=lookupAbilityNote(e);if(note)html+='<p class="help">'+esc(note)+'</p>';
    html+='</div>';
   }html+='</div>';
- }else html+='<p class="help">Ảnh hiện có không hiển thị kỹ năng bị động.</p>';
- html+='<h3>Ultimate</h3>';
- if(!u)html+='<p class="help">Ảnh hiện có không hiển thị Ultimate.</p>';
- else{
-  html+='<div class="hl-ability"><b>'+esc(LOOKUP_LABELS[u.type]||u.type)+'</b><p>'+esc(u.raw_text||'')+'</p>';
+ }
+ if(u){
+  html+='<h3>Kỹ năng tối thượng</h3>';
+  html+='<div class="hl-ability"><b>'+esc(LOOKUP_LABELS[u.type]||u.type)+'</b><p>'+esc(hamsterUltimateDescription(u))+'</p>';
   if(u.charge_points!==null&&u.charge_points!==undefined)html+='<p>Điểm sạc: <b>'+esc(u.charge_points)+'</b></p>';
-  if(u.tiers){html+='<div class="scroll"><table><thead><tr><th>Tier</th><th>Hiệu ứng</th><th>Điểm sạc</th></tr></thead><tbody>';
+  if(u.tiers){html+='<div class="scroll"><table><thead><tr><th>Bậc</th><th>Hiệu ứng</th><th>Điểm sạc</th></tr></thead><tbody>';
    for(const t of u.tiers){let effect='';
     if(t.miners_raw_power_multiplier!==undefined)effect='Power gốc miner ×'+t.miners_raw_power_multiplier;
     else if(t.reward_count!==undefined)effect=t.reward_count+' phần thưởng ×'+(u.multiplier||3);
     else if(t.reward_count_to_convert!==undefined)effect='Đổi '+t.reward_count_to_convert+' phần thưởng sang RLT';
-    else if(t.extra_loot_percent!==undefined)effect='Extra Loot +'+t.extra_loot_percent+'%';
-    else if(t.rest_time_change_minutes_per_hour!==undefined)effect=t.rest_time_change_minutes_per_hour+' phút nghỉ/giờ Expedition';
-    html+='<tr><td>'+esc(t.tier)+'</td><td>'+esc(effect||'Xem mô tả Ultimate')+'</td><td>'+esc(t.charge_points??'—')+'</td></tr>';
+    else if(t.extra_loot_percent!==undefined)effect='Phần thưởng bổ sung +'+t.extra_loot_percent+'%';
+    else if(t.rest_time_change_minutes_per_hour!==undefined)effect=t.rest_time_change_minutes_per_hour+' phút nghỉ/giờ thám hiểm';
+    html+='<tr><td>'+esc(t.tier)+'</td><td>'+esc(effect||'Xem mô tả kỹ năng tối thượng')+'</td><td>'+esc(t.charge_points??'—')+'</td></tr>';
    }html+='</tbody></table></div>';
   }html+='</div>';
  }
@@ -4311,7 +4337,7 @@ function hamsterLookupHtml(p,catalog=hamsterCatalog){
  if(!sets.length)html+='<p class="help">Chưa có set được ghi nhận cho hamster này trong danh mục.</p>';
  for(const s of sets){
   html+='<div class="hamster-set"><b>'+esc(s.name)+'</b><div class="hl-members">'+s.members.map(lookupMemberLink).join('')+'</div><div class="scroll"><table><thead><tr><th>Mốc</th><th>Số thành viên</th><th>Hiệu ứng cộng thêm</th><th>Thưởng</th></tr></thead><tbody>';
-  for(const l of s.levels){const amount=l.increment_percent??l.increment_value;let effect=(LOOKUP_LABELS[l.effect]||l.effect)+' '+lookupValue(amount,'increment_percent' in l?'percent':l.unit==='minutes'?'phút':l.unit);if(l.raw_effect_text)effect=l.raw_effect_text;
+  for(const l of s.levels){const amount=l.increment_percent??l.increment_value;let effect=(LOOKUP_LABELS[l.effect]||l.effect)+' '+lookupValue(amount,'increment_percent' in l?'percent':l.unit==='minutes'?'phút':l.unit);if(l.effect==='rest_restore')effect='Hồi '+l.increment_value+' phút nghỉ cho các hamster trong bộ khi một thành viên đi thám hiểm.';
    html+='<tr><td>'+esc(l.level)+'</td><td>'+esc(l.required_distinct_members)+'/'+esc(s.members.length)+'</td><td>'+esc(effect)+'</td><td>'+esc(l.reward_amount)+' '+esc(l.reward_currency||'')+'</td></tr>';
   }
   const full=s.full_set_total;
