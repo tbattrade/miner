@@ -41,11 +41,12 @@
 <style id="rc-gallery-css">
 #rc-gallery .rg-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}#rc-gallery .rg-folders{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}#rc-gallery .rg-folder{background:#293b5c}#rc-gallery .rg-folder.active{background:#167d84;outline:2px solid #4fe0d3}#rc-gallery .rg-drop{border:2px dashed #55759e;border-radius:12px;padding:18px;text-align:center;margin:12px 0;outline:none}#rc-gallery .rg-drop:focus,#rc-gallery .rg-drop.over{border-color:#4fe0d3;background:#193950}#rc-gallery .rg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}#rc-gallery .rg-card{background:#0e1b33;border:1px solid #34496a;border-radius:10px;padding:9px;min-width:0}#rc-gallery .rg-card.dragging{opacity:.4}#rc-gallery .rg-card img{width:100%;height:180px;object-fit:contain;background:#0a1224;border-radius:6px;cursor:zoom-in}#rc-gallery .rg-card .rg-title{overflow-wrap:anywhere;margin:6px 0;min-height:26px}.rg-editable{cursor:text}.rg-inline-name{width:100%;min-width:0;padding:5px 7px;font:inherit}#rc-gallery .rg-card .rg-buttons{display:flex;gap:5px}#rc-gallery .rg-card button{font-size:12px;padding:6px 8px}#rc-gallery .rg-info{font-size:12px;color:#a9bedc}#rc-gallery .rg-preview{position:fixed;inset:0;background:#000e;z-index:10010;display:none;align-items:center;justify-content:center;padding:30px}#rc-gallery .rg-preview.show{display:flex}#rc-gallery .rg-preview img{max-width:95vw;max-height:88vh;object-fit:contain}#rc-gallery .rg-preview button{position:absolute;right:20px;top:15px}
 </style>
-<style>.hamster-picker{display:grid;grid-template-columns:minmax(120px,1fr) minmax(150px,1.5fr) auto auto;gap:8px;margin:12px 0}.hamster-fields>div[hidden]{display:none}.hamster-fields>div{min-width:0}.hamster-fields select{max-width:100%;text-overflow:ellipsis}.hamster-heading label{display:flex;align-items:center;gap:5px;font-size:13px}.hamster-row{border-color:#3c5373}.hamster-power{color:#8fe0bb;font-size:14px;margin:12px 0}.hamster-set{border:1px solid #304364;border-radius:9px;padding:12px;margin-top:9px}.hamster-set.is-active{border-color:#3ec5a7;background:#12302f}.hamster-set p{margin:6px 0}.hamster-row details{margin-bottom:0}#hamster-data-status{color:#7dd5d1}@media(max-width:690px){.hamster-picker{grid-template-columns:1fr 1fr}.hamster-picker input,.hamster-picker select{grid-column:1/-1}.hamster-fields{grid-template-columns:1fr}.hamster-heading strong{flex-basis:100%}.hamster-row{padding:10px}}</style><style>.hl-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.hl-heading{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.hl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.hl-ability{border:1px solid #304364;border-radius:9px;padding:12px;margin:8px 0}.hl-ability p{font-size:13px;margin:7px 0;overflow-wrap:anywhere}.hl-members{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.hl-member{padding:6px 9px;font-size:13px}#hl-details h3{margin-top:20px}#hl-details h4{margin:14px 0 7px}#hl-details .scroll{max-width:100%}#hl-details table{font-size:12px}@media(max-width:690px){.hl-controls{grid-template-columns:1fr}.hl-stats{grid-template-columns:repeat(2,1fr)}}</style></head><body>
+<style>.hamster-picker{display:grid;grid-template-columns:minmax(120px,1fr) minmax(150px,1.5fr) auto auto;gap:8px;margin:12px 0}.hamster-fields>div[hidden]{display:none}.hamster-fields>div{min-width:0}.hamster-fields select{max-width:100%;text-overflow:ellipsis}.hamster-heading label{display:flex;align-items:center;gap:5px;font-size:13px}.hamster-row{border-color:#3c5373}.hamster-power{color:#8fe0bb;font-size:14px;margin:12px 0}.hamster-set{border:1px solid #304364;border-radius:9px;padding:12px;margin-top:9px}.hamster-set.is-active{border-color:#3ec5a7;background:#12302f}.hamster-set p{margin:6px 0}.hamster-row details{margin-bottom:0}#hamster-data-status{color:#7dd5d1}@media(max-width:690px){.hamster-picker{grid-template-columns:1fr 1fr}.hamster-picker input,.hamster-picker select{grid-column:1/-1}.hamster-fields{grid-template-columns:1fr}.hamster-heading strong{flex-basis:100%}.hamster-row{padding:10px}}</style><style>.hl-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.hl-heading{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.hl-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.hl-ability{border:1px solid #304364;border-radius:9px;padding:12px;margin:8px 0}.hl-ability p{font-size:13px;margin:7px 0;overflow-wrap:anywhere}.hl-members{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.hl-member{padding:6px 9px;font-size:13px}#hl-details h3{margin-top:20px}#hl-details h4{margin:14px 0 7px}#hl-details .scroll{max-width:100%}#hl-details table{font-size:12px}@media(max-width:690px){.hl-controls{grid-template-columns:1fr}.hl-stats{grid-template-columns:repeat(2,1fr)}}</style></head><body>
 <header><h1>Optimizing RollerCoin · Tối ưu Miner + Rack</h1><h2>Liên hệ tác giả qua Telegram: @canhtam286</h2><p> Tối ưu Power cho bạn</p><div id="rc-public-visit-counter" aria-live="polite"><span aria-hidden="true">👁</span><span>Tổng lượt truy cập:</span><strong id="rc-visit-count">Đang tải...</strong></div></header><div class="layout"><div>
-<section class="panel" id="rc-gallery"><h2>Thư viện ảnh Miner / Rack</h2><p class="help">Kéo ảnh để đổi thứ tự. Nhấp đúp vào tên thư mục hoặc tên ảnh để đổi tên; bấm ra ngoài để lưu.</p><div class="rg-toolbar"><button id="rg-new" type="button">+ Tạo thư mục</button><button id="rg-delete-folder" class="danger" type="button">Xóa thư mục</button><button id="rg-export" class="secondary" type="button">Sao lưu JSON</button><button id="rg-import" class="secondary" type="button">Khôi phục JSON</button><input type="file" id="rg-import-file" accept="application/json,.json" hidden></div><div id="rg-folders" class="rg-folders"></div><div id="rg-drop" class="rg-drop" tabindex="0">Bấm vào đây rồi Ctrl+V để dán ảnh, hoặc kéo ảnh vào / chọn tệp.<div class="actions" style="justify-content:center"><button id="rg-pick" type="button">Chọn ảnh</button><input type="file" id="rg-files" accept="image/*" multiple hidden></div></div><p id="rg-status" class="rg-info" aria-live="polite"></p><div id="rg-grid" class="rg-grid"></div><div id="rg-preview" class="rg-preview"><button type="button" id="rg-preview-close">Đóng ×</button><img alt="Ảnh phóng to"></div></section>
+<section class="panel" id="rc-gallery"><h2>Thư viện ảnh Miner / Rack</h2><p class="help">Lưu nguyên ảnh, không OCR hoặc cắt ảnh. Thư viện lưu riêng trên trình duyệt, không đưa vào phép tính. Kéo ảnh để đổi thứ tự. Nhấp đúp vào tên thư mục hoặc tên ảnh để đổi tên; bấm ra ngoài để lưu.</p><div class="rg-toolbar"><button id="rg-new" type="button">+ Tạo thư mục</button><button id="rg-delete-folder" class="danger" type="button">Xóa thư mục</button><button id="rg-export" class="secondary" type="button">Sao lưu JSON</button><button id="rg-import" class="secondary" type="button">Khôi phục JSON</button><input type="file" id="rg-import-file" accept="application/json,.json" hidden></div><div id="rg-folders" class="rg-folders"></div><div id="rg-drop" class="rg-drop" tabindex="0">Bấm vào đây rồi Ctrl+V để dán ảnh, hoặc kéo ảnh vào / chọn tệp.<div class="actions" style="justify-content:center"><button id="rg-pick" type="button">Chọn ảnh</button><input type="file" id="rg-files" accept="image/*" multiple hidden></div></div><p id="rg-status" class="rg-info" aria-live="polite"></p><div id="rg-grid" class="rg-grid"></div><div id="rg-preview" class="rg-preview"><button type="button" id="rg-preview-close">Đóng ×</button><img alt="Ảnh phóng to"></div></section>
 <section class="panel" id="rc-power-converter">
 <h2>1. Chuyển đổi sức mạnh đào</h2>
+<p class="help">Nhập giá trị và chọn đơn vị đầu vào, đầu ra. Kết quả được quy đổi tự động.</p>
 <div class="rc-convert-grid">
 <div><label for="rc-convert-input">Sức mạnh đầu vào</label><input id="rc-convert-input" type="number" min="0" step="any" value="1" inputmode="decimal"></div>
 <div><label for="rc-convert-from">Đơn vị đầu vào</label><select id="rc-convert-from"><option>GH/s</option><option>TH/s</option><option>PH/s</option><option selected>EH/s</option><option>ZH/s</option></select></div>
@@ -55,7 +56,7 @@
 </div>
 <div class="rc-convert-result" aria-live="polite">Kết quả: <strong id="rc-convert-display">—</strong></div>
 </section>
-<section class="panel" id="rc-text-import"><h2>2. Nhập Miner / Rack từ RollerCoin</h2><p class="help">Dán thông tin Miner hoặc Rack từ RollerCoin. Kiểm tra thông số trước khi thêm. Nhập nhiều Miner/Rack cùng lúc dùng Enter xuống dòng.</p><textarea class="rc-textbox" id="rc-pasted-miners" placeholder="Ví dụ:
+<section class="panel" id="rc-text-import"><h2>2. Nhập Miner / Rack từ RollerCoin</h2><p class="help">Dán văn bản Miner hoặc Rack từ RollerCoin. Kiểm tra thông số trước khi thêm. Nhập nhiều Miner/Rack cùng lúc dùng Enter xuống dòng.</p><textarea class="rc-textbox" id="rc-pasted-miners" placeholder="Ví dụ:
 Bog Rocket
 Set
 Size: 2 Cells
@@ -66,7 +67,7 @@ Quantity: 4"></textarea><div class="actions"><button id="rc-parse-text" type="bu
 <section class="panel"><h2>3. Miner sở hữu</h2><p class="help">Mỗi dòng là một loại Miner. Cells = số ô mỗi máy chiếm. Bonus % là bonus Miner (tính một lần cho mỗi loại).</p><div class="scroll"><div style="min-width:690px"><div class="entry muted"><span>Tên máy</span><span>Power</span><span>Đơn vị</span><span>Bonus %</span><span>Cells/máy</span><span>Số lượng</span><span></span></div><div id="miners"></div></div></div><div class="actions"><button id="addMiner">+ Thêm Miner</button><button class="danger" id="clearMiners">Xóa Miner</button></div></section>
 <section class="panel"><h2>4. Rack sở hữu</h2><p class="help">Cells/Rack là sức chứa của MỖI Rack. Bonus Rack chỉ cộng cho các máy nằm trên chính Rack đó.</p><div class="scroll"><div style="min-width:510px"><div class="entry rack muted"><span>Tên Rack</span><span>Bonus %</span><span>Cells/Rack</span><span>Số lượng</span><span></span></div><div id="racks"></div></div></div><div class="actions"><button id="addRack">+ Thêm Rack</button><button class="danger" id="clearRacks">Xóa Rack</button></div></section>
 
-<section class="panel" id="hamster-lookup"><h2>Tra cứu Hamster</h2><p class="help">Gõ tên để xem chỉ số, kỹ năng, Ultimate và set. Có thể tìm bằng một phần tên, không phân biệt chữ hoa/thường hay dấu nháy.</p><div class="hl-controls"><div><label for="hl-query">Tên hamster</label><input id="hl-query" type="search" placeholder="Ví dụ: Kitsumi, BB Smoke, Uncle Azoth…" autocomplete="off"></div><div><label for="hl-pick">Kết quả</label><select id="hl-pick"></select></div></div><p id="hl-count" class="help" aria-live="polite"></p><div id="hl-details"></div></section>
+<section class="panel" id="hamster-lookup"><h2>Tra cứu Hamster</h2><p class="help">Gõ tên để xem chỉ số, kỹ năng, Ultimate và set. Có thể tìm bằng một phần tên, không phân biệt chữ hoa/thường hay dấu nháy.</p><div class="hl-controls"><div><label for="hl-query">Tên hamster</label><input id="hl-query" type="search" placeholder="Ví dụ: Kitsumi, BB Smoke, Uncle Azoth…" autocomplete="off"></div><div><label for="hl-pick">Kết quả</label><select id="hl-pick"></select></div></div><label for="hl-filter">Tiêu chí lọc (tùy chọn)</label><input id="hl-filter" type="search" placeholder="Ví dụ: thế hệ 3 và may mắn >= 80; có giảm thời gian nghỉ" autocomplete="off"><p class="help">Nhập điều kiện mới mỗi lần cần. Dùng “và” để kết hợp, “hoặc” để chọn một trong các điều kiện. Ví dụ: máu từ 60 đến 90 và có Ultimate; set Pirate; không có Ultimate. So sánh số áp dụng cho chỉ số gốc và thế hệ. Kỹ năng tìm trong các lựa chọn có thể chọn và Ultimate, không có nghĩa là tất cả cùng kích hoạt.</p><p id="hl-filter-status" class="help" role="status"></p><div id="hl-results" class="scroll"></div><p id="hl-count" class="help" aria-live="polite"></p><div id="hl-details"></div></section>
 <section class="panel" id="hamster-panel"><h2>5. Hamster và set sở hữu</h2>
 <p class="help" id="hamster-data-status" aria-live="polite"></p>
 <p class="help">Thêm các hamster bạn sở hữu để nhận diện set. Bật “Có hiệu lực” khi hiệu ứng Expedition đang hoạt động; bật thêm “Ultimate” nếu kỹ năng đó cần kích hoạt. Có thể thêm nhiều bản cùng loại.</p>
@@ -4295,7 +4296,7 @@ function lookupMemberLink(id){const h=hamsterRecord(id);return h?'<button type="
 function hamsterLookupHtml(p,catalog=hamsterCatalog){
  const b=p.base_stats||{},u=p.ultimate;
  let html='<div class="hl-heading"><h3>'+esc(p.name)+'</h3><span class="chip">Thế hệ '+esc(p.generation||'—')+'</span></div>';
- html+='<div class="hl-stats">'+[['Máu',b.health],['Sức mạnh',b.strength],['May mắn',b.luck],['Tổng',b.sum]].map(([label,value])=>'<div class="stat">'+label+'<strong>'+esc(value??'—')+'</strong></div>').join('')+'</div><p class="help">Đây là chỉ số gốc trong ảnh. Chỉ số thực tế có thể khác sau khi nâng cấp hoặc phân bổ điểm.</p>';
+ html+='<div class="hl-stats">'+[['Máu',b.health],['Sức mạnh',b.strength],['May mắn',b.luck]].map(([label,value])=>'<div class="stat">'+label+'<strong>'+esc(value??'—')+'</strong></div>').join('')+'</div><p class="help">Đây là chỉ số gốc trong ảnh. Chỉ số thực tế có thể khác sau khi nâng cấp hoặc phân bổ điểm.</p>';
  if(p.builder||(p.abilities||[]).length)html+='<h3>Kỹ năng / chức năng</h3>';
  if(p.builder){
   html+='<p class="help">Mỗi ô kỹ năng chọn một phương án. Hiệu ứng có lợi và bất lợi của cùng phương án luôn đi kèm nhau.</p>';
@@ -4347,18 +4348,71 @@ function hamsterLookupHtml(p,catalog=hamsterCatalog){
 }
 function renderHamsterLookup(){
  const p=hamsterRecord($('hl-pick').value);
- $('hl-details').innerHTML=p?hamsterLookupHtml(p):'<p class="help">Không tìm thấy hamster phù hợp. Thử tên khác.</p>';
+ $('hl-details').innerHTML=p?hamsterLookupHtml(p):'<p class="help">Không tìm thấy hamster phù hợp. Thử tên hoặc tiêu chí khác.</p>';
 }
+function lookupText(text){return String(text||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().replace(/[’']/g,'').replace(/\s+/g,' ').trim()}
+function lookupEffects(p){return [...(p.abilities||[]),...(p.builder?.slots||[]).flatMap(s=>s.options.flatMap(o=>o.effects)),...(p.ultimate?[p.ultimate]:[])]}
+function compileHamsterFilter(query){
+ const q=lookupText(query).replace(/^(?:tim|loc)(?: cho toi)?\s+/, '').replace(/^(?:cac|nhung)\s+(?:hamster|chuot)\s+/, '');if(!q)return {test:()=>true,labels:[]};
+ const labels=[];
+ const groups=q.split(/\s+hoac\s+|\|/).map(group=>group.split(/\s+va\s+|[,;\n]+/).map(raw=>{
+  let text=raw.trim();if(!text)throw Error('Hãy nhập điều kiện ở cả hai bên “và / hoặc”.');
+  labels.push(text);
+  text=text.replace(/^(hamster\s+|chuot\s+|co\s+chi\s+so\s+|chi\s+so\s+)/,'');
+  const stat=text.match(/^(mau|health|hp|suc manh|strength|may man|luck|the he|gen)\s*(.*)$/);
+  if(stat && !(stat[1]==='suc manh' && stat[2]==='tu xa') && /^(?:[<>=]|\d|tu\b|it nhat\b|toi thieu\b|khong\b|toi da\b|tren\b|lon hon\b|duoi\b|nho hon\b|bang\b)/.test(stat[2])){
+   const field={mau:'health',health:'health',hp:'health','suc manh':'strength',strength:'strength','may man':'luck',luck:'luck','the he':'generation',gen:'generation'}[stat[1]];
+   const rest=stat[2].trim();let check;
+   const range=rest.match(/^(?:tu\s+)?(\d+(?:\.\d+)?)\s*(?:den|toi|-)\s*(\d+(?:\.\d+)?)$/);
+   if(range){const a=+range[1],b=+range[2];if(a>b)throw Error('Giới hạn đầu phải nhỏ hơn hoặc bằng giới hạn cuối.');check=n=>n>=a&&n<=b;}
+   else{const m=rest.match(/^(>=|<=|>|<|=|tu|it nhat|toi thieu|khong duoi|khong nho hon|khong qua|toi da|khong lon hon|tren|lon hon|duoi|nho hon|bang)?\s*(\d+(?:\.\d+)?)(?:\s*tro len|\s*tro xuong)?$/);
+    if(!m)throw Error('Chỉ số cần điều kiện rõ ràng, ví dụ “may mắn >= 80” hoặc “máu từ 60 đến 90”.');
+    let op=m[1]||'=';if(/tro len$/.test(rest))op='>=';if(/tro xuong$/.test(rest))op='<=';
+    const v=+m[2];check=n=>['>=','tu','it nhat','toi thieu','khong duoi','khong nho hon'].includes(op)?n>=v:['<=','khong qua','toi da','khong lon hon'].includes(op)?n<=v:['>','tren','lon hon'].includes(op)?n>v:['<','duoi','nho hon'].includes(op)?n<v:n===v;
+   }
+   return p=>check(field==='generation'?p.generation:p.base_stats?.[field]);
+  }
+  let negative=/^(khong co|khong|loai tru)\s+/.test(text);text=text.replace(/^(khong co|khong|loai tru|co)\s+/,'').replace(/^(ky nang|chuc nang)\s+/,'');
+  if(/^(ultimate|ky nang toi thuong)$/.test(text))return p=>negative?!p.ultimate:!!p.ultimate;
+  let ultimateOnly=false;if(/^(ultimate|ky nang toi thuong)\s+/.test(text)){ultimateOnly=true;text=text.replace(/^(ultimate|ky nang toi thuong)\s+/,'');}
+  const aliases=[
+   [/^(?:giam )?(?:thoi gian nghi|nghi ngoi|relax time|rest time)$/,['rest_time'],/^(giam)/.test(text)?-1:0],
+   [/^(?:giam )?(?:thoi gian tham hiem|thoi gian tham hiem|expedition time)$/,['expedition_time'],/^(giam)/.test(text)?-1:0],
+   [/^(?:tang )?(?:song sot|ti le song sot|survival)$/,['survival'],/^(tang)/.test(text)?1:0],
+   [/^(?:tang )?(?:phan thuong|phan thuong bo sung|extra loot|extra rewards)$/,['extra_loot','extra_rewards'],1],
+   [/^(?:giam )?(?:chi phi chuoc|chi phi chuoc thuong|buyback)$/,['buyback_discount'],0],
+   [/^(?:tang )?(?:kinh nghiem|xp|experience)$/,['experience'],1],
+   [/^(?:suc manh tu xa|remote power)$/,['remote_power'],0],
+   [/^(?:thuong tu xa|remote bonus)$/,['remote_bonus'],0],
+   [/^(?:hoi thoi gian nghi|rest relay)$/,['rest_relay','rest_restore'],0],
+   [/^(?:hoi thoi gian sac|charge relay)$/,['charge_relay'],0],
+   [/^(?:bo qua nghi|khong can nghi)$/,['keep_it_going','smart_study'],0],
+   [/^(?:rlt|kiem rlt)$/,['rlt_walk','rlt_chest','loot_conversion'],0]
+  ];
+  const alias=aliases.find(a=>a[0].test(text));
+  if(alias)return p=>{const es=ultimateOnly?(p.ultimate?[p.ultimate]:[]):lookupEffects(p);const found=es.some(e=>alias[1].includes(e.type)&&(!alias[2]||[e.value,...(e.level_values||[]).map(v=>v.value)].some(v=>typeof v==='number'&&v*alias[2]>0)));return negative?!found:found};
+  if(/[<>=]|\d/.test(text))throw Error('Chưa hiểu điều kiện “'+raw.trim()+'”. Hiện hỗ trợ so sánh số cho Máu, Sức mạnh, May mắn và Thế hệ; kỹ năng tìm theo tên.');
+  const setOnly=/^(set|bo)\s+/.test(text);text=text.replace(/^(ten|set|bo)\s+/,'');
+  if(!text)throw Error('Hãy nhập tên hoặc kỹ năng cần tìm.');
+  const tokens=text.split(/\s+/);
+  return p=>{const sets=hamsterCatalog.sets.filter(s=>s.members.includes(p.id));const corpus=setOnly?sets.map(s=>s.name).join(' '):ultimateOnly?(p.ultimate?(HAMSTER_LABELS[p.ultimate.type]||'')+' '+hamsterUltimateDescription(p.ultimate)+' '+p.ultimate.type:''):[p.name,...sets.map(s=>s.name),...lookupEffects(p).map(e=>(HAMSTER_LABELS[e.type]||'')+' '+e.type+' '+(e===p.ultimate?hamsterUltimateDescription(e):hamsterAbilityDescription(e)))].join(' ');const hay=lookupText(corpus);const found=tokens.every(t=>hay.includes(t));return negative?!found:found};
+ }));
+ return {test:p=>groups.some(g=>g.every(fn=>fn(p))),labels};
+}
+
 function populateHamsterLookup(){
  const pick=$('hl-pick'),previous=pick.value,key=lookupKey($('hl-query').value);
- const matches=hamsterCatalog.hamsters.filter(p=>lookupKey(p.name).includes(key)).sort((a,b)=>a.generation-b.generation||a.name.localeCompare(b.name));pick.replaceChildren();
+ let filter;try{filter=compileHamsterFilter($('hl-filter').value);$('hl-filter-status').textContent=filter.labels.length?'Đang lọc: '+$('hl-filter').value:'';}catch(e){pick.replaceChildren();pick.disabled=true;$('hl-filter-status').textContent=e.message;$('hl-results').innerHTML='';$('hl-count').textContent='';$('hl-details').innerHTML='';return;}
+ const matches=hamsterCatalog.hamsters.filter(p=>lookupKey(p.name).includes(key)&&filter.test(p)).sort((a,b)=>a.generation-b.generation||a.name.localeCompare(b.name));pick.replaceChildren();
  for(const p of matches){const op=document.createElement('option');op.value=p.id;op.textContent='Gen '+p.generation+' · '+p.name;pick.append(op)}
  const exact=matches.find(p=>lookupKey(p.name)===key);pick.value=exact?.id||(matches.some(p=>p.id===previous)?previous:matches[0]?.id)||'';pick.disabled=!matches.length;
- $('hl-count').textContent=matches.length+'/'+hamsterCatalog.hamsters.length+' hamster';renderHamsterLookup();
+ $('hl-count').textContent=matches.length+' hamster phù hợp';
+ $('hl-results').innerHTML=$('hl-filter').value.trim()&&matches.length?'<table><thead><tr><th>Tên hamster</th><th>Thế hệ</th><th>Máu</th><th>Sức mạnh</th><th>May mắn</th></tr></thead><tbody>'+matches.map(p=>'<tr><td>'+lookupMemberLink(p.id)+'</td><td>'+esc(p.generation)+'</td><td>'+esc(p.base_stats?.health??'—')+'</td><td>'+esc(p.base_stats?.strength??'—')+'</td><td>'+esc(p.base_stats?.luck??'—')+'</td></tr>').join('')+'</tbody></table>':'';renderHamsterLookup();
 }
 function initHamsterLookup(){
- $('hl-query').oninput=populateHamsterLookup;$('hl-pick').onchange=renderHamsterLookup;
- $('hl-details').onclick=e=>{const b=e.target.closest('[data-lookup-hamster]');if(!b)return;$('hl-query').value='';populateHamsterLookup();$('hl-pick').value=b.dataset.lookupHamster;renderHamsterLookup()};
+ $('hl-query').oninput=populateHamsterLookup;$('hl-filter').oninput=populateHamsterLookup;$('hl-pick').onchange=renderHamsterLookup;
+ $('hl-details').onclick=e=>{const b=e.target.closest('[data-lookup-hamster]');if(!b)return;$('hl-query').value='';$('hl-filter').value='';populateHamsterLookup();$('hl-pick').value=b.dataset.lookupHamster;renderHamsterLookup()};
+ $('hl-results').onclick=e=>{const b=e.target.closest('[data-lookup-hamster]');if(!b)return;$('hl-pick').value=b.dataset.lookupHamster;renderHamsterLookup()};
  populateHamsterLookup();
 }
 
