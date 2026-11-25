@@ -67,7 +67,7 @@ Quantity: 4"></textarea><div class="actions"><button id="rc-parse-text" type="bu
 <section class="panel"><h2>3. Miner sở hữu</h2><p class="help">Mỗi dòng là một loại Miner. Cells = số ô mỗi máy chiếm. Bonus % là bonus Miner (tính một lần cho mỗi loại).</p><div class="scroll"><div style="min-width:690px"><div class="entry muted"><span>Tên máy</span><span>Power</span><span>Đơn vị</span><span>Bonus %</span><span>Cells/máy</span><span>Số lượng</span><span></span></div><div id="miners"></div></div></div><div class="actions"><button id="addMiner">+ Thêm Miner</button><button class="danger" id="clearMiners">Xóa Miner</button></div></section>
 <section class="panel"><h2>4. Rack sở hữu</h2><p class="help">Cells/Rack là sức chứa của MỖI Rack. Bonus Rack chỉ cộng cho các máy nằm trên chính Rack đó.</p><div class="scroll"><div style="min-width:510px"><div class="entry rack muted"><span>Tên Rack</span><span>Bonus %</span><span>Cells/Rack</span><span>Số lượng</span><span></span></div><div id="racks"></div></div></div><div class="actions"><button id="addRack">+ Thêm Rack</button><button class="danger" id="clearRacks">Xóa Rack</button></div></section>
 
-<section class="panel" id="hamster-lookup"><h2>Tra cứu Hamster</h2><p class="help">Gõ tên để xem chỉ số, kỹ năng, Ultimate và set. Có thể tìm bằng một phần tên, không phân biệt chữ hoa/thường hay dấu nháy.</p><div class="hl-controls"><div><label for="hl-query">Tên hamster</label><input id="hl-query" type="search" placeholder="Ví dụ: Kitsumi, BB Smoke, Uncle Azoth…" autocomplete="off"></div><div><label for="hl-pick">Kết quả</label><select id="hl-pick"></select></div></div><label for="hl-filter">Tiêu chí lọc (tùy chọn)</label><input id="hl-filter" type="search" placeholder="Ví dụ: thế hệ 3 và may mắn >= 80; có giảm thời gian nghỉ" autocomplete="off"><p class="help">Nhập điều kiện mới mỗi lần cần. Dùng “và” để kết hợp, “hoặc” để chọn một trong các điều kiện. Ví dụ: máu từ 60 đến 90 và có Ultimate; set Pirate; không có Ultimate. So sánh số áp dụng cho chỉ số gốc và thế hệ. “x power” hoặc “tăng power” tìm cả Sức mạnh từ xa và Thưởng từ xa theo tổng chỉ số. Kỹ năng tìm trong các lựa chọn có thể chọn và Ultimate, không có nghĩa là tất cả cùng kích hoạt.</p><p id="hl-filter-status" class="help" role="status"></p><div id="hl-results" class="scroll"></div><p id="hl-count" class="help" aria-live="polite"></p><div id="hl-details"></div></section>
+<section class="panel" id="hamster-lookup"><h2>Tra cứu Hamster</h2><p class="help">Gõ tên để xem chỉ số, kỹ năng, Ultimate và set. Có thể tìm bằng một phần tên, không phân biệt chữ hoa/thường hay dấu nháy.</p><div class="hl-controls"><div><label for="hl-query">Tên hamster</label><input id="hl-query" type="search" placeholder="Ví dụ: Kitsumi, BB Smoke, Uncle Azoth…" autocomplete="off"></div><div><label for="hl-pick">Kết quả</label><select id="hl-pick"></select></div></div><label for="hl-filter">Tiêu chí lọc (tùy chọn)</label><input id="hl-filter" type="search" placeholder="Ví dụ: máu cao nhất; thế hệ 3 và may mắn cao nhất" autocomplete="off"><p class="help">Nhập điều kiện mới mỗi lần cần. Dùng “và” để kết hợp, “hoặc” để chọn một trong các điều kiện. Ví dụ: máu từ 60 đến 90 và có Ultimate; set Pirate; không có Ultimate. Có thể tìm “máu cao nhất”, “sức mạnh thấp nhất”, “thế hệ 3 và may mắn cao nhất”. So sánh cao/thấp nhất trong nhóm thỏa các điều kiện còn lại; đồng hạng sẽ hiện đủ. Nếu kết hợp nhiều chỉ số cao/thấp nhất bằng “và”, hamster phải đồng thời đứng đầu ở từng chỉ số. So sánh số áp dụng cho chỉ số gốc và thế hệ. “x power” hoặc “tăng power” tìm cả Sức mạnh từ xa và Thưởng từ xa theo tổng chỉ số. Kỹ năng tìm trong các lựa chọn có thể chọn và Ultimate, không có nghĩa là tất cả cùng kích hoạt.</p><p id="hl-filter-status" class="help" role="status"></p><div id="hl-results" class="scroll"></div><p id="hl-count" class="help" aria-live="polite"></p><div id="hl-details"></div></section>
 <section class="panel" id="hamster-panel"><h2>5. Hamster và set sở hữu</h2>
 <p class="help" id="hamster-data-status" aria-live="polite"></p>
 <p class="help">Thêm các hamster bạn sở hữu để nhận diện set. Bật “Có hiệu lực” khi hiệu ứng Expedition đang hoạt động; bật thêm “Ultimate” nếu kỹ năng đó cần kích hoạt. Có thể thêm nhiều bản cùng loại.</p>
@@ -4353,12 +4353,17 @@ function renderHamsterLookup(){
 function lookupText(text){return String(text||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().replace(/[’']/g,'').replace(/\s+/g,' ').trim()}
 function lookupEffects(p){return [...(p.abilities||[]),...(p.builder?.slots||[]).flatMap(s=>s.options.flatMap(o=>o.effects)),...(p.ultimate?[p.ultimate]:[])]}
 function compileHamsterFilter(query){
- const q=lookupText(query).replace(/^(?:tim|loc)(?: cho toi)?\s+/, '').replace(/^(?:cac|nhung)\s+(?:hamster|chuot)\s+/, '');if(!q)return {test:()=>true,labels:[]};
+ const q=lookupText(query).replace(/^(?:tim|loc)(?: cho toi)?\s+/, '').replace(/^(?:cac|nhung)\s+(?:hamster|chuot)\s+/, '');if(!q)return {test:()=>true,apply:rows=>rows,labels:[]};
  const labels=[];
  const groups=q.split(/\s+hoac\s+|\|/).map(group=>group.split(/\s+va\s+|[,;\n]+/).map(raw=>{
   let text=raw.trim();if(!text)throw Error('Hãy nhập điều kiện ở cả hai bên “và / hoặc”.');
   labels.push(text);
   text=text.replace(/^(hamster\s+|chuot\s+|co\s+chi\s+so\s+|chi\s+so\s+)/,'');
+  const extreme=text.match(/^(mau|health|hp|suc manh|strength|may man|luck)\s+(cao nhat|lon nhat|nhieu nhat|thap nhat|nho nhat|it nhat|max|min)$/);
+  if(extreme){
+   const field={mau:'health',health:'health',hp:'health','suc manh':'strength',strength:'strength','may man':'luck',luck:'luck'}[extreme[1]];
+   const fn=()=>true;fn.extreme={field,lowest:['thap nhat','nho nhat','it nhat','min'].includes(extreme[2])};return fn;
+  }
   const stat=text.match(/^(mau|health|hp|suc manh|strength|may man|luck|the he|gen)\s*(.*)$/);
   if(stat && !(stat[1]==='suc manh' && stat[2]==='tu xa') && /^(?:[<>=]|\d|tu\b|it nhat\b|toi thieu\b|khong\b|toi da\b|tren\b|lon hon\b|duoi\b|nho hon\b|bang\b)/.test(stat[2])){
    const field={mau:'health',health:'health',hp:'health','suc manh':'strength',strength:'strength','may man':'luck',luck:'luck','the he':'generation',gen:'generation'}[stat[1]];
@@ -4398,13 +4403,25 @@ function compileHamsterFilter(query){
   const tokens=text.split(/\s+/);
   return p=>{const sets=hamsterCatalog.sets.filter(s=>s.members.includes(p.id));const corpus=setOnly?sets.map(s=>s.name).join(' '):ultimateOnly?(p.ultimate?(HAMSTER_LABELS[p.ultimate.type]||'')+' '+hamsterUltimateDescription(p.ultimate)+' '+p.ultimate.type:''):[p.name,...sets.map(s=>s.name),...lookupEffects(p).map(e=>(HAMSTER_LABELS[e.type]||'')+' '+e.type+' '+(e===p.ultimate?hamsterUltimateDescription(e):hamsterAbilityDescription(e)))].join(' ');const hay=lookupText(corpus);const found=tokens.every(t=>hay.includes(t));return negative?!found:found};
  }));
- return {test:p=>groups.some(g=>g.every(fn=>fn(p))),labels};
+ const apply=rows=>{
+  const selected=new Set();
+  for(const group of groups){
+   const candidates=rows.filter(p=>group.every(fn=>fn(p)));
+   const limits=group.filter(fn=>fn.extreme).map(fn=>{
+    const {field,lowest}=fn.extreme,values=candidates.map(p=>p.base_stats?.[field]).filter(v=>typeof v==='number'&&Number.isFinite(v));
+    return {field,value:values.length?(lowest?Math.min(...values):Math.max(...values)):null};
+   });
+   for(const p of candidates)if(limits.every(l=>l.value!==null&&p.base_stats?.[l.field]===l.value))selected.add(p);
+  }
+  return rows.filter(p=>selected.has(p));
+ };
+ return {test:p=>apply(hamsterCatalog.hamsters).includes(p),apply,labels};
 }
 
 function populateHamsterLookup(){
  const pick=$('hl-pick'),previous=pick.value,key=lookupKey($('hl-query').value);
  let filter;try{filter=compileHamsterFilter($('hl-filter').value);$('hl-filter-status').textContent=filter.labels.length?'Đang lọc: '+$('hl-filter').value:'';}catch(e){pick.replaceChildren();pick.disabled=true;$('hl-filter-status').textContent=e.message;$('hl-results').innerHTML='';$('hl-count').textContent='';$('hl-details').innerHTML='';return;}
- const matches=hamsterCatalog.hamsters.filter(p=>lookupKey(p.name).includes(key)&&filter.test(p)).sort((a,b)=>a.generation-b.generation||a.name.localeCompare(b.name));pick.replaceChildren();
+ const matches=filter.apply(hamsterCatalog.hamsters.filter(p=>lookupKey(p.name).includes(key))).sort((a,b)=>a.generation-b.generation||a.name.localeCompare(b.name));pick.replaceChildren();
  for(const p of matches){const op=document.createElement('option');op.value=p.id;op.textContent='Gen '+p.generation+' · '+p.name;pick.append(op)}
  const exact=matches.find(p=>lookupKey(p.name)===key);pick.value=exact?.id||(matches.some(p=>p.id===previous)?previous:matches[0]?.id)||'';pick.disabled=!matches.length;
  $('hl-count').textContent=matches.length+' hamster phù hợp';
