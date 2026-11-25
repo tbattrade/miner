@@ -46,6 +46,7 @@
 <section class="panel" id="rc-gallery"><h2>Thư viện ảnh Miner / Rack</h2><p class="help">Lưu nguyên ảnh, không OCR hoặc cắt ảnh. Thư viện lưu riêng trên trình duyệt, không đưa vào phép tính. Kéo ảnh để đổi thứ tự. Nhấp đúp vào tên thư mục hoặc tên ảnh để đổi tên; bấm ra ngoài để lưu.</p><div class="rg-toolbar"><button id="rg-new" type="button">+ Tạo thư mục</button><button id="rg-delete-folder" class="danger" type="button">Xóa thư mục</button><button id="rg-export" class="secondary" type="button">Sao lưu JSON</button><button id="rg-import" class="secondary" type="button">Khôi phục JSON</button><input type="file" id="rg-import-file" accept="application/json,.json" hidden></div><div id="rg-folders" class="rg-folders"></div><div id="rg-drop" class="rg-drop" tabindex="0">Bấm vào đây rồi Ctrl+V để dán ảnh, hoặc kéo ảnh vào / chọn tệp.<div class="actions" style="justify-content:center"><button id="rg-pick" type="button">Chọn ảnh</button><input type="file" id="rg-files" accept="image/*" multiple hidden></div></div><p id="rg-status" class="rg-info" aria-live="polite"></p><div id="rg-grid" class="rg-grid"></div><div id="rg-preview" class="rg-preview"><button type="button" id="rg-preview-close">Đóng ×</button><img alt="Ảnh phóng to"></div></section>
 <section class="panel" id="rc-power-converter">
 <h2>1. Chuyển đổi sức mạnh đào</h2>
+<p class="help">Nhập giá trị và chọn đơn vị đầu vào, đầu ra. Kết quả được quy đổi tự động.</p>
 <div class="rc-convert-grid">
 <div><label for="rc-convert-input">Sức mạnh đầu vào</label><input id="rc-convert-input" type="number" min="0" step="any" value="1" inputmode="decimal"></div>
 <div><label for="rc-convert-from">Đơn vị đầu vào</label><select id="rc-convert-from"><option>GH/s</option><option>TH/s</option><option>PH/s</option><option selected>EH/s</option><option>ZH/s</option></select></div>
@@ -55,18 +56,18 @@
 </div>
 <div class="rc-convert-result" aria-live="polite">Kết quả: <strong id="rc-convert-display">—</strong></div>
 </section>
-<section class="panel" id="rc-text-import"><h2>2. Nhập Miner / Rack từ RollerCoin</h2><p class="help">Dán thông tin Miner hoặc Rack từ RollerCoin. Kiểm tra thông số trước khi thêm. Nhập nhiều Miner/Rack cùng lúc dùng Enter xuống dòng.</p><textarea class="rc-textbox" id="rc-pasted-miners" placeholder="Ví dụ:
+<section class="panel" id="rc-text-import"><h2>2. Nhập Miner / Rack từ RollerCoin</h2><p class="help">Dán văn bản Miner hoặc Rack từ RollerCoin. Kiểm tra thông số trước khi thêm. Nhập nhiều Miner/Rack cùng lúc dùng Enter xuống dòng.</p><textarea class="rc-textbox" id="rc-pasted-miners" placeholder="Ví dụ:
 Bog Rocket
 Set
 Size: 2 Cells
 Power 185.000 Ph/s
 Bonus 0.5 %
-Quantity: 4"></textarea><div class="actions"><button id="rc-parse-text" type="button">Phân tích</button><button id="rc-import-text" type="button" class="secondary">Thêm Miner / Rack vào danh sách</button></div><p class="rc-text-note" id="rc-text-status">Dữ liệu nhận diện cần kiểm tra trước khi nhập.</p><div class="rc-text-review"><table><thead><tr><th>Chọn</th><th>Loại</th><th>Tên Miner / Rack</th><th>Power</th><th>Đơn vị</th><th>Bonus %</th><th>Cells</th><th>Số lượng</th></tr></thead><tbody id="rc-text-rows"></tbody></table></div></section>
+Quantity: 4"></textarea><div class="actions"><button id="rc-parse-text" type="button">Phân tích văn bản</button><button id="rc-import-text" type="button" class="secondary">Thêm Miner / Rack vào danh sách</button></div><p class="rc-text-note" id="rc-text-status">Dữ liệu nhận diện cần kiểm tra trước khi nhập.</p><div class="rc-text-review"><table><thead><tr><th>Chọn</th><th>Loại</th><th>Tên Miner / Rack</th><th>Power</th><th>Đơn vị</th><th>Bonus %</th><th>Cells</th><th>Số lượng</th></tr></thead><tbody id="rc-text-rows"></tbody></table></div></section>
 <section class="panel" id="rc-old-image-import" hidden><h2>1. Dán ảnh Miner / Rack</h2><div class="drop" id="drop" tabindex="0">Dán ảnh bằng <b>Ctrl + V</b>, kéo thả hoặc bấm để chọn nhiều ảnh</div><input id="files" type="file" accept="image/*" multiple hidden><div id="shots" class="shots"></div><div class="actions"><button id="ocrStart">Nhận diện</button><button class="secondary" id="clearShots">Xóa toàn bộ</button></div><p id="ocrStatus" class="muted">Khung xanh trên ảnh là vùng thẻ sẽ được đọc; nếu lệch, đổi "Khung thẻ" sang Lưới và chỉnh số cột/hàng.</p><div id="reviewWrap" class="hidden"><h3>Kiểm tra kết quả OCR trước khi nhập</h3><p class="help">Dòng tô cam cần kiểm tra. Sửa tên/bonus ở đây: kiểm tra lại thông số trước khi nhập.</p><div class="scroll"><table class="review"><thead><tr><th>Chọn</th><th>Loại</th><th>Tên</th><th>Power</th><th>Đơn vị</th><th>Bonus %</th><th>Cells</th><th>Số lượng</th><th>Ghi chú</th></tr></thead><tbody id="review"></tbody></table></div><datalist id="nameList"></datalist><div class="actions"><button id="append">Thêm kết quả</button><button class="secondary" id="replace">Thay danh sách</button></div><details><summary>Văn bản OCR gốc</summary><pre id="raw"></pre></details></div></section>
 <section class="panel"><h2>3. Miner sở hữu</h2><p class="help">Mỗi dòng là một loại Miner. Cells = số ô mỗi máy chiếm. Bonus % là bonus Miner (tính một lần cho mỗi loại).</p><div class="scroll"><div style="min-width:690px"><div class="entry muted"><span>Tên máy</span><span>Power</span><span>Đơn vị</span><span>Bonus %</span><span>Cells/máy</span><span>Số lượng</span><span></span></div><div id="miners"></div></div></div><div class="actions"><button id="addMiner">+ Thêm Miner</button><button class="danger" id="clearMiners">Xóa Miner</button></div></section>
 <section class="panel"><h2>4. Rack sở hữu</h2><p class="help">Cells/Rack là sức chứa của MỖI Rack. Bonus Rack chỉ cộng cho các máy nằm trên chính Rack đó.</p><div class="scroll"><div style="min-width:510px"><div class="entry rack muted"><span>Tên Rack</span><span>Bonus %</span><span>Cells/Rack</span><span>Số lượng</span><span></span></div><div id="racks"></div></div></div><div class="actions"><button id="addRack">+ Thêm Rack</button><button class="danger" id="clearRacks">Xóa Rack</button></div></section>
 
-<section class="panel" id="hamster-lookup"><h2>Tra cứu Hamster</h2><p class="help">Gõ tên để xem chỉ số, kỹ năng, Ultimate và set. Có thể tìm bằng một phần tên, không phân biệt chữ hoa/thường hay dấu nháy.</p><div class="hl-controls"><div><label for="hl-query">Tên hamster</label><input id="hl-query" type="search" placeholder="Ví dụ: Kitsumi, BB Smoke, Uncle Azoth…" autocomplete="off"></div><div><label for="hl-pick">Kết quả</label><select id="hl-pick"></select></div></div><label for="hl-filter">Tiêu chí lọc (tùy chọn)</label><input id="hl-filter" type="search" placeholder="Ví dụ: máu cao nhất; thế hệ 3 và may mắn cao nhất" autocomplete="off"><p class="help">Nhập điều kiện mới mỗi lần cần. Dùng “và” để kết hợp, “hoặc” để chọn một trong các điều kiện. Ví dụ: máu từ 60 đến 90 và có Ultimate; set Pirate; không có Ultimate. Có thể tìm “máu cao nhất”, “sức mạnh thấp nhất”, “thế hệ 3 và may mắn cao nhất”. </p><p id="hl-filter-status" class="help" role="status"></p><div id="hl-results" class="scroll"></div><p id="hl-count" class="help" aria-live="polite"></p><div id="hl-details"></div></section>
+<section class="panel" id="hamster-lookup"><h2>Tra cứu Hamster</h2><p class="help">Gõ tên để xem chỉ số, kỹ năng, Ultimate và set. Có thể tìm bằng một phần tên, không phân biệt chữ hoa/thường hay dấu nháy.</p><div class="hl-controls"><div><label for="hl-query">Tên hamster</label><input id="hl-query" type="search" placeholder="Ví dụ: Kitsumi, BB Smoke, Uncle Azoth…" autocomplete="off"></div><div><label for="hl-pick">Kết quả</label><select id="hl-pick"></select></div></div><label for="hl-filter">Tiêu chí lọc (tùy chọn)</label><input id="hl-filter" type="search" placeholder="Ví dụ: máu cao nhất; thế hệ 3 và may mắn cao nhất" autocomplete="off"><p class="help">Nhập điều kiện mới mỗi lần cần. Dùng “và” để kết hợp, “hoặc” để chọn một trong các điều kiện. Ví dụ: máu từ 60 đến 90 và có Ultimate; set Pirate; không có Ultimate. Có thể tìm “máu cao nhất”, “sức mạnh thấp nhất”, “thế hệ 3 và may mắn cao nhất”. So sánh cao/thấp nhất trong nhóm thỏa các điều kiện còn lại; đồng hạng sẽ hiện đủ. Nếu kết hợp nhiều chỉ số cao/thấp nhất bằng “và”, hamster phải đồng thời đứng đầu ở từng chỉ số. “Cao hơn / lớn hơn / trên” đều là >; “thấp hơn / nhỏ hơn / dưới” đều là <. “Lớn nhất / cao nhất” và “nhỏ nhất / thấp nhất” cho cùng kết quả với từng chỉ số. So sánh số áp dụng cho chỉ số gốc và thế hệ. “x power” hoặc “tăng power” tìm cả Sức mạnh từ xa và Thưởng từ xa theo tổng chỉ số. Kỹ năng tìm trong các lựa chọn có thể chọn và Ultimate, không có nghĩa là tất cả cùng kích hoạt.</p><p id="hl-filter-status" class="help" role="status"></p><div id="hl-results" class="scroll"></div><p id="hl-count" class="help" aria-live="polite"></p><div id="hl-details"></div></section>
 <section class="panel" id="hamster-panel"><h2>5. Hamster và set sở hữu</h2>
 <p class="help" id="hamster-data-status" aria-live="polite"></p>
 <p class="help">Thêm các hamster bạn sở hữu để nhận diện set. Bật “Có hiệu lực” khi hiệu ứng Expedition đang hoạt động; bật thêm “Ultimate” nếu kỹ năng đó cần kích hoạt. Có thể thêm nhiều bản cùng loại.</p>
@@ -80,9 +81,9 @@ Quantity: 4"></textarea><div class="actions"><button id="rc-parse-text" type="bu
 </section>
 <section class="panel"><h2>6. Tính tổng và tối ưu bố trí</h2><div class="stats"><div class="stat">Power gốc (tất cả Miner)<strong id="basePower">—</strong></div><div class="stat">Bonus Miner (tất cả loại)<strong id="allBonus">—</strong></div><div class="stat">Cells cần / Cells có<strong id="cells">—</strong></div><div class="stat">Tổng power đào tối đa<strong id="maxPower">—</strong><small id="maxRank"></small></div></div>
 <div class="grid2"><div><label>Rank mục tiêu</label><select id="targetRank"></select></div><div><label>Khoảng đệm an toàn (EH/s)</label><input id="buffer" type="number" min="0" step="any" value="0.001"></div></div>
-<div><label>Thời gian tìm kiếm</label><select id="timeout"><option value="1000">Nhanh (1 giây)</option><option value="3000" selected>Cân bằng (3 giây)</option><option value="8000">Kỹ (8 giây)</option><option value="15000">Rất kỹ (15 giây)</option></select></div>
-<div class="actions"><button id="optimize">Tìm phương án tối ưu</button><button id="maximize" class="secondary">Tối đa power (không giới hạn)</button><button class="secondary" id="compare">So sánh các Rank</button></div>
-<p class="help">Tìm bố trí có tổng power đào cao nhất theo hiệu ứng hamster đang bật, giữ power thường dưới trần Rank. Không chọn hoặc tắt hết hiệu ứng hamster thì tối ưu miner/rack như thường. Tôn trọng Cells và số lượng sở hữu.</p>
+
+<div class="actions"><button id="optimize">Tìm phương án tối ưu</button><button id="maximize" class="secondary">Tối đa power (không giới hạn)</button><button class="secondary" id="compare">So sánh các Rank</button><button id="stop-optimize" class="danger" hidden>Dừng tìm</button></div>
+<p class="help">Ưu tiên power gốc của các miner được lắp cao nhất; nếu cùng power gốc, chọn tổng bonus hiệu dụng Miner + Rack thấp nhất. Giữ power thường dưới trần Rank, tôn trọng Cells và số lượng sở hữu. Hamster vẫn được cộng vào tổng đào. Tìm đến khi chứng minh được phương án tối ưu, không giới hạn thời gian. Không bắt buộc dùng hết miner hoặc rack. Có thể dừng và xem phương án tốt nhất đã tìm được; phương án dừng sớm chưa được xác nhận tối ưu.</p>
 <p class="help" id="status"></p><div id="result"></div></section>
 </div><aside><section class="panel"><h2>Bảng sức mạnh các Rank</h2><p class="help">Rank mục tiêu có viền xanh; Mức Rank tương ứng power thường của phương án tối đa được tô nền. Giảm power không làm tài khoản đã lên Rank tự hạ Rank.</p><div class="scroll"><table><thead><tr><th>Rank</th><th>Từ</th><th>Đến</th></tr></thead><tbody id="ranks"></tbody></table></div></section>
 <section class="panel"><h2>Quy tắc tính (theo RollerCoin FAQ)</h2><p class="help"><b>Power</b> = Power gốc các Miner <b>được lắp</b> × (1 + Bonus Miner) + Σ (Bonus Rack × Power gốc các máy nằm trên Rack đó).</p><p class="help">Bonus Miner: mỗi loại máy (cùng tên + cùng bonus) chỉ cộng một lần. Bonus Rack: mỗi Rack tăng riêng cho máy đặt trên nó, Rack trùng tên vẫn được tính riêng.</p><p class="help">Bộ tối ưu chọn subset Miner + Rack (không bắt buộc lắp hết) để power cao nhất dưới trần Rank: tham lam → nhánh-cận (chính xác với ≤ 60 máy nếu kịp thời gian) → simulated annealing nhiều lần khởi động lại → tinh chỉnh thêm/đổi/chuyển. Chạy nền trong Web Worker nên trang không bị treo.</p></section>
@@ -3856,12 +3857,12 @@ function evaluateLayout(miners,racks,assign,opt){
   return {power:rankPower+remotePower+remoteBonusPower,rankPower,remotePower,remoteBonusPower,hamsterPower:remotePower+remoteBonusPower,base,mb,rackPower,ok,used};
 }
 
-/* inp: {miners:[{eh,slots,bonus,key}], racks:[{bonus,slots}], ceiling, timeMs, seed} */
-function solve(inp){
-  const M=inp.miners,R=inp.racks,n=M.length,r=R.length;
+/* objective: raw => maximize raw power then minimize effective miner+rack bonus; power => maximize total mining power. Full search has no work/time limit; quick is reserved for sidebar previews. */
+function solve(inp,notify){
+  const M=inp.miners,R=inp.racks,n=M.length,r=R.length,rawFirst=inp.objective==='raw';
   const h=inp.hamster||{},extra=Math.max(0,Number(h.flat)||0)+Math.max(0,Number(h.bonus)||0)/100;
   const C=(typeof inp.ceiling==='number'&&isFinite(inp.ceiling))?inp.ceiling:Infinity;
-  const timeMs=Math.max(20,inp.timeMs||2000),rnd=mulberry32(inp.seed||20261114),T_START=nowMs();
+  const T_START=nowMs();
   const eh=new Float64Array(n),sl=new Int32Array(n),mk=new Int32Array(n),kb=[],keyMap=new Map();
   for(let i=0;i<n;i++){eh[i]=M[i].eh;sl[i]=M[i].slots;const key=M[i].key||('__anon'+i);let k=keyMap.get(key);if(k===undefined){k=kb.length;keyMap.set(key,k);kb.push(M[i].key?M[i].bonus/100:0)}mk[i]=k}
   const rb=new Float64Array(r),cap=new Int32Array(r);for(let j=0;j<r;j++){rb[j]=R[j].bonus/100;cap[j]=R[j].slots}
@@ -3879,18 +3880,25 @@ function solve(inp){
   function clearAll(){while(np)unplace(placed[np-1]);base=0;rsum=0;B=0}
   function load(a){clearAll();for(let i=0;i<n;i++)if(a[i]>=0)place(i,a[i])}
   const feasible=p=>rankPower()<C;
-  let bestA=new Int32Array(n).fill(-1),bestP=0;if(!feasible(bestP))bestP=-Infinity;
-  function consider(){const p=power();if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg)}}
-  const rackOrder=[...Array(r).keys()].sort((a,b)=>rb[b]-rb[a]||cap[b]-cap[a]);
+  const equal=(a,b)=>a===b||Math.abs(a-b)<=1e-12*Math.max(Math.abs(a),Math.abs(b),1e-9);
+  const bonusRate=()=>base>0?B+rsum/base:0;
+  let bestA=new Int32Array(n).fill(-1),bestP=0,bestBase=0,bestBonus=0;if(!feasible(bestP))bestP=-Infinity;
+  function consider(){
+    const p=power(),bonus=bonusRate();if(!feasible(p))return false;
+    const better=bestP===-Infinity||(rawFirst?(!equal(base,bestBase)?base>bestBase:!equal(bonus,bestBonus)&&bonus<bestBonus):p>bestP&&!equal(p,bestP));
+    if(better){bestP=p;bestBase=base;bestBonus=bonus;bestA.set(asg);return true}return false;
+  }
+  const rackOrder=[...Array(r).keys()].sort((a,b)=>(rawFirst?rb[a]-rb[b]:rb[b]-rb[a])||cap[b]-cap[a]||a-b);
 
-  // 1) Tham lam: ưu tiên rack bonus cao. Nếu lắp vào rack mạnh bị vượt trần thì thử rack yếu hơn;
+
+  // 1) Tham lam: ưu tiên rack bonus thấp khi tối ưu power gốc, cao khi tối đa tổng đào. Nếu lắp vào rack mạnh bị vượt trần thì thử rack yếu hơn;
   // máy không vừa trần thì để ngoài. Không bắt buộc dùng hết rack.
   function greedy(order,use){clearAll();const racks=use||rackOrder;for(const i of order){for(const j of racks){if(free[j]<sl[i])continue;place(i,j);if(feasible(power()))break;unplace(i)}}consider()}
   const idx=[...Array(n).keys()];
   const gOrders=[
     idx.slice().sort((a,b)=>eh[b]-eh[a]),
     idx.slice().sort((a,b)=>eh[b]/sl[b]-eh[a]/sl[a]),
-    idx.slice().sort((a,b)=>(eh[b]+kb[mk[b]]*1e3)-(eh[a]+kb[mk[a]]*1e3))
+    idx.slice().sort((a,b)=>rawFirst?eh[b]-eh[a]||kb[mk[a]]-kb[mk[b]]:(eh[b]+kb[mk[b]]*1e3)-(eh[a]+kb[mk[a]]*1e3))
   ];
   if(Array.isArray(inp.initial)&&inp.initial.length===n&&evaluateLayout(M,R,inp.initial,inp).ok){load(inp.initial);consider()}
   for(const o of gOrders)greedy(o);
@@ -3902,84 +3910,45 @@ function solve(inp){
     for(const k of ks){const use=rackOrder.slice(0,k);for(const o of gOrders)greedy(o,use)}
   }
 
-  // 1b) Nhánh-cận (branch & bound) có giới hạn thời gian: tìm chính xác với bộ dữ liệu nhỏ/vừa.
-  let exactDone=false;
-  if(n>0&&r>0&&n<=60){
+  // Complete branch-and-bound; no time, node, iteration or miner-count limit.
+  // Only automatic sidebar previews use quick greedy results.
+  let nodes=0,exactDone=!n||!r;
+  function result(exact){const v=evaluateLayout(M,R,bestA,inp);return {found:bestP>-Infinity,exact,objective:rawFirst?'raw':'power',base:v.base,bonusPercent:v.base>0?(v.rankPower/v.base-1)*100:0,assign:Array.from(bestA),power:v.power,rankPower:v.rankPower,hamster:inp.hamster||{},iterations:0,nodes,elapsed:Math.round(nowMs()-T_START),ceiling:C};}
+  if(!inp.quick&&n>0&&r>0){
     const ord=idx.slice().sort((a,b)=>eh[b]-eh[a]||mk[a]-mk[b]||sl[a]-sl[b]);
-    const sufEh=new Float64Array(n+1),sufKB=new Float64Array(n+1);const seenK=new Set();
-    for(let t=n-1;t>=0;t--){const i=ord[t];sufEh[t]=sufEh[t+1]+eh[i];if(!seenK.has(mk[i])){seenK.add(mk[i]);sufKB[t]=sufKB[t+1]+kb[mk[i]]}else sufKB[t]=sufKB[t+1]}
-    const maxRb=r?Math.max(...rb):0,same=new Uint8Array(n);
+    const sufEh=new Float64Array(n+1),sufKB=new Float64Array(n+1),sufDensity=new Float64Array(n+1),seenK=new Set();
+    for(let t=n-1;t>=0;t--){const i=ord[t];sufEh[t]=sufEh[t+1]+eh[i];sufDensity[t]=Math.max(sufDensity[t+1],eh[i]/sl[i]);sufKB[t]=sufKB[t+1];if(!seenK.has(mk[i])){seenK.add(mk[i]);sufKB[t]+=kb[mk[i]]}}
+    const maxRb=r?Math.max(...rb):0,same=new Uint8Array(n),skipped=new Uint8Array(n);
     for(let t=1;t<n;t++){const a=ord[t],b=ord[t-1];same[t]=(eh[a]===eh[b]&&sl[a]===sl[b]&&mk[a]===mk[b])?1:0}
-    const limit=T_START+timeMs*0.3;let nodes=0,aborted=false;const skipped=new Uint8Array(n);
-    const rec=t=>{
-      if(aborted)return;if((++nodes&1023)===0&&nowMs()>limit){aborted=true;return}
-      const p=power();if(!feasible(p))return;if(p>bestP+1e-15){bestP=p;bestA.set(asg)}
-      if(t===n)return;
-      const ub=(base+sufEh[t])*(1+B+sufKB[t]+extra)+rsum+sufEh[t]*maxRb;if(ub<=bestP+1e-15)return;
-      const i=ord[t];
-      if(!(same[t]&&skipped[t-1])){
-        const tried=[];
-        for(const j of rackOrder){if(free[j]<sl[i])continue;let dup=false;for(const q of tried)if(rb[q]===rb[j]&&free[q]===free[j]){dup=true;break}if(dup)continue;tried.push(j);
-          place(i,j);skipped[t]=0;rec(t+1);unplace(i);if(aborted)return}
+    clearAll();
+    const stack=[{t:0,entered:false,placed:-1}];
+    const pop=()=>{const f=stack.pop();if(f.placed>=0)unplace(f.placed)};
+    if(notify)notify(result(false));
+    while(stack.length){
+      const f=stack[stack.length-1],t=f.t;
+      if(!f.entered){
+        nodes++;if(notify&&(nodes&32767)===0)notify(result(false));
+        if(!feasible(power())){pop();continue}consider();
+        if(t===n){pop();continue}
+        let cells=0;for(const c of free)cells+=c;
+        const remaining=Math.min(sufEh[t],cells*sufDensity[t]);
+        const rawUB=Math.min(base+remaining,Number.isFinite(C)?(C-rsum)/(1+B):Infinity);
+        const ub=(base+remaining)*(1+B+sufKB[t]+extra)+rsum+remaining*maxRb;
+        const lowerBonus=B+(rawUB>0?rsum/rawUB:0);
+        if(rawFirst?(rawUB<bestBase&&!equal(rawUB,bestBase))||(equal(rawUB,bestBase)&&(lowerBonus>bestBonus||equal(lowerBonus,bestBonus))):(ub<bestP||equal(ub,bestP))){pop();continue}
+        f.entered=true;f.next=same[t]&&skipped[t-1]?r:0;f.tried=[];f.skipVisited=false;
       }
-      skipped[t]=1;rec(t+1);skipped[t]=0;
-    };
-    clearAll();rec(0);exactDone=!aborted;clearAll();
-  }
-  const scale=isFinite(C)?C:Math.max(bestP,1e-12);
-
-  // 2) Simulated annealing, nhiều lần khởi động lại.
-  const PEN=4;const score=p=>rankPower()<C?p:p-PEN*(1+extra)*Math.max(0,rankPower()-C);
-  let iterations=0;const restarts=Math.max(2,Math.min(8,Math.round(timeMs/400)));
-  const saBudget=timeMs*0.85;
-  for(let rs=0;rs<restarts&&n>0&&r>0&&!exactDone;rs++){
-    const segStart=nowMs(),segLen=(saBudget-(segStart-T_START))/(restarts-rs);if(segLen<=2)break;
-    if(rs%3===0)load(bestA);
-    else if(rs%3===1){const o=idx.slice();for(let k=o.length-1;k>0;k--){const q=Math.floor(rnd()*(k+1));const t=o[k];o[k]=o[q];o[q]=t}const kUse=1+((rnd()*r)|0);greedy(o,rackOrder.slice(0,kUse))}
-    else clearAll();
-    const T0=(rs===0?0.03:0.01)*scale,T1=1e-9*scale;let T=T0,cur=score(power());
-    for(;;){
-      iterations++;
-      if((iterations&255)===0){const f=(nowMs()-segStart)/segLen;if(f>=1)break;T=T0*Math.pow(T1/T0,f)}
-      const m=rnd();let type,a=-1,b=-1,ja=-1,jb=-1,emptied=null;
-      if(nu>0&&(np===0||m<0.25)){ // thêm máy
-        a=unp[(rnd()*nu)|0];jb=(rnd()*r)|0;if(free[jb]<sl[a]){let ok=false;for(let t=0;t<4&&!ok;t++){jb=(rnd()*r)|0;ok=free[jb]>=sl[a]}if(!ok)continue}
-        place(a,jb);type=0;
-      }else if(m<0.4){ // gỡ máy
-        a=placed[(rnd()*np)|0];ja=asg[a];unplace(a);type=1;
-      }else if(m<0.72&&nu>0){ // đổi máy đang lắp với máy trong kho
-        a=placed[(rnd()*np)|0];b=unp[(rnd()*nu)|0];ja=asg[a];if(free[ja]+sl[a]<sl[b])continue;unplace(a);place(b,ja);type=2;
-      }else if(m<0.86&&r>1){ // chuyển máy sang rack khác
-        a=placed[(rnd()*np)|0];ja=asg[a];jb=(rnd()*r)|0;if(jb===ja||free[jb]<sl[a])continue;unplace(a);place(a,jb);type=3;
-      }else if(m<0.93&&np>0&&r>0){ // dọn trống cả một rack (không bắt buộc dùng hết rack)
-        jb=(rnd()*r)|0;emptied=[];for(let t=np-1;t>=0;t--){const i=placed[t];if(asg[i]===jb){emptied.push(i);unplace(i)}}if(!emptied.length)continue;type=5;
-      }else if(np>1){ // hoán đổi hai máy ở hai rack
-        a=placed[(rnd()*np)|0];b=placed[(rnd()*np)|0];ja=asg[a];jb=asg[b];if(ja===jb)continue;if(free[ja]+sl[a]<sl[b]||free[jb]+sl[b]<sl[a])continue;unplace(a);unplace(b);place(a,jb);place(b,ja);type=4;
-      }else continue;
-      const p=power(),s=score(p),d=s-cur;
-      if(d>=0||rnd()<Math.exp(d/T)){cur=s;if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg)}}
-      else{
-        if(type===0)unplace(a);else if(type===1)place(a,ja);else if(type===2){unplace(b);place(a,ja)}else if(type===3){unplace(a);place(a,ja)}else if(type===5){for(let t=emptied.length-1;t>=0;t--)place(emptied[t],jb)}else{unplace(a);unplace(b);place(a,ja);place(b,jb)}
-      }
+      const i=ord[t];let descended=false;
+      while(f.next<r){const j=rackOrder[f.next++];if(free[j]<sl[i])continue;if(f.tried.some(q=>rb[q]===rb[j]&&free[q]===free[j]))continue;f.tried.push(j);place(i,j);skipped[t]=0;stack.push({t:t+1,entered:false,placed:i});descended=true;break}
+      if(descended)continue;
+      if(!f.skipVisited){f.skipVisited=true;skipped[t]=1;stack.push({t:t+1,entered:false,placed:-1});continue}
+      skipped[t]=0;pop();
     }
+    exactDone=true;clearAll();
   }
-
-  // 3) Tinh chỉnh tất định: thử mọi phép thêm / đổi / chuyển có lợi cho tới khi hết cải thiện.
-  load(bestA);
-  const typeKey=i=>eh[i]+'|'+sl[i]+'|'+mk[i];
-  for(let pass=0;pass<50&&nowMs()-T_START<timeMs*1.1;pass++){
-    let improved=false;const seen=new Set(),reps=[];for(let k=0;k<nu;k++){const u=unp[k],tk=typeKey(u);if(!seen.has(tk)){seen.add(tk);reps.push(u)}}
-    for(const u of reps){if(asg[u]>=0)continue;for(const j of rackOrder){if(free[j]<sl[u])continue;place(u,j);const p=power();if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg);improved=true;break}unplace(u)}}
-    const pl=Array.from(placed.subarray(0,np));
-    outer:for(const a of pl){const ja=asg[a];if(ja<0)continue;
-      for(const u of reps){if(asg[u]>=0||free[ja]+sl[a]<sl[u])continue;unplace(a);place(u,ja);const p=power();if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg);improved=true;continue outer}unplace(u);place(a,ja)}
-      for(let j=0;j<r;j++){if(j===ja||free[j]<sl[a]||rb[j]<=rb[ja])continue;unplace(a);place(a,j);const p=power();if(feasible(p)&&p>bestP+1e-15){bestP=p;bestA.set(asg);improved=true;continue outer}unplace(a);place(a,ja)}
-    }
-    if(!improved)break;
-  }
-  const verified=evaluateLayout(M,R,bestA,inp);
-  return {found:bestP>-Infinity,exact:exactDone,assign:Array.from(bestA),power:verified.power,rankPower:verified.rankPower,hamster:inp.hamster||{},iterations,elapsed:Math.round(nowMs()-T_START),ceiling:C};
+  return result(exactDone);
 }
+
 if(typeof module!=='undefined')module.exports={solve,evaluateLayout,mulberry32};
 </script><script>
 'use strict';
@@ -4459,15 +4428,28 @@ async function refresh(){const revision=refreshRevision;const ms=expandMiners(),
   const need=ms.reduce((a,m)=>a+m.slots,0),have=rs.reduce((a,r)=>a+r.slots,0);$('cells').textContent=need+' / '+have;$('cells').style.color=need>have?'#ffd39a':'';
   markRanks();save();
   if(!ms.length||!rs.length){$('maxPower').textContent='—';return}
-  const res=await runSolve({miners:ms,racks:rs,ceiling:Infinity,timeMs:Math.min(600,150+ms.length*2)});
+  let res;try{res=await runSolve({miners:ms,racks:rs,ceiling:Infinity,objective:'power',quick:true})}catch(e){if(e.name!=='AbortError')$('maxPower').textContent='—';return}
   if(revision!==refreshRevision)return;window.__maxPower=res.rankPower;$('maxPower').textContent=showP(res.power);$('maxRank').textContent='→ '+RANKS[rankOf(res.rankPower)][0];markRanks()}
 function markRanks(){const mi=window.__maxPower!=null?rankOf(window.__maxPower):-1;$('ranks').querySelectorAll('tr').forEach((tr,i)=>{tr.classList.toggle('active',i===mi);tr.classList.toggle('target',i===Number($('targetRank').value))})}
 function initRanks(){RANKS.forEach((r,i)=>{const op=document.createElement('option');op.value=i;op.textContent=r[0];$('targetRank').append(op);const tr=document.createElement('tr');for(const t of [r[0],unitRank(r[1]),unitRank(r[2])]){const td=document.createElement('td');td.textContent=t;tr.append(td)}$('ranks').append(tr)});$('targetRank').onchange=()=>{markRanks();save()}}
 
 /* ---------- Chạy bộ tối ưu trong Web Worker ---------- */
-let worker=null,jobId=0;const pending=new Map();
-function getWorker(){if(worker!==null)return worker;try{const src=$('solver-src').textContent+'\nonmessage=e=>{const {id,inp}=e.data;let res;try{res=solve(inp)}catch(err){res={error:String(err&&err.message||err)}}postMessage({id,res})};';worker=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})));worker.onmessage=e=>{const p=pending.get(e.data.id);if(p){pending.delete(e.data.id);p(e.data.res)}};worker.onerror=()=>{worker=false}}catch(e){worker=false}return worker}
-function runSolve(inp){inp={...inp,hamster:inp.hamster||hamsterConfig()};const w=getWorker();if(!w)return new Promise(ok=>setTimeout(()=>ok(solve(inp)),10));const id=++jobId;return new Promise(ok=>{pending.set(id,ok);w.postMessage({id,inp})})}
+let jobId=0;const pending=new Map();
+function cancelSolvers(){for(const job of pending.values()){job.worker.terminate();job.reject(Object.assign(Error('Đã dừng tìm.'),{name:'AbortError'}))}pending.clear()}
+function runSolve(inp,onProgress){
+ inp={...inp,objective:inp.objective||'raw',hamster:inp.hamster||hamsterConfig()};
+ return new Promise((resolve,reject)=>{
+  let w,url;const id=++jobId;
+  const finish=(res,error)=>{pending.delete(id);if(w)w.terminate();if(url)URL.revokeObjectURL(url);error?reject(error):resolve(res)};
+  try{const src=$('solver-src').textContent+'\nonmessage=e=>{const {id,inp}=e.data;try{const res=solve(inp,res=>postMessage({id,progress:true,res}));postMessage({id,res})}catch(err){postMessage({id,error:String(err&&err.message||err)})}}';url=URL.createObjectURL(new Blob([src],{type:'text/javascript'}));w=new Worker(url);pending.set(id,{worker:w,reject:error=>finish(null,error)});
+   w.onmessage=e=>{const d=e.data;if(d.progress){if(onProgress)onProgress(d.res);return}if(d.error)finish(null,Error(d.error));else finish(d.res)};
+   w.onerror=e=>finish(null,Error(e.message||'Không chạy được bộ tìm kiếm.'));w.postMessage({id,inp});
+  }catch(e){finish(null,Error('Không khởi chạy được Web Worker để tìm kiếm. Hãy mở bằng trình duyệt hỗ trợ Web Worker.'))}
+ });
+}
+function searchError(e){busy(false,e.name==='AbortError'?'Đã dừng tìm kiếm. Xem trạng thái xác nhận của phương án đang hiển thị.':'Lỗi tối ưu: '+e.message)}
+function stopOptimization(){cancelSolvers();busy(false,'Đã dừng tìm kiếm. Xem trạng thái xác nhận của phương án đang hiển thị.')}
+
 function output(html){$('result').innerHTML=html}
 function showPlan(res,label,ms,rs,ceilRank){
   if(!res||res.error)return `<div class="result warn">Lỗi tối ưu: ${esc(res&&res.error||'không rõ')}</div>`;
@@ -4481,44 +4463,38 @@ function showPlan(res,label,ms,rs,ceilRank){
   const unusedR=rs.length-groups.length;
   const item=k=>{const [n,p,s]=k.split('|');return `${esc(n||'Miner')} (${esc(p)}, ${s} Cells)`};
   const below=v.rankPower<floor?`<p class="warn">Power thường thấp hơn ngưỡng dưới của ${esc(RANKS[ceilRank][0])} (${unitRank(floor)}): Mức power thường tương ứng ${esc(RANKS[rankOf(v.rankPower)][0])}.</p>`:'';
-  return `<div class="result"><h3>${esc(label)} · ${showP(v.power)}${Number.isFinite(ceil)?' · '+fmt(pct,3)+'% trần Rank (power thường)':''}</h3>${Number.isFinite(ceil)?`<div class="progress"><div style="width:${pct}%"></div></div>`:''}
+  return `<div class="result"><h3>${esc(label)} · ${res.objective==='raw'?'Power gốc '+showP(v.base):showP(v.power)}${Number.isFinite(ceil)?' · '+fmt(pct,3)+'% trần Rank (power thường)':''}</h3>${Number.isFinite(ceil)?`<div class="progress"><div style="width:${pct}%"></div></div>`:''}
   <p><b>Power thường / xét Rank: ${showP(v.rankPower)}</b> · Hamster cộng: <b>+${showP(v.hamsterPower)}</b> · Tổng đào: <b>${showP(v.power)}</b></p><p class="help">Remote Power: +${showP(v.remotePower)} · Remote Bonus: +${showP(v.remoteBonusPower)}. Khi hamster hết hiệu lực, còn ${showP(v.rankPower)}.</p><p>Power gốc <b>${showP(v.base)}</b> · Bonus Miner <b>+${fmt(v.mb)}%</b> · Power từ Bonus Rack <b>${showP(v.rackPower)}</b></p>
   ${Number.isFinite(res.ceiling)?`<p>Giới hạn power thường: <b>${unitRank(res.ceiling)}</b> · Còn trống: <b>${showP(Math.max(0,res.ceiling-v.rankPower))}</b></p>`:''}${below}
   ${hamsterSnapshot.length?'<p class="help">Hamster có hiệu lực: '+hamsterSnapshot.join(' · ')+'</p>':''}
   <h3>Bố trí đề xuất</h3>${groups.map(g=>`<p><b>${esc(g.r.name+' #'+g.r.instance)}</b> <span class="muted">(+${fmt(g.r.bonus)}%, ${g.used}/${g.r.slots} Cells, +${showP(g.raw*g.r.bonus/100)})</span>: ${[...g.list].map(([k,c])=>(c>1?c+'× ':'')+item(k)).join('; ')}</p>`).join('')||'<p>Chưa lắp máy nào.</p>'}
   <p><b>Không sử dụng (${res.assign.filter(a=>a<0).length} máy / ${unusedR} Rack):</b> ${[...ex].map(([k,c])=>(c>1?c+'× ':'')+esc(k)).join(', ')||'Không có máy dư'}${unusedR?` · ${unusedR} Rack để trống`:''}</p>
-  <small>${v.ok?'✓ Đã kiểm tra lại sức chứa Rack và công thức':'⚠ Lỗi kiểm tra sức chứa'} · ${res.exact?'Nghiệm chính xác (đã duyệt hết)':'Gần tối ưu, không bảo đảm tối ưu tuyệt đối'} · ${res.iterations.toLocaleString()} bước SA · ${res.elapsed} ms</small></div>`}
-function prepareRun(){const ms=expandMiners(),rs=expandRacks();if(!ms.length||!rs.length){output('<p class="warn">Cần ít nhất một Miner (power &gt; 0) và một Rack.</p>');return null}return {ms,rs,time:Number($('timeout').value),buffer:Math.max(0,Number($('buffer').value)||0)}}
+  <p>Bonus hiệu dụng Miner + Rack: <b>+${fmt(v.base>0?(v.rankPower/v.base-1)*100:0)}%</b></p><small>${res.objective==='raw'?'Ưu tiên power gốc → bonus thấp · ':'Ưu tiên tổng power đào · '}${v.ok?'✓ Đã kiểm tra lại sức chứa Rack và công thức':'⚠ Lỗi kiểm tra sức chứa'} · ${res.exact?'Đã xác nhận tối ưu bằng nhánh-cận':'Phương án hiện tại — chưa xác nhận tối ưu'} · ${(res.nodes||0).toLocaleString()} nhánh đã xét · ${res.elapsed} ms</small></div>`}
+function prepareRun(){const ms=expandMiners(),rs=expandRacks();if(!ms.length||!rs.length){output('<p class="warn">Cần ít nhất một Miner (power &gt; 0) và một Rack.</p>');return null}return {ms,rs,buffer:Math.max(0,Number($('buffer').value)||0)}}
 const ceilFor=(idx,buffer)=>RANKS[idx][2]===Infinity?Infinity:RANKS[idx][2]-buffer;
-function busy(on,msg){document.querySelectorAll('#hamster-panel input,#hamster-panel select,#hamster-panel button,#miners input,#miners select,#miners button,#racks input,#racks button,#targetRank,#buffer,#timeout,#addMiner,#addRack,#clearMiners,#clearRacks,#rc-parse-text,#rc-import-text').forEach(e=>e.disabled=on);if(!on&&!$('hamster-pick').options.length)$('hamster-add').disabled=true;for(const id of ['optimize','maximize','compare'])$(id).disabled=on;$('status').textContent=msg||''}
+function busy(on,msg){if(on&&!$('optimize').disabled){cancelSolvers();clearTimeout(refreshTimer);refreshRevision++}$('stop-optimize').hidden=!on;document.querySelectorAll('#hamster-panel input,#hamster-panel select,#hamster-panel button,#miners input,#miners select,#miners button,#racks input,#racks button,#targetRank,#buffer,#addMiner,#addRack,#clearMiners,#clearRacks,#rc-parse-text,#rc-import-text').forEach(e=>e.disabled=on);if(!on&&!$('hamster-pick').options.length)$('hamster-add').disabled=true;for(const id of ['optimize','maximize','compare'])$(id).disabled=on;$('status').textContent=msg||''}
 async function doOptimize(){
  const c=prepareRun();if(!c)return;const t=Number($('targetRank').value),rank=RANKS[t],upper=rank[2];
- busy(true,'Đang tối ưu tổng power đào...');
+ busy(true,'Đang tối ưu power gốc, rồi giảm bonus...');
  try{
   const h=hamsterConfig();
-  const plain=h.flat+h.bonus>0?await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(t,c.buffer),timeMs:c.time,hamster:{flat:0,bonus:0}}):null;
-  const primary=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(t,c.buffer),timeMs:c.time,hamster:h,initial:plain?.assign});
-  let html='<h3>Phương án tối ưu — Tổng power đào cao nhất ('+(h.flat+h.bonus>0?'có hiệu ứng hamster':'không có hiệu ứng hamster')+')</h3>'+showPlan(primary,rank[0],c.ms,c.rs,t);
+  const primary=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(t,c.buffer),hamster:h},res=>{output('<h3>Đang tìm — phương án tốt nhất hiện tại (chưa xác nhận tối ưu)</h3>'+showPlan(res,rank[0],c.ms,c.rs,t));$('status').textContent='Đang tìm, đã xét '+res.nodes.toLocaleString()+' nhánh…'});
+  let html='<h3>Phương án ưu tiên power gốc cao nhất, rồi bonus thấp nhất</h3>'+showPlan(primary,rank[0],c.ms,c.rs,t);
+  output(html);
   const ratio=primary.found&&Number.isFinite(upper)?primary.rankPower/upper:null;
   if(t>0&&ratio!==null&&ratio<0.9){
    busy(true,'Dưới 90%: đang tối ưu Rank liền dưới...');const lower=t-1;
-   const lr=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(lower,c.buffer),timeMs:c.time,seed:7});
+   const lr=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(lower,c.buffer)},res=>output(html+'<h3>Đang tìm Rank liền dưới — chưa xác nhận tối ưu</h3>'+showPlan(res,RANKS[lower][0],c.ms,c.rs,lower)));
    html+='<h3>Tham khảo bố trí cho ngưỡng Rank '+esc(RANKS[lower][0])+'</h3>'+showPlan(lr,RANKS[lower][0],c.ms,c.rs,lower);
   }
-  if((primary.hamster.flat||0)+(primary.hamster.bonus||0)>0){
-   busy(true,'Đang lập bảng so sánh không hamster...');
-   if(plain.found&&primary.found){const pv=evaluateLayout(c.ms,c.rs,plain.assign,{hamster:primary.hamster});
-    html+='<h3>So với bố trí tối ưu khi không có hamster</h3><p>Bố trí cũ khi bật hamster: <b>'+showP(pv.power)+'</b>. Bố trí tìm theo hamster: <b>'+showP(primary.power)+'</b>. Chênh lệch: <b>'+showP(primary.power-pv.power)+'</b>.</p><details><summary>Xem bố trí tối ưu không hamster</summary>'+showPlan(plain,'Không hamster',c.ms,c.rs,t)+'</details>';
-   }
-  }
   output(html);busy(false,'Đã hoàn thành.');
- }catch(e){busy(false,'Lỗi tối ưu: '+e.message)}
+ }catch(e){searchError(e)}
 }
-async function doMaximize(){const c=prepareRun();if(!c)return;busy(true,'Đang tìm power tối đa...');try{const r=await runSolve({miners:c.ms,racks:c.rs,ceiling:Infinity,timeMs:c.time});output('<h3>Power tối đa (không giới hạn Rank)</h3>'+showPlan(r,'Rank '+RANKS[rankOf(r.rankPower)][0],c.ms,c.rs,null));busy(false,'Đã hoàn thành.')}catch(e){busy(false,'Lỗi: '+e.message)}}
-async function doCompare(){const c=prepareRun();if(!c)return;busy(true,'Đang tìm power tối đa...');try{const mx=await runSolve({miners:c.ms,racks:c.rs,ceiling:Infinity,timeMs:Math.max(800,c.time/3)});const top=rankOf(mx.rankPower);const rows=[],plans=[];
-  for(let i=top;i>=Math.max(0,top-3);i--){busy(true,'Đang tối ưu '+RANKS[i][0]+'...');const r=i===top&&RANKS[i][2]===Infinity?mx:await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(i,c.buffer),timeMs:Math.max(800,c.time/2),seed:i+3});
+async function doMaximize(){const c=prepareRun();if(!c)return;busy(true,'Đang tìm power tối đa...');try{const r=await runSolve({miners:c.ms,racks:c.rs,ceiling:Infinity,objective:'power'},res=>output('<h3>Đang tìm tổng power tối đa — chưa xác nhận tối ưu</h3>'+showPlan(res,'Không giới hạn Rank',c.ms,c.rs,null)));output('<h3>Power tối đa (không giới hạn Rank)</h3>'+showPlan(r,'Rank '+RANKS[rankOf(r.rankPower)][0],c.ms,c.rs,null));busy(false,'Đã hoàn thành.')}catch(e){searchError(e)}}
+async function doCompare(){const c=prepareRun();if(!c)return;busy(true,'Đang tìm power tối đa...');try{const mx=await runSolve({miners:c.ms,racks:c.rs,ceiling:Infinity,objective:'power'},res=>output('<h3>Đang tìm tổng power tối đa để so sánh Rank</h3>'+showPlan(res,'Không giới hạn Rank',c.ms,c.rs,null)));const top=rankOf(mx.rankPower);const rows=[],plans=[];
+  for(let i=top;i>=Math.max(0,top-3);i--){busy(true,'Đang tối ưu '+RANKS[i][0]+'...');const r=await runSolve({miners:c.ms,racks:c.rs,ceiling:ceilFor(i,c.buffer)},res=>output('<h3>Đang tìm '+esc(RANKS[i][0])+' — chưa xác nhận tối ưu</h3>'+showPlan(res,RANKS[i][0],c.ms,c.rs,i)));
     const pct=r.found&&Number.isFinite(RANKS[i][2])?100*r.rankPower/RANKS[i][2]:null;rows.push(`<tr><td>${esc(RANKS[i][0])}</td><td>${r.found?showP(r.power):'—'}</td><td>${r.found?showP(r.rankPower):'—'}</td><td>${pct===null?'—':fmt(pct,3)+'%'}</td><td>${r.found?r.assign.filter(a=>a>=0).length:0}</td></tr>`);plans.push(`<details><summary>Chi tiết ${esc(RANKS[i][0])}</summary>${showPlan(r,RANKS[i][0],c.ms,c.rs,i)}</details>`)}
-  output(`<h3>So sánh các Rank</h3><p class="help">Power tối đa: <b>${showP(mx.power)}</b> (${esc(RANKS[top][0])}). Mỗi Rank được tối ưu riêng, không cần lắp hết Rack.</p><div class="scroll"><table><thead><tr><th>Rank</th><th>Tổng đào tốt nhất</th><th>Power thường</th><th>% trần Rank</th><th>Số máy lắp</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>${plans.join('')}`);busy(false,'Đã hoàn thành.')}catch(e){busy(false,'Lỗi: '+e.message)}}
+  output(`<h3>So sánh các Rank</h3><p class="help">Power tối đa: <b>${showP(mx.power)}</b> (${esc(RANKS[top][0])}). Mỗi Rank được tối ưu riêng, không cần lắp hết Rack.</p><div class="scroll"><table><thead><tr><th>Rank</th><th>Tổng đào theo bố trí ưu tiên power gốc</th><th>Power thường</th><th>% trần Rank</th><th>Số máy lắp</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>${plans.join('')}`);busy(false,'Đã hoàn thành.')}catch(e){searchError(e)}}
 
 /* ---------- Xử lý ảnh ---------- */
 async function prepare(file){const bmp=await createImageBitmap(file);const c=document.createElement('canvas');c.width=bmp.width;c.height=bmp.height;c.getContext('2d').drawImage(bmp,0,0);bmp.close&&bmp.close();return c}
@@ -4626,7 +4602,7 @@ try{for(const k of [STORE,LIB,'rc_optimizer_current','rc_optimizer_compare','rc_
 miners=[];racks=[]; // Mỗi lần mở trang đều bắt đầu với danh sách trống.
 render();
 $('addMiner').onclick=()=>{miners.push(newMiner());render()};$('addRack').onclick=()=>{racks.push(newRack());render()};$('clearMiners').onclick=()=>{if(confirm('Xóa Miner?')){miners=[];render()}};$('clearRacks').onclick=()=>{if(confirm('Xóa Rack?')){racks=[];render()}};
-$('optimize').onclick=doOptimize;$('maximize').onclick=doMaximize;$('compare').onclick=doCompare;for(const id of ['buffer','timeout'])$(id).addEventListener('input',refreshSoon);
+$('optimize').onclick=doOptimize;$('maximize').onclick=doMaximize;$('compare').onclick=doCompare;$('stop-optimize').onclick=stopOptimization;for(const id of ['buffer'])$(id).addEventListener('input',refreshSoon);
 $('drop').onclick=()=>$('files').click();$('files').onchange=e=>addShots(e.target.files);$('clearShots').onclick=()=>{shots=[];reviewRows=[];renderShots();$('reviewWrap').classList.add('hidden')};$('ocrStart').onclick=ocr;$('append').onclick=()=>applyOcr(false);$('replace').onclick=()=>applyOcr(true);
 document.addEventListener('paste',e=>{const fs=[...(e.clipboardData?.items||[])].filter(i=>i.type.startsWith('image/')).map(i=>i.getAsFile()).filter(Boolean);if(fs.length){e.preventDefault();addShots(fs)}});$('drop').ondragover=e=>e.preventDefault();$('drop').ondrop=e=>{e.preventDefault();addShots(e.dataTransfer.files)};
 </script><script id="rc-text-import-script">
