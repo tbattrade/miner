@@ -4604,14 +4604,26 @@ const $=id=>document.getElementById(id);
 let found=[];
 const unitMap={gh:'GH/s',th:'TH/s',ph:'PH/s',eh:'EH/s',zh:'ZH/s'};
 function num(x){return Number(String(x).replace(/,/g,'.'))}
+function classifyTextItem(name,power,cells,sectionType){
+ // Power is a miner attribute. A word inside an item name is never a type marker.
+ if(power!==null)return 'miner';
+ const key=norm(name);
+ if(lookup.has(key)||(typeof BUILTIN_MINERS!=='undefined'&&BUILTIN_MINERS.some(n=>norm(n)===key)))return 'miner';
+ if(typeof BUILTIN_RACKS!=='undefined'&&BUILTIN_RACKS.some(n=>norm(n)===key))return 'rack';
+ if(sectionType)return sectionType;
+ return cells>=3?'rack':'miner';
+}
 function parse(text){
  const lines=text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),rows=[];
  const powerRE=/(?:power\s*:?\s*)?([\d.,]+)\s*(Gh|Th|Ph|Eh|Zh)\s*\/\s*s/i;
  const reserved=/^(?:set|size|power|bonus|quantity|miner details|racks details|rack details|can't be sold|can be sold|inventory|collection|sell|marketplace)$/i;
+ let sectionType=null;
  const starts=(k)=> k+1<lines.length && (/^(?:set|.+\s+set)$/i.test(lines[k+1])||/^size\s*:/i.test(lines[k+1])) && !reserved.test(lines[k]) && !powerRE.test(lines[k]) && !/\bset$/i.test(lines[k]);
  for(let i=0;i<lines.length;i++){
+  if(/^miner details$/i.test(lines[i]))sectionType='miner';
+  else if(/^(?:racks details|rack details)$/i.test(lines[i]))sectionType='rack';
   if(!starts(i))continue;
-  const name=lines[i],isRack=/\brack\b/i.test(name);
+  const name=lines[i];
   let power=null,unit=null,bonus=null,cells=null,qty=1,hasQty=false;
   for(let j=i+1;j<Math.min(lines.length,i+19);j++){
    if(j>i+1&&starts(j))break;
@@ -4622,6 +4634,7 @@ function parse(text){
    m=lines[j].match(/^quantity\s*:?\s*(\d+)$/i);if(m){qty=Number(m[1]);hasQty=true}
    else if(/^quantity\s*:?$/i.test(lines[j])&&/^\d+$/.test(lines[j+1]||'')){qty=Number(lines[j+1]);hasQty=true}
   }
+  const isRack=classifyTextItem(name,power,cells,sectionType)==='rack';
   if(isRack){if(!cells)continue;power=0;unit='PH/s';bonus=bonus??0}
   else if(power===null||!unit||bonus===null)continue;
   const row={type:isRack?'rack':'miner',name,power,unit,bonus,cells:cells||(isRack?8:2),qty:hasQty?qty:1,checked:true};
