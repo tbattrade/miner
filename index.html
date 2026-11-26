@@ -26,15 +26,11 @@
 #rc-power-converter .rc-convert-result strong{color:#4fe0d3;font-size:22px}
 @media(max-width:800px){#rc-power-converter .rc-convert-grid{grid-template-columns:minmax(0,1fr) 125px}#rc-power-converter .rc-convert-arrow{display:none}}
 </style>
-<style id="rc-visitor-counter-style">
-#rc-public-visit-counter{display:inline-flex;align-items:center;gap:9px;margin-top:6px;padding:8px 12px;background:#0c1830;border:1px solid #385174;border-radius:9px;color:#b9d2f4;font:600 13px system-ui,sans-serif}
-#rc-visit-count{font-variant-numeric:tabular-nums;color:#4fe0d3;font-size:17px}
-</style>
 <style id="rc-gallery-css">
 #rc-gallery .rg-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}#rc-gallery .rg-folders{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}#rc-gallery .rg-folder{background:#293b5c}#rc-gallery .rg-folder.active{background:#167d84;outline:2px solid #4fe0d3}#rc-gallery .rg-drop{border:2px dashed #55759e;border-radius:12px;padding:18px;text-align:center;margin:12px 0;outline:none}#rc-gallery .rg-drop:focus,#rc-gallery .rg-drop.over{border-color:#4fe0d3;background:#193950}#rc-gallery .rg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}#rc-gallery .rg-card{background:#0e1b33;border:1px solid #34496a;border-radius:10px;padding:9px;min-width:0}#rc-gallery .rg-card.dragging{opacity:.4}#rc-gallery .rg-card img{width:100%;height:180px;object-fit:contain;background:#0a1224;border-radius:6px;cursor:zoom-in}#rc-gallery .rg-card .rg-title{overflow-wrap:anywhere;margin:6px 0;min-height:26px}.rg-editable{cursor:text}.rg-inline-name{width:100%;min-width:0;padding:5px 7px;font:inherit}#rc-gallery .rg-card .rg-buttons{display:flex;gap:5px}#rc-gallery .rg-card button{font-size:12px;padding:6px 8px}#rc-gallery .rg-info{font-size:12px;color:#a9bedc}#rc-gallery .rg-preview{position:fixed;inset:0;background:#000e;z-index:10010;display:none;align-items:center;justify-content:center;padding:30px}#rc-gallery .rg-preview.show{display:flex}#rc-gallery .rg-preview img{max-width:95vw;max-height:88vh;object-fit:contain}#rc-gallery .rg-preview button{position:absolute;right:20px;top:15px}
 </style>
 <style>.hamster-picker{display:grid;grid-template-columns:minmax(120px,1fr) minmax(150px,1.5fr) auto auto;gap:8px;margin:12px 0}.hamster-fields>div[hidden]{display:none}.hamster-fields>div{min-width:0}.hamster-fields select{max-width:100%;text-overflow:ellipsis}.hamster-heading label{display:flex;align-items:center;gap:5px;font-size:13px}.hamster-row{border-color:#3c5373}.hamster-power{color:#8fe0bb;font-size:14px;margin:12px 0}.hamster-set{border:1px solid #304364;border-radius:9px;padding:12px;margin-top:9px}.hamster-set.is-active{border-color:#3ec5a7;background:#12302f}.hamster-set p{margin:6px 0}.hamster-row details{margin-bottom:0}#hamster-data-status{color:#7dd5d1}@media(max-width:690px){.hamster-picker{grid-template-columns:1fr 1fr}.hamster-picker input,.hamster-picker select{grid-column:1/-1}.hamster-fields{grid-template-columns:1fr}.hamster-heading strong{flex-basis:100%}.hamster-row{padding:10px}}</style><style>.hl-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.hl-heading{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.hl-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.hl-ability{border:1px solid #304364;border-radius:9px;padding:12px;margin:8px 0}.hl-ability p{font-size:13px;margin:7px 0;overflow-wrap:anywhere}.hl-members{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.hl-member{padding:6px 9px;font-size:13px}#hl-details h3{margin-top:20px}#hl-details h4{margin:14px 0 7px}#hl-details .scroll{max-width:100%}#hl-details table{font-size:12px}@media(max-width:690px){.hl-controls{grid-template-columns:1fr}.hl-stats{grid-template-columns:repeat(2,1fr)}}</style></head><body>
-<header><h1>Optimizing RollerCoin · Tối ưu Miner + Rack</h1><h2>Liên hệ tác giả qua Telegram: @canhtam286</h2><p> Tối ưu Power cho bạn</p><div id="rc-public-visit-counter" aria-live="polite"><span aria-hidden="true">👁</span><span>Tổng lượt truy cập:</span><strong id="rc-visit-count">Đang tải...</strong></div></header><div class="layout"><div>
+<header><h1>Optimizing RollerCoin · Tối ưu Miner + Rack</h1><h2>Liên hệ tác giả qua Telegram: @canhtam286</h2><p> Tối ưu Power cho bạn</p></header><div class="layout"><div>
 <section class="panel" id="rc-gallery"><h2>Thư viện ảnh Miner / Rack</h2><p class="help">Kéo ảnh để đổi thứ tự. Nhấp đúp vào tên thư mục hoặc tên ảnh để đổi tên; bấm ra ngoài để lưu.</p><div class="rg-toolbar"><button id="rg-new" type="button">+ Tạo thư mục</button><button id="rg-delete-folder" class="danger" type="button">Xóa thư mục</button><button id="rg-export" class="secondary" type="button">Sao lưu JSON</button><button id="rg-import" class="secondary" type="button">Khôi phục JSON</button><input type="file" id="rg-import-file" accept="application/json,.json" hidden></div><div id="rg-folders" class="rg-folders"></div><div id="rg-drop" class="rg-drop" tabindex="0">Bấm vào đây rồi Ctrl+V để dán ảnh, hoặc kéo ảnh vào / chọn tệp.<div class="actions" style="justify-content:center"><button id="rg-pick" type="button">Chọn ảnh</button><input type="file" id="rg-files" accept="image/*" multiple hidden></div></div><p id="rg-status" class="rg-info" aria-live="polite"></p><div id="rg-grid" class="rg-grid"></div><div id="rg-preview" class="rg-preview"><button type="button" id="rg-preview-close">Đóng ×</button><img alt="Ảnh phóng to"></div></section>
 <section class="panel" id="rc-power-converter">
 <h2>1. Chuyển đổi sức mạnh đào</h2>
@@ -4728,24 +4724,6 @@ $('rc-import-text').onclick=()=>{
   }
   [input,from,to].forEach(el=>{el.addEventListener('input',update);el.addEventListener('change',update)});
   update();
-})();
-</script>
-<script id="rc-visitor-counter-script">
-(function(){
-  'use strict';
-  // CounterAPI: dữ liệu công khai dùng chung cho tất cả người xem.
-  // Đổi namespace và key nếu muốn bắt đầu bộ đếm mới.
-  const endpoint='https://api.counterapi.dev/v1/rollercoin-optimizer-canhtam286/visits/up';
-  const label=document.getElementById('rc-visit-count');
-  if(!label)return;
-  fetch(endpoint,{method:'GET',cache:'no-store'})
-    .then(function(response){if(!response.ok)throw Error('HTTP '+response.status);return response.json()})
-    .then(function(data){
-      const count=Number(data.count);
-      if(!Number.isFinite(count)||count<0)throw Error('Invalid count');
-      label.textContent=Math.trunc(count).toLocaleString('vi-VN');
-    })
-    .catch(function(){label.textContent='Tạm thời không khả dụng';});
 })();
 </script>
 <script id="rc-gallery-js">
