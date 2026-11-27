@@ -4454,7 +4454,9 @@ function downloadPlanTxt(event){
   const miners=Array.from(rack.querySelectorAll('.plan-miner'),m=>'  - '+clean(m));
   return [heading,...miners].join('\r\n');
  });if(!blocks.length)return;
- const blob=new Blob(['\uFEFF'+blocks.join('\r\n\r\n')+'\r\n'],{type:'text/plain;charset=utf-8'});
+ const data=layout.closest('.result').dataset;
+ const summary=['Power gốc: '+data.planBase,'Bonus Miner: +'+data.planMinerBonus+'%','Bonus Rack: +'+data.planRackBonus,'Tổng đào: '+data.planTotal].join('\r\n');
+ const blob=new Blob(['\uFEFF'+summary+'\r\n\r\nBố trí đề xuất\r\n\r\n'+blocks.join('\r\n\r\n')+'\r\n'],{type:'text/plain;charset=utf-8'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='bo-tri-de-xuat.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 $('result').addEventListener('click',downloadPlanTxt);
@@ -4471,7 +4473,7 @@ function showPlan(res,label,ms,rs,ceilRank){
   const unusedR=rs.length-groups.length;
   const item=k=>{const [n,p,s]=k.split('|');return `${esc(n||'Miner')} (${esc(p)}, ${s} Cells)`};
   const below=v.rankPower<floor?`<p class="warn">Power thường thấp hơn ngưỡng dưới của ${esc(RANKS[ceilRank][0])} (${unitRank(floor)}): Mức power thường tương ứng ${esc(RANKS[rankOf(v.rankPower)][0])}.</p>`:'';
-  return `<div class="result"><h3>${esc(label)} · ${res.objective==='raw'?'Power gốc '+showP(v.base):showP(v.power)}${Number.isFinite(ceil)?' · '+fmt(pct,3)+'% trần Rank (power thường)':''}</h3>${Number.isFinite(ceil)?`<div class="progress"><div style="width:${pct}%"></div></div>`:''}
+  return `<div class="result" data-plan-base="${esc(showP(v.base))}" data-plan-miner-bonus="${fmt(v.mb)}" data-plan-rack-bonus="${esc(showP(v.rackPower))}" data-plan-total="${esc(showP(v.power))}"><h3>${esc(label)} · ${res.objective==='raw'?'Power gốc '+showP(v.base):showP(v.power)}${Number.isFinite(ceil)?' · '+fmt(pct,3)+'% trần Rank (power thường)':''}</h3>${Number.isFinite(ceil)?`<div class="progress"><div style="width:${pct}%"></div></div>`:''}
   <p><b>Power thường / xét Rank: ${showP(v.rankPower)}</b> · Hamster cộng: <b>+${showP(v.hamsterPower)}</b> · Tổng đào: <b>${showP(v.power)}</b></p><p class="help">Remote Power: +${showP(v.remotePower)} · Remote Bonus: +${showP(v.remoteBonusPower)}. Khi hamster hết hiệu lực, còn ${showP(v.rankPower)}.</p><p>Power gốc <b>${showP(v.base)}</b> · Bonus Miner <b>+${fmt(v.mb)}%</b> · Power từ Bonus Rack <b>${showP(v.rackPower)}</b></p>
   ${Number.isFinite(res.ceiling)?`<p>Giới hạn power thường: <b>${unitRank(res.ceiling)}</b> · Còn trống: <b>${showP(Math.max(0,res.ceiling-v.rankPower))}</b></p>`:''}${below}
   ${hamsterSnapshot.length?'<p class="help">Hamster có hiệu lực: '+hamsterSnapshot.join(' · ')+'</p>':''}
@@ -4834,5 +4836,4 @@ async function addFiles(files){if(!db){status('Chưa mở được kho lưu tr�
 $('rg-new').onclick=async()=>{const name=prompt('Tên thư mục mới:');if(!name||!name.trim())return;const f={id:id(),name:name.trim(),order:folders.length};await req(store('folders','readwrite').put(f));current=f.id;await load()};
 $('rg-delete-folder').onclick=async()=>{const f=folders.find(x=>x.id===current);if(!f||!confirm('Xóa thư mục "'+f.name+'" cùng toàn bộ ảnh bên trong?'))return;for(const x of items.filter(i=>i.folder===current))await req(store('images','readwrite').delete(x.id));await req(store('folders','readwrite').delete(current));current=null;await load()};
 $('rg-pick').onclick=()=>$('rg-files').click();$('rg-files').onchange=async e=>{await addFiles([...e.target.files]);e.target.value=''};
-const drop=$('rg-drop');drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('over')});drop.addEventListener('dragleave',()=>drop.classList.remove('over'));drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('over');addFiles([...e.dataTransfer.files])});
-document.addEventListener('paste',e=>{const t=e.target;if(t&&(t.closest('input,textarea,[contenteditable="true"]')))return;const fs=[...(e.clipboardData?.items||[])].filter(x=>x.kind==='file'&&x.type.startsWith('image/'
+const drop=$('rg-drop');drop.addEventListener('dragover',e=>{e.preventDefault();drop.c
